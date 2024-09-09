@@ -1,17 +1,24 @@
 plugins {
     id("java")
+    kotlin("jvm")
 }
 
 group = "xyz.sk1.bukkit.prisonextra"
 version = "1.0-SNAPSHOT"
 
 repositories {
+    mavenLocal()
     mavenCentral()
+
+    maven("https://jitpack.io")
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation(project(":PrisonExtra-api"))
+    implementation("org.reflections:reflections:0.10.2")
+    implementation("com.github.Cobeine:SQLava:1.5.5-SNAPSHOT")
+    implementation("com.zaxxer:HikariCP:5.0.1")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.withType<ProcessResources> {
@@ -21,8 +28,6 @@ tasks.withType<ProcessResources> {
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }
-
-
-tasks.test {
-    useJUnitPlatform()
+kotlin {
+    jvmToolchain(8)
 }
