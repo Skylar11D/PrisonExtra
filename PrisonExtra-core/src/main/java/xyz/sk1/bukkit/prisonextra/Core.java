@@ -1,12 +1,11 @@
 package xyz.sk1.bukkit.prisonextra;
 
-public class Core extends Plugin {
+public class Core extends Base {
 
     private static volatile Core instance;
 
     @Override
     public void init() {
-
         instance = this;
 
     }

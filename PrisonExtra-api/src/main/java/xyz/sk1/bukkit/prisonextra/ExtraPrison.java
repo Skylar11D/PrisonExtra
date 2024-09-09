@@ -1,6 +1,6 @@
 package xyz.sk1.bukkit.prisonextra;
 
-public interface Extra {
+public interface ExtraPrison {
 
     void init();
     void fini();
