@@ -14,6 +14,15 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+tasks.withType<ProcessResources> {
+    from(sourceSets.main.get().resources) {
+        include("plugin.yml")
+        filter { line -> line.replace("%project_version%", project.version.toString()) }
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+}
+
+
 tasks.test {
     useJUnitPlatform()
 }

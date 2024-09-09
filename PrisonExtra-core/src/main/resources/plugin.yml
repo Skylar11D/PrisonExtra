@@ -1,0 +1,4 @@
+name: PrisonExtra
+main: xyz.sk1.bukkit.prisonextra.Core
+version: %project_version%
+author: Skylar
