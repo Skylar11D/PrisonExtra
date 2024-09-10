@@ -1,28 +1,40 @@
 package xyz.sk1.bukkit.prisonextra.managers;
 
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import xyz.sk1.bukkit.prisonextra.player.Prisoner;
 import xyz.sk1.bukkit.prisonextra.utils.tasks.PrisonTask;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public abstract class PrisonManager<Entity extends Prisoner, Task extends PrisonTask> {
+/**
+ * @Author <a href="https://www.github.com/user/skylar11d">Skylar</a>
+ *
+ * @param <P> The target to be imprisoned
+ * @param <E> The prisoner object
+ * @param <T> The prisoner's tasks in the prison
+ */
+public abstract class PrisonManager<P, E, T extends PrisonTask> {
 
-    private final Map<Entity, Task> prisoners;
+    private final Map<E, T> prisoners;
 
     public PrisonManager(){
         prisoners = new HashMap<>();
     }
 
-    abstract List<Entity> getPrisoners();
+    protected Map<E,T> getPrisoners(){
+        return prisoners;
+    }
 
-    abstract boolean checkPrisoner(Entity player);
+    protected abstract E get(P player);
 
-    abstract void imprison(Entity player);
+    /**
+     * Checks whether the specified target player is a prisoner or not
+     * @param player
+     * @return true/false
+     */
+    protected abstract boolean checkPrisoner(P player);
 
-    abstract void release(Entity player);
+    protected abstract void imprison(P player);
+
+    protected abstract void release(P player);
 
 }

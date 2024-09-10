@@ -14,6 +14,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+tasks.named("assemble"){
+    dependsOn("ShadowJar")
+}
+
 tasks.test {
     useJUnitPlatform()
 }

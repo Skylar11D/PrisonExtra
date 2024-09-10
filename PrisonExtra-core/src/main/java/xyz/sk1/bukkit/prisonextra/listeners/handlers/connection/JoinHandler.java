@@ -8,7 +8,7 @@ public class JoinHandler extends BaseListener {
 
     @EventHandler
     public void handleJoin(PlayerJoinEvent e){
-
+        e.setJoinMessage("Welcome ya 5wl! :), we hope you enjoy your stay here");
     }
 
 }

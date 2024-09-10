@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     id("java")
     kotlin("jvm")
@@ -16,7 +18,6 @@ repositories {
 dependencies {
     implementation(project(":PrisonExtra-api"))
     implementation("org.reflections:reflections:0.10.2")
-    implementation("com.github.Cobeine:SQLava:1.5.5-SNAPSHOT")
     implementation("com.zaxxer:HikariCP:5.0.1")
     implementation(kotlin("stdlib-jdk8"))
 }
@@ -28,6 +29,27 @@ tasks.withType<ProcessResources> {
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }
+
+tasks.withType<ShadowJar>{
+    minimize()
+
+    archiveBaseName.set(rootProject.name)
+    archiveVersion.set(this.project.version.toString())
+
+    var classifier: String;
+    if(this.project.name.equals("PrisonExtra-api")){
+        classifier = "api"
+    } else {
+        classifier = ""
+    }
+
+    archiveClassifier.set(classifier)
+}
+
+tasks.named("assemble"){
+    dependsOn("ShadowJar")
+}
+
 kotlin {
     jvmToolchain(8)
 }

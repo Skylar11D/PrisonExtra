@@ -1,0 +1,19 @@
+{
+  "service": {
+    "hostname": "example.com",
+    "port": 3306,
+    "username": "Fahad",
+    "passphrase": "123Abc321",
+
+    "Database": {
+
+      "name": "MarsDB",
+      "table": {
+        "name": "MarsPrison"
+      },
+
+    },
+
+    "autoconnection": true
+  }
+}

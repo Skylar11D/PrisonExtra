@@ -27,6 +27,7 @@ subprojects {
         maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://repo.codemc.io/repository/maven-releases/")
         maven("https://oss.sonatype.org/content/groups/public/")
+        maven("https://jitpack.io")
     }
 
     dependencies {
@@ -36,15 +37,38 @@ subprojects {
         implementation("org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT")
         implementation("org.spigotmc:minecraft-server:1.8.8-SNAPSHOT")
         implementation("com.github.retrooper.packetevents:spigot:2.3.0")
+        implementation("mysql:mysql-connector-java:8.0.33")
 
-        annotationProcessor("org.projectlombok:lombok:1.18.32")
+        compileOnly("org.projectlombok:lombok:1.18.32")
+    }
+
+    tasks.withType<ShadowJar>{
+        minimize()
+
+        archiveBaseName.set(rootProject.name)
+        archiveVersion.set(this.project.version.toString())
+
+        var classifier: String
+        if(this.project.name.equals("PrisonExtra-api")){
+            classifier = "api"
+        } else {
+            classifier = "core"
+        }
+
+        archiveClassifier.set(classifier)
+
+        destinationDirectory.set(file("/home/skylar/Desktop/minecraft-net/1/plugins"))
     }
 
 }
 
-tasks.withType<ShadowJar>{
+/*tasks.withType<ShadowJar>{
     minimize()
-}
+
+    archiveBaseName.set(rootProject.name)
+    archiveVersion.set(version.toString())
+    destinationDirectory.set(file("/home/skylar/Desktop/minecraft-net/1/plugins/"))
+}*/
 
 tasks.test {
     useJUnitPlatform()
