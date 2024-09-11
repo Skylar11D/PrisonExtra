@@ -1,8 +1,14 @@
 package xyz.sk1.bukkit.prisonextra;
 
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
-import xyz.sk1.bukkit.prisonextra.internal.storage.SQL;
+import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
+import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
+import xyz.sk1.bukkit.prisonextra.utilities.cosmetics.CosmeticsManager;
+import xyz.sk1.bukkit.prisonextra.utilities.factory.DataBaseFactory;
+import xyz.sk1.bukkit.prisonextra.utilities.factory.MySQLConnectionFactory;
+import xyz.sk1.bukkit.prisonextra.utilities.housing.HouseManager;
+import xyz.sk1.bukkit.prisonextra.utils.factory.AbstractDatabaseFactory;
 
 import java.io.IOException;
 
@@ -11,17 +17,21 @@ public class Core extends Base {
     private static volatile Core instance;
     private PluginManager pluginManager;
     private UserManager playerManager;
-    private SQL sql;
+    private HouseManager houseManager;
+    private CosmeticsManager cosmeticsManager;
+    private Database database;
+    private AbstractDatabaseFactory abstractDatabaseFactory;
 
-    @Override
-    public void init() {
+
+    public void onceEnabled() {
         instance = this;
 
-        this.pluginManager = new PluginManager();
-        this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.listeners");
+        abstractDatabaseFactory = new DataBaseFactory();
+        database = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
+        database.connect();
 
+        this.pluginManager = new PluginManager();
         this.playerManager = new UserManager();
-        //this.sql = new MySQL();
 
     }
 
@@ -29,7 +39,7 @@ public class Core extends Base {
     public void fini() {
 
         try {
-            sql.close();
+            database.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -59,7 +69,12 @@ public class Core extends Base {
         return playerManager;
     }
 
-    public SQL getConnection() {
+    public Database getConnection() {
         return sql;
     }
+
+    public Database getDatabaseConnection() {
+        return databaseConnection;
+    }
+
 }

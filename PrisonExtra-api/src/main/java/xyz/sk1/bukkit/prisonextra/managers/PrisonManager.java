@@ -20,21 +20,21 @@ public abstract class PrisonManager<P, E, T extends PrisonTask> {
         prisoners = new HashMap<>();
     }
 
-    protected Map<E,T> getPrisoners(){
+    public Map<E,T> getPrisoners(){
         return prisoners;
     }
 
-    protected abstract E get(P player);
+    public abstract E get(P player);
 
     /**
      * Checks whether the specified target player is a prisoner or not
      * @param player
      * @return true/false
      */
-    protected abstract boolean checkPrisoner(P player);
+    public abstract boolean checkPrisoner(P player);
 
-    protected abstract void imprison(P player);
+    public abstract void imprison(P player);
 
-    protected abstract void release(P player);
+    public abstract void release(P player);
 
 }
