@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.reflections.Reflections;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.listeners.BaseListener;
-import xyz.sk1.bukkit.prisonextra.utilities.Utils;
+import xyz.sk1.bukkit.prisonextra.utils.Utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;

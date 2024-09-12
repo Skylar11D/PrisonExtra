@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.utils.factory;
+package xyz.sk1.bukkit.prisonextra.utilities.factory;
 
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;

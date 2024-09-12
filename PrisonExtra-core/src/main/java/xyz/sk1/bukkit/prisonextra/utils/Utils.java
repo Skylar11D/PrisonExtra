@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.utilities;
+package xyz.sk1.bukkit.prisonextra.utils;
 
 import org.bukkit.ChatColor;
 

@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.utils.housing;
+package xyz.sk1.bukkit.prisonextra.region;
 
 import lombok.Data;
 

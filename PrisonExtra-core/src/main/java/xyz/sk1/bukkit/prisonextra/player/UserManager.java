@@ -1,14 +1,26 @@
 package xyz.sk1.bukkit.prisonextra.player;
 
 import org.bukkit.entity.Player;
-import xyz.sk1.bukkit.prisonextra.managers.PrisonManager;
+import xyz.sk1.bukkit.prisonextra.prisoner.PrisonManager;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
-import xyz.sk1.bukkit.prisonextra.utilities.tasks.UserTask;
+import xyz.sk1.bukkit.prisonextra.utils.tasks.UserTask;
 
-public class UserManager extends PrisonManager<Player, Prisoner, UserTask> {
+import java.util.Collections;
+import java.util.Map;
+
+public class UserManager implements PrisonManager<Player, Prisoner, UserTask> {
+
+    public UserManager(){
+
+    }
 
     @Override
-    public Prisoner get(org.bukkit.entity.Player player) {
+    public Map<Prisoner, UserTask> getPrisoners() {
+        return Collections.emptyMap();
+    }
+
+    @Override
+    public Prisoner get(Player player) {
         return getPrisoners().keySet().stream().filter(
                 p -> p.getPlayer() == player).findFirst().orElse(null
         );
@@ -29,4 +41,9 @@ public class UserManager extends PrisonManager<Player, Prisoner, UserTask> {
         getPrisoners().remove(player);
     }
 
+
+    @Override
+    public void load() {
+
+    }
 }

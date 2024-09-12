@@ -1,17 +1,18 @@
 package xyz.sk1.bukkit.prisonextra;
 
+import lombok.Getter;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
-import xyz.sk1.bukkit.prisonextra.utilities.cosmetics.CosmeticsManager;
-import xyz.sk1.bukkit.prisonextra.utilities.factory.DataBaseFactory;
-import xyz.sk1.bukkit.prisonextra.utilities.factory.MySQLConnectionFactory;
-import xyz.sk1.bukkit.prisonextra.utilities.housing.HouseManager;
-import xyz.sk1.bukkit.prisonextra.utils.factory.AbstractDatabaseFactory;
+import xyz.sk1.bukkit.prisonextra.utils.cosmetics.CosmeticsManager;
+import xyz.sk1.bukkit.prisonextra.utils.factory.DatabaseFactory;
+import xyz.sk1.bukkit.prisonextra.utils.housing.HouseManager;
+import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 
 import java.io.IOException;
 
+@Getter
 public class Core extends Base {
 
     private static volatile Core instance;
@@ -22,11 +23,11 @@ public class Core extends Base {
     private Database database;
     private AbstractDatabaseFactory abstractDatabaseFactory;
 
-
-    public void onceEnabled() {
+    @Override
+    public void init() {
         instance = this;
 
-        abstractDatabaseFactory = new DataBaseFactory();
+        abstractDatabaseFactory = new DatabaseFactory();
         database = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
         database.connect();
 
@@ -59,22 +60,6 @@ public class Core extends Base {
         }
 
         return instance;
-    }
-
-    public PluginManager getPluginManager() {
-        return pluginManager;
-    }
-
-    public UserManager getPlayerManager() {
-        return playerManager;
-    }
-
-    public Database getConnection() {
-        return sql;
-    }
-
-    public Database getDatabaseConnection() {
-        return databaseConnection;
     }
 
 }
