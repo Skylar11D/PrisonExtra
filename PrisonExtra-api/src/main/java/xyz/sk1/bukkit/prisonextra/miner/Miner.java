@@ -1,14 +1,17 @@
 package xyz.sk1.bukkit.prisonextra.miner;
 
 import net.minecraft.server.v1_8_R3.EntitySkeleton;
-import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftSkeleton;
+import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import xyz.sk1.bukkit.prisonextra.utilities.tasks.PrisonTask;
 
-public abstract class Miner<T extends PrisonTask> extends CraftSkeleton {
+public abstract class Miner<T extends PrisonTask> extends EntitySkeleton {
 
-    public Miner(CraftServer server, EntitySkeleton entity) {
-        super(server, entity);
+    public Miner(World world) {
+        super(((CraftWorld)world).getHandle());
+
     }
+
+
 
 }
