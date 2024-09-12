@@ -2,6 +2,7 @@ package xyz.sk1.bukkit.prisonextra;
 
 import lombok.Getter;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
+import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
@@ -19,8 +20,9 @@ public class Core extends Base {
 
     private static volatile Core instance;
     private PluginManager pluginManager;
-    private PrisonManager playerManager;
+    private PrisonManager userManager;
     private RegionManager regionManager;
+    private ManagerRegistry managerRegistry;
     private CosmeticsManager cosmeticsManager;
 
     private Database database;
@@ -35,8 +37,14 @@ public class Core extends Base {
         database.connect();
 
         this.pluginManager = new PluginManager();
-        this.playerManager = new UserManager();
+        this.managerRegistry = new ManagerRegistry();
+
+        this.userManager = new UserManager();
         this.regionManager = new HouseManager();
+
+        this.managerRegistry.register(userManager);
+        this.managerRegistry.register(regionManager);
+
 
     }
 
