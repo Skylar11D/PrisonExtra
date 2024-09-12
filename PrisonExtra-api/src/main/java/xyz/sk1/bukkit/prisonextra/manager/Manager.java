@@ -2,7 +2,7 @@ package xyz.sk1.bukkit.prisonextra.manager;
 
 public interface Manager {
 
-    default void launch(){
+    default void enable(){
 
 
 
@@ -10,5 +10,7 @@ public interface Manager {
     }
 
     void load();
+
+    ManagerType getType(ManagerType type);
 
 }
