@@ -5,6 +5,8 @@ import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
+import xyz.sk1.bukkit.prisonextra.prisoner.PrisonManager;
+import xyz.sk1.bukkit.prisonextra.region.RegionManager;
 import xyz.sk1.bukkit.prisonextra.utils.cosmetics.CosmeticsManager;
 import xyz.sk1.bukkit.prisonextra.utils.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.utils.housing.HouseManager;
@@ -17,9 +19,10 @@ public class Core extends Base {
 
     private static volatile Core instance;
     private PluginManager pluginManager;
-    private UserManager playerManager;
-    private HouseManager houseManager;
+    private PrisonManager playerManager;
+    private RegionManager regionManager;
     private CosmeticsManager cosmeticsManager;
+
     private Database database;
     private AbstractDatabaseFactory abstractDatabaseFactory;
 
@@ -33,6 +36,7 @@ public class Core extends Base {
 
         this.pluginManager = new PluginManager();
         this.playerManager = new UserManager();
+        this.regionManager = new HouseManager();
 
     }
 

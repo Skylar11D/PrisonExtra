@@ -2,15 +2,13 @@ package xyz.sk1.bukkit.prisonextra.manager;
 
 public interface Manager {
 
-    default void enable(){
-
-
+    default void start(){
 
         load();
     }
 
     void load();
 
-    ManagerType getType(ManagerType type);
+    ManagerType getType();
 
 }

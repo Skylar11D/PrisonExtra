@@ -1,3 +1,3 @@
 package xyz.sk1.bukkit.prisonextra.manager;
 
-public enum ManagerType {Prison, Region}
+public enum ManagerType {PRISON, REGION, COSMETICS}
