@@ -1,10 +1,10 @@
 package xyz.sk1.bukkit.prisonextra.internal.cache;
 
-import java.util.Map;
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
 
 public interface Cache<K, V> {
-
-    boolean removeEldestEntry(Map.Entry<K, V> eldest);
 
     void put(K key, V value);
 
@@ -12,7 +12,6 @@ public interface Cache<K, V> {
 
     void remove(K key);
 
-    void clear();
 
     int size();
 

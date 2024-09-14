@@ -22,6 +22,7 @@ public class Minion extends Miner<UserTask> {
 
         this.setPosition(location.getX(), location.getY(), location.getZ());
         this.setSneaking(true);
+        this.persistent = true;
 
 
     }

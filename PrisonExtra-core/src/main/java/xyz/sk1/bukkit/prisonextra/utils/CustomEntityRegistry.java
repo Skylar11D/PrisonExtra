@@ -12,6 +12,10 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 @SuppressWarnings("all")
 public class CustomEntityRegistry {
 

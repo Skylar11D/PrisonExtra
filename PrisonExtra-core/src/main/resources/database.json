@@ -9,9 +9,10 @@
 
       "name": "MarsDB",
       "table": {
-        "name": "player_region",
-        "name": "player_cosmetic",
-        "name": "player_minion"
+        "name": "regions",
+        "name": "cosmetics",
+        "name": "minions",
+        "name": "prisoners"
       }
 
     },

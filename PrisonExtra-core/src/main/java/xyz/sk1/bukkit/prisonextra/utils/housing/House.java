@@ -4,6 +4,10 @@ import lombok.Data;
 import org.bukkit.Location;
 import xyz.sk1.bukkit.prisonextra.region.Region;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 public class House extends Region {
 
     public House(Location position1, Location position2) {

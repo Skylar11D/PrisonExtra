@@ -6,6 +6,10 @@ import xyz.sk1.bukkit.prisonextra.internal.storage.mongo.MongoDatabase;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 public class DatabaseFactory extends AbstractDatabaseFactory {
 
     @Override

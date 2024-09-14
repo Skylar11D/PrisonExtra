@@ -2,6 +2,7 @@ package xyz.sk1.bukkit.prisonextra;
 
 import lombok.Getter;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
+import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
@@ -15,6 +16,10 @@ import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 
 import java.io.IOException;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 @Getter
 public class Core extends Base {
 
@@ -22,8 +27,10 @@ public class Core extends Base {
     private PluginManager pluginManager;
     private PrisonManager userManager;
     private RegionManager regionManager;
-    private ManagerRegistry managerRegistry;
     private CosmeticsManager cosmeticsManager;
+
+    private ManagerRegistry managerRegistry;
+    private LRUCacheRegistry lruCacheRegistry;
 
     private Database database;
     private AbstractDatabaseFactory abstractDatabaseFactory;
@@ -35,6 +42,9 @@ public class Core extends Base {
         abstractDatabaseFactory = new DatabaseFactory();
         database = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
         database.connect();
+
+        lruCacheRegistry = new LRUCacheRegistry<>();
+        lruCacheRegistry.createCache("regions", 1000);
 
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();

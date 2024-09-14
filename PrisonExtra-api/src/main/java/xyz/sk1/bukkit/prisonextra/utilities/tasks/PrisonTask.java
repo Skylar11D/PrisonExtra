@@ -1,4 +1,9 @@
 package xyz.sk1.bukkit.prisonextra.utilities.tasks;
 
-public abstract class PrisonTask {
+import org.bukkit.entity.Player;
+
+public interface PrisonTask {
+
+    Player getPlayer();
+
 }

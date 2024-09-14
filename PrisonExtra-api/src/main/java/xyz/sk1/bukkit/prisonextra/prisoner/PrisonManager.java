@@ -3,6 +3,7 @@ package xyz.sk1.bukkit.prisonextra.prisoner;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.utilities.tasks.PrisonTask;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,19 +15,19 @@ import java.util.Map;
  */
 public interface PrisonManager<P, E, T extends PrisonTask> extends Manager {
 
-    Map<E,T> getPrisoners();
+    Map<E, List<T>> getPrisoners();
 
-    public E get(P player);
+    E get(P player);
 
     /**
      * Checks whether the specified target player is a prisoner or not
      * @param player
      * @return true/false
      */
-    public boolean checkPrisoner(P player);
+    boolean checkPrisoner(P player);
 
-    public void imprison(P player);
+    void imprison(P player);
 
-    public void release(P player);
+    void release(P player);
 
 }
