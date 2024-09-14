@@ -9,10 +9,7 @@
 
       "name": "MarsDB",
       "table": {
-        "name": "regions",
-        "name": "cosmetics",
-        "name": "minions",
-        "name": "prisoners"
+        "name": "regions"
       }
 
     },

@@ -22,6 +22,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.0.1")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.8.0")
     implementation(kotlin("stdlib-jdk8"))
+    implementation("com.github.Mqzn:Lotus:1.1.6")
 }
 
 tasks.withType<ProcessResources> {
@@ -38,7 +39,7 @@ tasks.withType<ShadowJar>{
     archiveBaseName.set(rootProject.name)
     archiveVersion.set(this.project.version.toString())
 
-    var classifier: String;
+    val classifier: String
     if(this.project.name.equals("PrisonExtra-api")){
         classifier = "api"
     } else {

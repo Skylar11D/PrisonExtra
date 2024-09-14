@@ -5,7 +5,6 @@ import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.prisoner.PrisonManager;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 import xyz.sk1.bukkit.prisonextra.utilities.tasks.PrisonTask;
-import xyz.sk1.bukkit.prisonextra.utils.tasks.UserTask;
 
 import java.util.*;
 
@@ -15,8 +14,8 @@ import java.util.*;
 
 public class UserManager implements PrisonManager<Player, Prisoner, PrisonTask> {
 
-    private Map<Prisoner, List<PrisonTask>> prisoners;
-    private List<PrisonTask> prisonTasks;
+    private final Map<Prisoner, List<PrisonTask>> prisoners;
+    private final List<PrisonTask> prisonTasks;
 
     public UserManager(){
         this.prisoners = new HashMap<>();
@@ -34,6 +33,7 @@ public class UserManager implements PrisonManager<Player, Prisoner, PrisonTask> 
                 p -> p.getPlayer() == player).findFirst().orElse(null);
     }
 
+    @SuppressWarnings("all")
     @Override
     public boolean checkPrisoner(Player player) {
         return getPrisoners().containsKey(player);
@@ -49,6 +49,7 @@ public class UserManager implements PrisonManager<Player, Prisoner, PrisonTask> 
         }, prisonTasks);
     }
 
+    @SuppressWarnings("all")
     @Override
     public void release(Player player) {
         getPrisoners().remove(player);

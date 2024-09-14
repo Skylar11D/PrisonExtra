@@ -1,15 +1,14 @@
 package xyz.sk1.bukkit.prisonextra.manager;
 
-import java.sql.SQLException;
-
 public interface Manager {
 
-    default void start() throws SQLException {
+    default void start() throws Exception {
 
         load();
+
     }
 
-    void load() throws SQLException;
+    void load() throws Exception;
 
     ManagerType getType();
 

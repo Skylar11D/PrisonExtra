@@ -8,9 +8,6 @@ import xyz.sk1.bukkit.prisonextra.region.Region;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author <a href="https://github.com/skylar11d">skylar</a>
@@ -20,6 +17,7 @@ public final class HouseManager implements RegionManager<House> {
 
     Cache<String, Region> cachedRegions;
 
+    @SuppressWarnings("unchecked")
     public HouseManager(){
         this.cachedRegions = Core.getInstance().getLruCacheRegistry().getCache("regions");
     }
@@ -36,7 +34,7 @@ public final class HouseManager implements RegionManager<House> {
     }
 
     @Override
-    public void load() throws SQLException {
+    public void load() throws Exception {
 
         try(PreparedStatement statement = Core.getInstance().getDatabase().getConnection().prepareStatement("SELECT * FROM region")) {
 

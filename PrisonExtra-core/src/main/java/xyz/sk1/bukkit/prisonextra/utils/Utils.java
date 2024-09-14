@@ -9,9 +9,11 @@ import java.util.logging.Logger;
 public class Utils {
 
     public static final Logger LOG = Logger.getLogger("PrisonExtra");
-    public static final String colorize(String text){
+
+    public static String COLORIZE(String text){
         return ChatColor.translateAlternateColorCodes('&', text);
     }
-    public static ExecutorService pool = Executors.newCachedThreadPool();
+
+    public static final ExecutorService POOL = Executors.newCachedThreadPool();
 
 }
