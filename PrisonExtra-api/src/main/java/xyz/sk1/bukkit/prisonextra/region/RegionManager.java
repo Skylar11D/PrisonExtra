@@ -17,6 +17,6 @@ public interface RegionManager<R extends Region> extends Manager {
      * Get the location of the region from the cache
      * @param location
      */
-    void getRegionByLocation(Location location);
+    R getRegionByLocation(Location location);
 
 }

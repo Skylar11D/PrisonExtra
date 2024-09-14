@@ -1,8 +1,9 @@
-package xyz.sk1.bukkit.prisonextra.internal.storage;
+package xyz.sk1.bukkit.prisonextra.internal.storage.sql;
 
 import lombok.*;
+import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
+import xyz.sk1.bukkit.prisonextra.utils.Utils;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -28,14 +29,19 @@ public class MySQLDatabase extends Database {
         String connectionUrl = "jdbc:mysql://"+hostname+":"+port+"/"+database;
 
         try {
-            //needs to be
+            //only one thread allowed
             synchronized (this){
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(connectionUrl, username, passphrase);
+
+                Utils.LOG.info("Checking tables specified in (database.json)..");
+                //createTables();
+
             }
 
         } catch (ClassNotFoundException | RuntimeException | SQLException e) {
             e.printStackTrace();
+            Utils.LOG.warning("Failed to connect to the database, please define it in database.json");
         }
 
     }
@@ -46,7 +52,15 @@ public class MySQLDatabase extends Database {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void createTables(String regionTable){
 
     }
 }

@@ -10,7 +10,7 @@ import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.prisoner.PrisonManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
 import xyz.sk1.bukkit.prisonextra.utils.cosmetics.CosmeticsManager;
-import xyz.sk1.bukkit.prisonextra.utils.factory.DatabaseFactory;
+import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.utils.housing.HouseManager;
 import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 
