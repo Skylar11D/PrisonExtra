@@ -7,7 +7,7 @@ import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 public class Active implements MinionState {
 
     @Override
-    public void perform(Prisoner prisoner, Minion<?> miner) {
+    public void perform(Prisoner prisoner, Minion miner) {
 
     }
 

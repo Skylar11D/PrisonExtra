@@ -4,6 +4,6 @@ import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 
 public interface MinionState {
 
-    void perform(Prisoner prisoner, Minion<?> miner);
+    void perform(Prisoner prisoner, Minion miner);
 
 }
