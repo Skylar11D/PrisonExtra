@@ -4,10 +4,7 @@ import lombok.*;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.utils.Utils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true)
@@ -36,8 +33,8 @@ public class MySQLDatabase extends Database {
                 connection = DriverManager.getConnection(connectionUrl, username, passphrase);
 
                 Utils.LOG.info("Checking tables specified in (database.json)..");
-                //createTables();
 
+                checkRegionTable("region");
             }
 
         } catch (ClassNotFoundException | RuntimeException | SQLException e) {
@@ -61,7 +58,32 @@ public class MySQLDatabase extends Database {
         }
     }
 
-    private void createRegionTables(String regionTable){
-        PreparedStatement statement = getConnection().prepareStatement("CREATE TABLE ")
+    private void checkRegionTable(String regionTable){
+        try {
+            String query = "CREATE TABLE IF NOT EXISTS " + regionTable +
+                    " (owner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+
+            Statement statement = getConnection().createStatement();
+
+            statement.execute(query);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    private void checkTable(String regionTable){
+        try {
+            String query = "CREATE TABLE IF NOT EXISTS regions " +
+                    "(owner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+
+            Statement statement = getConnection().createStatement();
+
+            statement.execute(query);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -5,16 +5,14 @@ import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.Settings;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.SettingsManager;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationFactory;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationHandlerFactory;
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.prisoner.PrisonManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
-import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractConfigurationFactory;
 import xyz.sk1.bukkit.prisonextra.utils.Utils;
 import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.utils.housing.House;
@@ -37,7 +35,7 @@ public class Core extends Base {
     private PluginManager pluginManager;
     private PrisonManager userManager;
     private RegionManager<House> regionManager;
-    private Settings settingsManager;
+    private ConfigurationHandler yamlConfigurationHandlerManager;
 
     private ManagerRegistry managerRegistry;
     private LRUCacheRegistry lruCacheRegistry;
@@ -45,7 +43,7 @@ public class Core extends Base {
     private Database database;
 
     private AbstractDatabaseFactory abstractDatabaseFactory;
-    private AbstractConfigurationFactory abstractConfigFactory;
+    private ConfigurationHandlerFactory abstractConfigFactory;
 
     private FileConfiguration settings;
 
@@ -59,8 +57,8 @@ public class Core extends Base {
         abstractDatabaseFactory = new DatabaseFactory();
         database = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
 
-        abstractConfigFactory = new ConfigurationFactory();
-        settings = abstractConfigFactory.createConfig(this, "settings.yml");
+        abstractConfigFactory = new ConfigurationHandlerFactory();
+        //settings = abstractConfigFactory.createConfig(this, "settings.yml");
 
         Utils.LOG.info("Connecting to the database..");
         database.connect();
@@ -73,11 +71,9 @@ public class Core extends Base {
 
         this.userManager = new UserManager();
         this.regionManager = new HouseManager();
-        this.settingsManager = new SettingsManager(settings);
 
         this.managerRegistry.register(userManager);
         this.managerRegistry.register(regionManager);
-        this.managerRegistry.register(settingsManager);
 
         try {
 

@@ -3,8 +3,6 @@ package xyz.sk1.bukkit.prisonextra.utils.minion.pathfinder;
 import net.minecraft.server.v1_8_R3.*;
 import xyz.sk1.bukkit.prisonextra.minion.Minion;
 
-import java.util.EnumSet;
-
 public class PathfinderGoalMoveToStone extends PathfinderGoal {
     private final Minion zombie;;
     private BlockPosition targetBlock;
