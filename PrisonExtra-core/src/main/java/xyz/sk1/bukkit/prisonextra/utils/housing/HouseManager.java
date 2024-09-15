@@ -24,7 +24,7 @@ public final class HouseManager implements RegionManager<House> {
 
     @Override
     public void insertRegion(House region) {
-        //cachedRegions.put("");
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package xyz.sk1.bukkit.prisonextra.utils;
 
+import com.google.gson.JsonObject;
 import org.bukkit.ChatColor;
 
 import java.util.concurrent.ExecutorService;

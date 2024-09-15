@@ -38,6 +38,7 @@ subprojects {
         implementation("org.spigotmc:minecraft-server:1.8.8-SNAPSHOT")
         implementation("com.github.retrooper.packetevents:spigot:2.3.0")
         implementation("mysql:mysql-connector-java:8.0.33")
+        implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
 
         compileOnly("org.projectlombok:lombok:1.18.32")
     }

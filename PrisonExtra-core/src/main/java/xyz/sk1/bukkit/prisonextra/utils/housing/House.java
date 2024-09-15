@@ -18,6 +18,7 @@ public class House extends Region implements Accessable {
 
     @Getter
     private List<String> deniedPlayers;
+    private
     @Getter(onMethod_ = "isDenyingAll")
     private boolean denyAll;
     private final AccessStrategy accessStrategy;

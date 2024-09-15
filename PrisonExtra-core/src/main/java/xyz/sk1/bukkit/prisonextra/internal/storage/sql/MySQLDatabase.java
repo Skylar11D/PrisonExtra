@@ -6,6 +6,7 @@ import xyz.sk1.bukkit.prisonextra.utils.Utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @RequiredArgsConstructor
@@ -60,7 +61,7 @@ public class MySQLDatabase extends Database {
         }
     }
 
-    private void createTables(String regionTable){
-
+    private void createRegionTables(String regionTable){
+        PreparedStatement statement = getConnection().prepareStatement("CREATE TABLE ")
     }
 }

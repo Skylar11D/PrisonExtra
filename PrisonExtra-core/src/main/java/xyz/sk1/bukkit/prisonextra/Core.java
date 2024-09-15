@@ -1,5 +1,6 @@
 package xyz.sk1.bukkit.prisonextra;
 
+import io.github.mqzen.menus.Lotus;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
@@ -31,6 +32,7 @@ import java.sql.SQLException;
 public class Core extends Base {
 
     private static volatile Core instance;
+    private Lotus api;
 
     private PluginManager pluginManager;
     private PrisonManager userManager;
@@ -50,6 +52,9 @@ public class Core extends Base {
     @Override
     public void init() {
         instance = this;
+        api = Lotus.load(this);
+
+        Utils.LOG.warning("This plugin only supports MySQL 5.7 service and above");
 
         abstractDatabaseFactory = new DatabaseFactory();
         database = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
