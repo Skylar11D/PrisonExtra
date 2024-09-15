@@ -4,9 +4,9 @@ import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigManager;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationFactory;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.type.ConfigurationManager;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.Settings;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.SettingsManager;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationFactory;
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
@@ -35,7 +35,7 @@ public class Core extends Base {
     private PluginManager pluginManager;
     private PrisonManager userManager;
     private RegionManager<House> regionManager;
-    private ConfigurationManager configurationManager;
+    private Settings settingsManager;
 
     private ManagerRegistry managerRegistry;
     private LRUCacheRegistry lruCacheRegistry;
@@ -55,7 +55,7 @@ public class Core extends Base {
         database = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
 
         abstractConfigFactory = new ConfigurationFactory();
-        this.settings = abstractConfigFactory.createConfig(this, "settings.yml");
+        settings = abstractConfigFactory.createConfig(this, "settings.yml");
 
         Utils.LOG.info("Connecting to the database..");
         database.connect();
@@ -68,11 +68,11 @@ public class Core extends Base {
 
         this.userManager = new UserManager();
         this.regionManager = new HouseManager();
-        this.configurationManager = new ConfigManager(settings);
+        this.settingsManager = new SettingsManager(settings);
 
         this.managerRegistry.register(userManager);
         this.managerRegistry.register(regionManager);
-        this.managerRegistry.register(configurationManager);
+        this.managerRegistry.register(settingsManager);
 
         try {
 

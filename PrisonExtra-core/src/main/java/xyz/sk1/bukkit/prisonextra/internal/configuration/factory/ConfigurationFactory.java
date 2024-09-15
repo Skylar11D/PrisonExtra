@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.internal.configuration;
+package xyz.sk1.bukkit.prisonextra.internal.configuration.factory;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

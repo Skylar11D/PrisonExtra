@@ -1,24 +1,12 @@
 package xyz.sk1.bukkit.prisonextra.prisoner;
 
 import org.bukkit.entity.Player;
-import xyz.sk1.bukkit.prisonextra.enums.Cosmetics;
+import xyz.sk1.bukkit.prisonextra.minion.Minion;
 
 public interface Prisoner {
 
     Player getPlayer();
 
-    default void spawnMiner(){}
-
-    default void summonParticle(Cosmetics.ParticleType type){}
-
-    default void rentHouse(){}
-
-    default void rentMiner(){}
-
-    default void purchaseMiner(){}
-
-    default void purchaseCosmetic(Cosmetics type){}
-
-    default void summonCloak(Cosmetics.CloakType type){}
+    default Minion<?> getMiner(Minion<?> miner){return null;}
 
 }

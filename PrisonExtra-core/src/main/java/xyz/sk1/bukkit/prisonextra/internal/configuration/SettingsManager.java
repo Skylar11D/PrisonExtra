@@ -1,17 +1,15 @@
 package xyz.sk1.bukkit.prisonextra.internal.configuration;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.type.ConfigurationManager;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 
-public class ConfigManager implements ConfigurationManager {
+public class SettingsManager implements Settings {
 
-    private FileConfiguration fileConfiguration;
+    private final FileConfiguration fileConfiguration;
 
-    public ConfigManager(FileConfiguration fileConfiguration) {
+    public SettingsManager(FileConfiguration fileConfiguration) {
         this.fileConfiguration = fileConfiguration;
     }
-
 
     @Override
     public void setOption(String option, Object value) {
