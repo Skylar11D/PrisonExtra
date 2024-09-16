@@ -13,7 +13,7 @@ import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
-import xyz.sk1.bukkit.prisonextra.utils.Utils;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.utils.housing.House;
 import xyz.sk1.bukkit.prisonextra.utils.housing.HouseManager;

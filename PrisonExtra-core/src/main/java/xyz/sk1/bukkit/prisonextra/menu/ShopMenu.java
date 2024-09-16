@@ -8,7 +8,7 @@ import io.github.mqzen.menus.titles.MenuTitle;
 import io.github.mqzen.menus.titles.MenuTitles;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import xyz.sk1.bukkit.prisonextra.utils.Utils;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 public class ShopMenu implements Menu {
     @Override
