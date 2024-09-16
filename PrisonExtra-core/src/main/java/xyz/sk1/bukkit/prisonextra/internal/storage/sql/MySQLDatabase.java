@@ -82,7 +82,8 @@ public class MySQLDatabase extends Database {
     private void checkRegionTable(String regionTable){
         try {
             String query = "CREATE TABLE IF NOT EXISTS " + regionTable +
-                    " (owner VARCHAR(32), world VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+                    " (owner VARCHAR(32), world VARCHAR(32), denyAll BOOLEAN ,deniedPlayers JSON, " +
+                    "x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
 
             Statement statement = getConnection().createStatement();
 
@@ -96,7 +97,7 @@ public class MySQLDatabase extends Database {
     private void checkMinionTable(String minionTable){
         try {
             String query = "CREATE TABLE IF NOT EXISTS " + minionTable +
-                    "(owner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+                    "(owner VARCHAR(32), duration BIGINT, rented BOOLEAN)";
 
             Statement statement = getConnection().createStatement();
 
@@ -110,7 +111,7 @@ public class MySQLDatabase extends Database {
     private void checkPrisonersTable(String pName) {
         try {
             String query = "CREATE TABLE IF NOT EXISTS " + pName +
-                    "(owner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+                    "(prisoner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
 
             Statement statement = getConnection().createStatement();
 

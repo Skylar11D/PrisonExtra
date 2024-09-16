@@ -4,6 +4,9 @@ import net.minecraft.server.v1_8_R3.*;
 import xyz.sk1.bukkit.prisonextra.minion.Minion;
 
 public class PathfinderGoalMoveToStone extends PathfinderGoal {
+
+    //experimental
+
     private final Minion zombie;;
     private BlockPosition targetBlock;
     private final double speed;

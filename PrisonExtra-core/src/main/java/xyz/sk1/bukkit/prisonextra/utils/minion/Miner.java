@@ -2,6 +2,7 @@ package xyz.sk1.bukkit.prisonextra.utils.minion;
 
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftZombie;
 import org.bukkit.entity.Skeleton;
 import xyz.sk1.bukkit.prisonextra.minion.Minion;
 import xyz.sk1.bukkit.prisonextra.minion.type.MinionType;
@@ -10,7 +11,9 @@ import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 import xyz.sk1.bukkit.prisonextra.utils.minion.pathfinder.PathfinderGoalMoveToStone;
 import xyz.sk1.bukkit.prisonextra.utils.minion.states.Locked;
 
-public class Miner extends Minion { ;
+public class Miner extends Minion {
+
+    // This is the actual personal miner for each player (experimental)
 
     private final Prisoner prisoner;
 
