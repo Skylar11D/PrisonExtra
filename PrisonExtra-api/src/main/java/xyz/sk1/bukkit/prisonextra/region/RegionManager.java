@@ -3,6 +3,8 @@ package xyz.sk1.bukkit.prisonextra.region;
 import org.bukkit.Location;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 
+import java.util.Optional;
+
 public interface RegionManager<R extends Region> extends Manager {
 
     /**
@@ -15,8 +17,9 @@ public interface RegionManager<R extends Region> extends Manager {
 
     /**
      * Get the location of the region from the cache
+     *
      * @param location
      */
-    R getRegionByLocation(Location location);
+    Optional<R> getRegionByLocation(Location location);
 
 }

@@ -6,6 +6,7 @@ import net.minecraft.server.v1_8_R3.Entity;
 import net.minecraft.server.v1_8_R3.EntityTypes;
 import net.minecraft.server.v1_8_R3.MinecraftKey;
 import net.minecraft.server.v1_8_R3.RegistryMaterials;
+import xyz.sk1.bukkit.prisonextra.Core;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

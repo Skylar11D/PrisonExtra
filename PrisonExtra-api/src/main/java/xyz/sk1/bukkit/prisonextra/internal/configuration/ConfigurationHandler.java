@@ -1,13 +1,13 @@
 package xyz.sk1.bukkit.prisonextra.internal.configuration;
 
-public interface ConfigurationHandler {
+public interface ConfigurationHandler<D> {
 
     void load();
 
     void save();
 
-    Object get();
+    D get(String path);
 
-    void set();
+    void set(String path, D victim);
 
 }

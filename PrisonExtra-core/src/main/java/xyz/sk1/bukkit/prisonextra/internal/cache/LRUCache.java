@@ -1,6 +1,9 @@
 package xyz.sk1.bukkit.prisonextra.internal.cache;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -9,24 +12,25 @@ import java.util.Map;
 
 public class LRUCache<K, V> implements Cache<K, V> {
 
-    private final int capacity;
+    private int capacity;
+    private int size;
     private final Map<K, Node<?, ?>> map;
     private final Node<K, V> head;
     private final Node<K, V> tail;
 
     private static class Node<K, V> {
+
         K key;
         V value;
-
         Node<?, ?> prev;
-        Node<?, ?> next;
 
+        Node<?, ?> next;
         public Node(K key, V value){
             this.key = key;
             this.value = value;
         }
-    }
 
+    }
     public LRUCache(int capacity) {
         this.capacity = capacity;
         this.map = new HashMap<>();
@@ -52,6 +56,7 @@ public class LRUCache<K, V> implements Cache<K, V> {
         node = new Node<>(key, value);
         map.put(key, node);
         addNode(node);
+        size++;
 
     }
 
@@ -89,15 +94,61 @@ public class LRUCache<K, V> implements Cache<K, V> {
         Node<?, ?> node = tail.prev;
         removeNode(node);
         map.remove(node.key);
+        size--;
     }
 
     @Override
     public void remove(K key) {
+        Node<?, ?> node = map.remove(key);
 
+        if (node == null) {
+            return;
+        }
+        removeNode(node);
+        size--;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
+
+    @Override
+    public @NotNull Iterator<Map.Entry<K, V>> iterator() {
+        return new CacheIterator();
+    }
+
+    private class CacheIterator implements Iterator<Map.Entry<K, V>> {
+        private Node<K, V> current = (Node<K, V>) head.next;
+
+        @Override
+        public boolean hasNext() {
+            return current != tail;
+        }
+
+        @Override
+        public Map.Entry<K, V> next() {
+            Node<K, V> node = current;
+            current = (Node<K, V>) current.next;
+            return new Map.Entry<K, V>() {
+                @Override
+                public K getKey() {
+                    return node.key;
+                }
+
+                @Override
+                public V getValue() {
+                    return node.value;
+                }
+
+                @Override
+                public V setValue(V value) {
+                    V oldValue = node.value;
+                    node.value = value;
+                    return oldValue;
+                }
+            };
+        }
+    }
+
 }

@@ -5,11 +5,13 @@
     "username": "Fahad",
     "passphrase": "123Abc321",
 
-    "Database": {
+    "database": {
 
       "name": "MarsDB",
       "table": {
-        "name": "regions"
+        "regions": "regions",
+        "minions": "minions",
+        "prisoners": "prisoners"
       }
 
     },

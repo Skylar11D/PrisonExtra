@@ -23,11 +23,12 @@ public class House extends Region implements Accessable {
     private boolean denyAll;
     private final AccessStrategy accessStrategy;
 
-    public House(Location position1, Location position2) {
-        super(position1, position2);
+    public House(Location position1, Location position2, String owner) {
+        super(position1, position2, owner);
         this.accessStrategy = new WhitelistAccessStrategy();
     }
 
+    @Override
     public boolean contains(Location location){
 
         return location.getX() > getMinX() && location.getY() > getMinY() && location.getZ() < getMinZ() &&

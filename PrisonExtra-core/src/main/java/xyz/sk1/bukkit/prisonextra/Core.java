@@ -1,8 +1,8 @@
 package xyz.sk1.bukkit.prisonextra;
 
 import io.github.mqzen.menus.Lotus;
+import lombok.AccessLevel;
 import lombok.Getter;
-import org.bukkit.configuration.file.FileConfiguration;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
@@ -10,8 +10,8 @@ import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationHa
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
+import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
-import xyz.sk1.bukkit.prisonextra.prisoner.PrisonManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
 import xyz.sk1.bukkit.prisonextra.utils.Utils;
 import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
@@ -19,6 +19,7 @@ import xyz.sk1.bukkit.prisonextra.utils.housing.House;
 import xyz.sk1.bukkit.prisonextra.utils.housing.HouseManager;
 import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -33,19 +34,27 @@ public class Core extends Base {
     private Lotus api;
 
     private PluginManager pluginManager;
-    private PrisonManager userManager;
+    @SuppressWarnings("all")
+    private Manager userManager;
     private RegionManager<House> regionManager;
-    private ConfigurationHandler yamlConfigurationHandlerManager;
 
     private ManagerRegistry managerRegistry;
+    @SuppressWarnings("all")
     private LRUCacheRegistry lruCacheRegistry;
 
     private Database database;
 
     private AbstractDatabaseFactory abstractDatabaseFactory;
-    private ConfigurationHandlerFactory abstractConfigFactory;
+    @Getter(AccessLevel.PRIVATE)
+    private ConfigurationHandlerFactory configurationFactory;
 
-    private FileConfiguration settings;
+
+    @Getter(AccessLevel.PRIVATE)
+    private File settingsFile;
+    @Getter(AccessLevel.PRIVATE)
+    private File databaseFile;
+    private ConfigurationHandler settings;
+    private ConfigurationHandler databasecfg;
 
     @Override
     public void init() {
@@ -57,8 +66,12 @@ public class Core extends Base {
         abstractDatabaseFactory = new DatabaseFactory();
         database = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
 
-        abstractConfigFactory = new ConfigurationHandlerFactory();
-        //settings = abstractConfigFactory.createConfig(this, "settings.yml");
+        settingsFile = new File(getDataFolder(), "settings.yml");
+        databaseFile = new File(getDataFolder(), "database.json");
+
+        configurationFactory = new ConfigurationHandlerFactory();
+        settings = configurationFactory.createConfigHandler(settingsFile).orElse(null);
+        databasecfg = configurationFactory.createConfigHandler(databaseFile).orElse(null);
 
         Utils.LOG.info("Connecting to the database..");
         database.connect();
@@ -88,6 +101,8 @@ public class Core extends Base {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.listeners");
 
 
     }

@@ -14,7 +14,10 @@ public abstract class Region {
     private final double maxY;
     private final double maxZ;
 
-    protected Region(Location position1, Location position2) {
+    private final String owner;
+
+    protected Region(Location position1, Location position2, String owner) {
+        this.owner = owner;
         this.minX = Math.min(position1.getX(), position2.getX());
         this.minY = Math.min(position1.getY(), position2.getY());
         this.minZ = Math.min(position1.getZ(), position2.getZ());
@@ -22,4 +25,6 @@ public abstract class Region {
         this.maxY = Math.max(position1.getY(), position2.getY());
         this.maxZ = Math.max(position1.getZ(), position2.getZ());
     }
+
+    public abstract boolean contains(Location location);
 }

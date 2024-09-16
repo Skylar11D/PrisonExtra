@@ -1,6 +1,10 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage.sql;
 
+import com.google.gson.JsonObject;
 import lombok.*;
+import xyz.sk1.bukkit.prisonextra.Core;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.JsonConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
 import xyz.sk1.bukkit.prisonextra.utils.Utils;
 
@@ -25,6 +29,7 @@ public class MySQLDatabase extends Database {
     @Override
     public void connect() {
         String connectionUrl = "jdbc:mysql://"+hostname+":"+port+"/"+database;
+        ConfigurationHandler<JsonObject> ch = Core.getInstance().getDatabasecfg();
 
         try {
             //only one thread allowed
@@ -34,7 +39,23 @@ public class MySQLDatabase extends Database {
 
                 Utils.LOG.info("Checking tables specified in (database.json)..");
 
-                checkRegionTable("region");
+
+                JsonObject service = ch.get("service");
+                JsonObject db = service.getAsJsonObject("database");
+                JsonObject table = db.getAsJsonObject("table");
+                JsonObject region = table.getAsJsonObject("regions");
+                JsonObject minions = table.getAsJsonObject("minions");
+                JsonObject prisoners = table.getAsJsonObject("prisoners");
+
+                String rName = region.getAsString();
+
+                String mName = minions.getAsString();
+
+                String pName = prisoners.getAsString();
+
+                checkRegionTable(rName);
+                checkMinionTable(mName);
+                checkPrisonersTable(pName);
             }
 
         } catch (ClassNotFoundException | RuntimeException | SQLException e) {
@@ -61,7 +82,7 @@ public class MySQLDatabase extends Database {
     private void checkRegionTable(String regionTable){
         try {
             String query = "CREATE TABLE IF NOT EXISTS " + regionTable +
-                    " (owner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+                    " (owner VARCHAR(32), world VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
 
             Statement statement = getConnection().createStatement();
 
@@ -72,9 +93,23 @@ public class MySQLDatabase extends Database {
         }
     }
 
-    private void checkTable(String regionTable){
+    private void checkMinionTable(String minionTable){
         try {
-            String query = "CREATE TABLE IF NOT EXISTS regions " +
+            String query = "CREATE TABLE IF NOT EXISTS " + minionTable +
+                    "(owner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+
+            Statement statement = getConnection().createStatement();
+
+            statement.execute(query);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void checkPrisonersTable(String pName) {
+        try {
+            String query = "CREATE TABLE IF NOT EXISTS " + pName +
                     "(owner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
 
             Statement statement = getConnection().createStatement();
