@@ -3,6 +3,7 @@ package xyz.sk1.bukkit.prisonextra;
 import lombok.AccessLevel;
 import lombok.Getter;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
+import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.NPCManager;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
@@ -34,7 +35,8 @@ public class Core extends Base {
 
     private PluginManager pluginManager;
     @SuppressWarnings("all")
-    private Manager userManager, fakeplayerManager;
+    private Manager userManager;
+    private NPCManager fakeplayerManager;
     private RegionManager<House> regionManager;
 
     private ManagerRegistry managerRegistry;
