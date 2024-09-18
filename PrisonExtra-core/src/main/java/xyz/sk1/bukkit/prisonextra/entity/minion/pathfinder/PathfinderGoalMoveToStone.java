@@ -1,7 +1,7 @@
-package xyz.sk1.bukkit.prisonextra.utils.minion.pathfinder;
+package xyz.sk1.bukkit.prisonextra.entity.minion.pathfinder;
 
 import net.minecraft.server.v1_8_R3.*;
-import xyz.sk1.bukkit.prisonextra.minion.Minion;
+import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
 
 public class PathfinderGoalMoveToStone extends PathfinderGoal {
 

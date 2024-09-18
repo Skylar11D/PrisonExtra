@@ -2,8 +2,8 @@ package xyz.sk1.bukkit.prisonextra.prisoner;
 
 import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
-import xyz.sk1.bukkit.prisonextra.minion.Minion;
-import xyz.sk1.bukkit.prisonextra.minion.type.MinionType;
+import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
+import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.Optional;
  * @param <E> The prisoner object
  * @param <M> Represents the prisoner's minions
  */
-public interface PrisonManager<P, E, M extends Minion<?>> extends Manager {
+public interface PrisonManager<P, E, M extends Minion> extends Manager {
 
     /**
      * Get a list of all registered prisoners
@@ -53,8 +53,8 @@ public interface PrisonManager<P, E, M extends Minion<?>> extends Manager {
      * @param player
      * @return Optional object of <code>Minion</code>
      */
-    Optional<Minion<?>> getMinion(Player player, MinionType type);
+    Optional<Minion> getMinion(Player player, MinionType type);
 
-    void registerMinion(Minion<?> minion, P player);
+    void registerMinion(Minion minion, P player);
 
 }

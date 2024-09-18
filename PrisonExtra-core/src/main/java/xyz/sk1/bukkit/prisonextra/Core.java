@@ -1,8 +1,8 @@
 package xyz.sk1.bukkit.prisonextra;
 
-import io.github.mqzen.menus.Lotus;
 import lombok.AccessLevel;
 import lombok.Getter;
+import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
@@ -31,11 +31,10 @@ import java.sql.SQLException;
 public class Core extends Base {
 
     private static volatile Core instance;
-    private Lotus api;
 
     private PluginManager pluginManager;
     @SuppressWarnings("all")
-    private Manager userManager;
+    private Manager userManager, fakeplayerManager;
     private RegionManager<House> regionManager;
 
     private ManagerRegistry managerRegistry;
@@ -48,7 +47,6 @@ public class Core extends Base {
     @Getter(AccessLevel.PRIVATE)
     private ConfigurationHandlerFactory configurationFactory;
 
-
     @Getter(AccessLevel.PRIVATE)
     private File settingsFile;
     @Getter(AccessLevel.PRIVATE)
@@ -59,7 +57,6 @@ public class Core extends Base {
     @Override
     public void init() {
         instance = this;
-        api = Lotus.load(this);
 
         Utils.LOG.warning("This plugin only supports MySQL 5.7 service and above");
 
@@ -76,8 +73,10 @@ public class Core extends Base {
         Utils.LOG.info("Connecting to the database..");
         database.connect();
 
+        Utils.LOG.info("Creating necessary caches..");
         lruCacheRegistry = new LRUCacheRegistry<>();
         lruCacheRegistry.createCache("regions", 500);
+        lruCacheRegistry.createCache("fakeplayers", 4);
 
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();
@@ -85,8 +84,11 @@ public class Core extends Base {
         this.userManager = new UserManager();
         this.regionManager = new HouseManager();
 
+        this.fakeplayerManager = new FakePlayerManager();
+
         this.managerRegistry.register(userManager);
         this.managerRegistry.register(regionManager);
+        this.managerRegistry.register(fakeplayerManager);
 
         try {
 
@@ -95,6 +97,9 @@ public class Core extends Base {
 
             Utils.LOG.info("Loading all regions to the cache..");
             this.regionManager.start();
+
+            Utils.LOG.info("Loading all npcs to the cache..");
+            this.fakeplayerManager.start();
 
         } catch (SQLException e){
             e.printStackTrace();

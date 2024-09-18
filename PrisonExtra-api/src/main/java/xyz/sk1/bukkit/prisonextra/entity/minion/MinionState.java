@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.minion;
+package xyz.sk1.bukkit.prisonextra.entity.minion;
 
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 

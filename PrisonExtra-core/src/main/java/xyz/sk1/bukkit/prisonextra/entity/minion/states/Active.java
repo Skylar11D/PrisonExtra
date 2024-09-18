@@ -1,7 +1,7 @@
-package xyz.sk1.bukkit.prisonextra.utils.minion.states;
+package xyz.sk1.bukkit.prisonextra.entity.minion.states;
 
-import xyz.sk1.bukkit.prisonextra.minion.Minion;
-import xyz.sk1.bukkit.prisonextra.minion.MinionState;
+import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
+import xyz.sk1.bukkit.prisonextra.entity.minion.MinionState;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 
 public class Active implements MinionState {
