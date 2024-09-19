@@ -1,6 +1,7 @@
 package xyz.sk1.bukkit.prisonextra.executors.npc.subcommands;
 
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
@@ -30,9 +31,6 @@ public class SubNpcType implements Subcommand {
             return;
         }
 
-        String texture = yamlSettings.get().getString("npcs."+args[1]+".appearance.texture");
-        String signature = yamlSettings.get().getString("npcs."+args[1]+".appearance.signature");
-
         yamlSettings.get().set("npcs."+args[1]+".coordinates.x", sender.getLocation().getX());
         yamlSettings.get().set("npcs."+args[1]+".coordinates.y", sender.getLocation().getY());
         yamlSettings.get().set("npcs."+args[1]+".coordinates.z", sender.getLocation().getZ());
@@ -40,7 +38,13 @@ public class SubNpcType implements Subcommand {
 
        yamlSettings.get().set("npcs."+args[1]+".attributes.type", args[3]);
 
-        ((FakePlayerManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).getFactory().createTextured(args[1], texture, signature, sender.getLocation());
+        ((FakePlayerManager)Core.getInstance().
+                getManagerRegistry().getManager(ManagerType.NPC)).
+                getNpcFactory().createPlain(args[1], sender.getLocation());
+
+        sender.playSound(sender.getLocation(), Sound.LEVEL_UP, 0.9f, 0.9f);
+
+        sender.sendMessage(Utils.colorize("&fSuccessfully created &b"+args[0].toUpperCase()+" &fas a NPC!"));
 
     }
 }

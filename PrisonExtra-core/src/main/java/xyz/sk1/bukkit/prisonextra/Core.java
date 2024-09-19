@@ -94,8 +94,8 @@ public class Core extends Base {
             throw new RuntimeException(e);
         }
 
-        abstractDatabaseFactory = new DatabaseFactory();
-        PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
+        //abstractDatabaseFactory = new DatabaseFactory();
+        //PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
 
         settingsFile = new File(getDataFolder(), "settings.yml");
         databaseFile = new File(getDataFolder(), "database.json");

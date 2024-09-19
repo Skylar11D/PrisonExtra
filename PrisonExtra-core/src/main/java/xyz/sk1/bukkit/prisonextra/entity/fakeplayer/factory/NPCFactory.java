@@ -6,9 +6,9 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.PrisonNPC;
 
 public class NPCFactory {
 
-    public NPC createPlain(String name, String texture, String signature, Location location){
+    public NPC createPlain(String name, Location location){
 
-        return new PrisonNPC(name, location, texture, signature);
+        return new PrisonNPC(name, location);
     }
 
     public NPC createTextured(String name, String texture, String signature, Location location){

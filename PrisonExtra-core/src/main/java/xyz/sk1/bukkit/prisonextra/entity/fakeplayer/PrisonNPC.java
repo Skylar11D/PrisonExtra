@@ -18,6 +18,11 @@ public class PrisonNPC extends NPC {
 
     private EntityPlayer npc;
 
+    public PrisonNPC(String name, Location location) {
+        super(name, location);
+        customize();
+    }
+
     public PrisonNPC(String name, Location location, String texture, String signature) {
         super(name, location, texture, signature);
         customize();
@@ -43,6 +48,8 @@ public class PrisonNPC extends NPC {
                 PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc);
 
         PacketPlayOutSpawnEntity spawnEntity = new PacketPlayOutSpawnEntity(npc, npc.getId());
+
+        this.npc.setPosition(getPosition().getX(), getPosition().getY(), getPosition().getZ());
 
         this.infoPacket = info;
         this.spawnPacket = spawnEntity;
