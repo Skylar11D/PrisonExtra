@@ -21,7 +21,8 @@ public interface NPCManager<N extends NPC> extends Manager {
     /**
      * Acknowledge all players in this case prisoners about
      * the fakePlayer entity to make it visible and interactable
-     * @param fakePlayer
+     * @param fakePlayer the npc to have its packets synchronized with the server
+     * @param npcObservers users who will be acknowledged about <code>fakePlayer</code>'s existence
      */
     void syncNPC(N fakePlayer, NPCObserver... npcObservers);
 

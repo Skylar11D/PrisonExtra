@@ -8,6 +8,8 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.factory.NPCFactory;
 import xyz.sk1.bukkit.prisonextra.internal.cache.Cache;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 
+import java.util.Arrays;
+
 public class FakePlayerManager implements NPCManager<PrisonNPC> {
 
 
@@ -37,9 +39,7 @@ public class FakePlayerManager implements NPCManager<PrisonNPC> {
     }
 
     private void notifyPrisoners(PrisonNPC fakePlayer, NPCObserver... observers){
-        for(NPCObserver npcObserver : observers){
-            npcObserver.displayNPC(fakePlayer);
-        }
+        Arrays.stream(observers).forEach(observer -> observer.displayNPC(fakePlayer));
     }
 
     @Override

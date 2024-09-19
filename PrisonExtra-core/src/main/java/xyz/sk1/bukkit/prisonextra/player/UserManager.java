@@ -90,32 +90,12 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     @Override
     public void load() {
 
-        ((FakePlayerManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).syncNPC((PrisonNPC) getNPCFromTheYaml().get(), (User)getPrisoners().keySet());
+        //((FakePlayerManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).syncNPC(, (User)getPrisoners().keySet());
 
-    }
-
-    private Optional<NPC> getNPCFromTheYaml(){
-        YamlConfigurationHandler yamlSettings = (YamlConfigurationHandler) Core.getInstance().getSettings();
-
-        for (String name : yamlSettings.get().getConfigurationSection("npcs").getKeys(false)){
-            String texture = yamlSettings.get().getString("npcs."+name+".appearance.texture");
-            String signature = yamlSettings.get().getString("npcs."+name+".appearance.signature");
-
-            double pointX = yamlSettings.get().getDouble("npcs."+name+".coordinates.x");
-            double pointY = yamlSettings.get().getDouble("npcs."+name+".coordinates.y");
-            double pointZ = yamlSettings.get().getDouble("npcs."+name+".coordinates.z");
-            String world = yamlSettings.get().getString("npcs."+name+".coordinates.world");
-
-            Location location = new Location(Bukkit.getWorld(world), pointX, pointY, pointZ);
-
-            return Optional.of(npcFactory.createTextured(name, texture, signature, location));
-        }
-
-        return Optional.empty();
     }
 
     @Override
     public ManagerType getType() {
-        return ManagerType.NPC;
+        return ManagerType.PRISON;
     }
 }
