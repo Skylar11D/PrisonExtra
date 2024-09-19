@@ -4,3 +4,6 @@ version: %project_version%
 author: Skylar
 website: sk1.xyz
 softdepend: [ProtocolLib]
+
+commands:
+  npc:

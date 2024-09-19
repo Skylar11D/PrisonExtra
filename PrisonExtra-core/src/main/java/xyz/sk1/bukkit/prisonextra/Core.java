@@ -9,7 +9,7 @@ import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationHandlerFactory;
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
-import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
+import xyz.sk1.bukkit.prisonextra.internal.storage.PDatabase;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
@@ -43,7 +43,7 @@ public class Core extends Base {
     @SuppressWarnings("all")
     private LRUCacheRegistry lruCacheRegistry;
 
-    private Database database;
+    private PDatabase PDatabase;
 
     private AbstractDatabaseFactory abstractDatabaseFactory;
     @Getter(AccessLevel.PRIVATE)
@@ -61,24 +61,6 @@ public class Core extends Base {
         instance = this;
 
         Utils.LOG.warning("This plugin only supports MySQL 5.7 service and above");
-
-        abstractDatabaseFactory = new DatabaseFactory();
-        database = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
-
-        settingsFile = new File(getDataFolder(), "settings.yml");
-        databaseFile = new File(getDataFolder(), "database.json");
-
-        configurationFactory = new ConfigurationHandlerFactory();
-        settings = configurationFactory.createConfigHandler(settingsFile).orElse(null);
-        databasecfg = configurationFactory.createConfigHandler(databaseFile).orElse(null);
-
-        Utils.LOG.info("Connecting to the database..");
-        database.connect();
-
-        Utils.LOG.info("Creating necessary caches..");
-        lruCacheRegistry = new LRUCacheRegistry<>();
-        lruCacheRegistry.createCache("regions", 500);
-        lruCacheRegistry.createCache("fakeplayers", 4);
 
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();
@@ -109,6 +91,27 @@ public class Core extends Base {
             throw new RuntimeException(e);
         }
 
+        abstractDatabaseFactory = new DatabaseFactory();
+        PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
+
+        settingsFile = new File(getDataFolder(), "settings.yml");
+        databaseFile = new File(getDataFolder(), "database.json");
+
+        this.saveResource("settings.yml", false);
+        this.saveResource("database.json", false);
+
+        configurationFactory = new ConfigurationHandlerFactory();
+        settings = configurationFactory.createConfigHandler(settingsFile).orElse(null);
+        databasecfg = configurationFactory.createConfigHandler(databaseFile).orElse(null);
+
+        Utils.LOG.info("Connecting to the database..");
+        //PDatabase.connect();
+
+        Utils.LOG.info("Creating necessary caches..");
+        lruCacheRegistry = new LRUCacheRegistry<>();
+        lruCacheRegistry.createCache("regions", 500);
+        lruCacheRegistry.createCache("fakeplayers", 4);
+
         this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.listeners");
 
 
@@ -119,7 +122,7 @@ public class Core extends Base {
 
         try {
             Utils.LOG.info("Closing any connection to the database..");
-            database.close();
+            PDatabase.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

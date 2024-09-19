@@ -5,6 +5,6 @@ import xyz.sk1.bukkit.prisonextra.region.Region;
 
 public abstract class AbstractRegionFactory {
 
-    public abstract Region createRegion(Location position1, Location position2);
+    public abstract Region createRegion(Location position1, Location position2, String ownerName);
 
 }

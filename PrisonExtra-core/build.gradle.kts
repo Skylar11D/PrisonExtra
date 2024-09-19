@@ -22,6 +22,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.0.1")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.8.0")
     implementation(kotlin("stdlib-jdk8"))
+    implementation("org.projectlombok:lombok:1.18.32")
 }
 
 tasks.withType<ProcessResources> {

@@ -25,10 +25,12 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     private final Map<Prisoner, List<Minion>> prisoners;
     @SuppressWarnings("all")
     private final List<PrisonTask> prisonTasks;
+    private NPCFactory npcFactory;
 
     public UserManager(){
         this.prisoners = new HashMap<>();
         this.prisonTasks = new ArrayList<>();
+        this.npcFactory = new NPCFactory();
     }
 
     @Override
@@ -86,7 +88,6 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     @Override
     public void load() {
 
-        NPCFactory npcFactory = new NPCFactory();
         NPCManager npcManager = Core.getInstance().getFakeplayerManager();
 
         NPC npc = npcFactory.createNPC("Johnny Sins", "ewogICJ0aW1lc3RhbXAiIDogMTcyNjY4MDkwMjE5OCwKICAicHJvZmlsZUlkIiA6ICJiOWRjZjg1ODAyZmU0NzhjYTQ1YjVjNDFlNjZkMjQ1YSIsCiAgInByb2ZpbGVOYW1lIiA6ICJLYWk1MTIiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2Q4MDczNDg5OTgzYjAyNGEzMmY3YjhiNDkzMTkzY2ZlYzNmY2Y3OGM3NzcxZjU0OWM2NDdhNjM3YTQ0ZjFmNiIKICAgIH0sCiAgICAiQ0FQRSIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Q5ZDgyYWIxN2ZkOTIwMjJkYmQ0YTg2Y2RlNGMzODJhNzU0MGUxMTdmYWU3YjlhMjg1MzY1ODUwNWE4MDYyNSIKICAgIH0KICB9Cn0",
@@ -99,6 +100,6 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
 
     @Override
     public ManagerType getType() {
-        return ManagerType.PRISON;
+        return ManagerType.NPC;
     }
 }

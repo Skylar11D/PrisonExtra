@@ -59,7 +59,7 @@ public final class HouseManager implements RegionManager<House> {
 
     @Override
     public void load() throws Exception {
-        Connection connection = Core.getInstance().getDatabase().getConnection();
+        Connection connection = Core.getInstance().getPDatabase().getConnection();
 
         Statement statement = connection.createStatement();
 

@@ -6,8 +6,8 @@ public interface ConfigurationHandler<D> {
 
     void save();
 
-    D get(String path);
+    default D get(String path){return null;}
 
-    void set(String path, D victim);
+    default void set(String path, D victim){}
 
 }

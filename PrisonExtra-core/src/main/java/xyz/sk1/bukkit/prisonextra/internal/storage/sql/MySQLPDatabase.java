@@ -4,14 +4,14 @@ import com.google.gson.JsonObject;
 import lombok.*;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
-import xyz.sk1.bukkit.prisonextra.internal.storage.Database;
+import xyz.sk1.bukkit.prisonextra.internal.storage.PDatabase;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.sql.*;
 
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true)
-public class MySQLDatabase extends Database {
+public class MySQLPDatabase extends PDatabase {
 
     private Connection connection;
 

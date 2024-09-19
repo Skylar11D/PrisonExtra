@@ -1,36 +1,43 @@
 package xyz.sk1.bukkit.prisonextra.internal.configuration;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import xyz.sk1.bukkit.prisonextra.Core;
 
 import java.io.File;
+import java.io.IOException;
 
-@Getter
-@RequiredArgsConstructor
-public class YamlConfigurationHandler implements ConfigurationHandler<Object> {
+public class YamlConfigurationHandler implements ConfigurationHandler<FileConfiguration> {
 
     private final File file;
+    private FileConfiguration fileConfiguration;
+
+    public YamlConfigurationHandler(File file) {
+        this.file = file;
+        load();
+    }
 
     @Override
     public void load() {
         if(!file.exists()){
-            Core.getInstance().saveResource(file.getName(), true);
+            Core.getInstance().saveResource(file.getName(), false);
+            this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
+
         }
+        this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
     }
 
     @Override
     public void save() {
+        try {
+            this.fileConfiguration.save(file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @Override
-    public Object get(String path) {
-        return null;
-    }
-
-    @Override
-    public void set(String path, Object victim) {
-
+    public FileConfiguration get() {
+        return fileConfiguration;
     }
 
 }

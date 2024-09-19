@@ -39,8 +39,9 @@ subprojects {
 
         implementation("mysql:mysql-connector-java:8.0.33")
         implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
+        implementation("dev.triumphteam:triumph-gui:3.1.10")
 
-        compileOnly("org.projectlombok:lombok:1.18.32")
+        annotationProcessor("org.projectlombok:lombok:1.18.32")
     }
 
     tasks.withType<ShadowJar>{
