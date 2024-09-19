@@ -22,7 +22,7 @@ public abstract class Executor implements CommandExecutor {
 
         if(!attributes.permission().isEmpty()){
             if(!sender.hasPermission(attributes.permission())){
-                sender.sendMessage(Utils.COLORIZE("You can't access this command (permission required)"));
+                sender.sendMessage(Utils.colorize("You can't access this command (permission required)"));
                 return false;
             }
         }

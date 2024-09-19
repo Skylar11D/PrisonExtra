@@ -18,7 +18,7 @@ public class NPCCommand extends Executor {
     @Override
     protected void execute(Player sender, String[] args) {
         if(args.length < 1 || args.length > 4)
-            sender.sendMessage(Utils.COLORIZE("&cSyntax: /npc create <name> type <general|null|null>"));
+            sender.sendMessage(Utils.colorize("&cSyntax: /npc create <name> type <general|null|null>"));
 
         subNpcCreate.dispatch(sender, args);
 

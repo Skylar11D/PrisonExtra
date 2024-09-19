@@ -11,16 +11,16 @@ public class SubNpcType implements Subcommand {
     public void dispatch(Player sender, String[] args) {
 
         if(!args[2].equalsIgnoreCase("type")) {
-            sender.sendMessage(Utils.COLORIZE("&cInvalid third argument!"));
+            sender.sendMessage(Utils.colorize("&cInvalid third argument!"));
             return;
         }
         if(args[3].isEmpty()){
-            sender.sendMessage(Utils.COLORIZE("&cInvalid type!"));
+            sender.sendMessage(Utils.colorize("&cInvalid type!"));
             return;
         }
 
         if(!args[3].equalsIgnoreCase("general")){
-            sender.sendMessage(Utils.COLORIZE("&cThe specified type doesn't exist!"));
+            sender.sendMessage(Utils.colorize("&cThe specified type doesn't exist!"));
             return;
         }
 

@@ -10,7 +10,7 @@ public class Utils {
 
     public static final Logger LOG = Logger.getLogger("PrisonExtra");
 
-    public static String COLORIZE(String text){
+    public static String colorize(String text){
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 

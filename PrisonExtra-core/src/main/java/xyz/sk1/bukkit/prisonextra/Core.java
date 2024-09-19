@@ -116,6 +116,7 @@ public class Core extends Base {
         lruCacheRegistry.createCache("fakeplayers", 4);
 
         this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.listeners");
+        this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");
 
 
     }
