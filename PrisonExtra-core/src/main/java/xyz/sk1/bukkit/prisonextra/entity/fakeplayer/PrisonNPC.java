@@ -42,24 +42,18 @@ public class PrisonNPC extends NPC {
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
         this.npc = new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager);
-        setId(npc.getId());
+        setId(npc.getBukkitEntity().getEntityId());
 
         PacketPlayOutPlayerInfo info = new PacketPlayOutPlayerInfo(
                 PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc);
 
-        PacketPlayOutSpawnEntity spawnEntity = new PacketPlayOutSpawnEntity(npc, npc.getId());
+        PacketPlayOutSpawnEntity spawnEntity = new PacketPlayOutSpawnEntity(npc, getId());
 
         this.npc.setPosition(getPosition().getX(), getPosition().getY(), getPosition().getZ());
 
         this.infoPacket = info;
         this.spawnPacket = spawnEntity;
 
-        CompletableFuture.runAsync(() -> {
-            for (Player player : Bukkit.getOnlinePlayers()){
-                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(info);
-                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(spawnEntity);
-            }
-        });
     }
 
     @Override

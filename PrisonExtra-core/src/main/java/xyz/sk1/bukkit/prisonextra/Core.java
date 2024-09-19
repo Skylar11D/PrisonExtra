@@ -26,6 +26,8 @@ import java.sql.SQLException;
 
 /**
  * @author <a href="https://github.com/skylar11d">skylar</a>
+ *
+ * The control flow in this class is highly crucial, don't change the order
  */
 
 @Getter
@@ -65,6 +67,14 @@ public class Core extends Base {
 
         Utils.LOG.warning("This plugin only supports MySQL 5.7 service and above");
 
+        Utils.LOG.info("Creating necessary caches..");
+        lruCacheRegistry = new LRUCacheRegistry<>();
+        lruCacheRegistry.createCache("regions", 500);
+        lruCacheRegistry.createCache("fakeplayers", 4);
+
+
+
+
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();
 
@@ -86,7 +96,7 @@ public class Core extends Base {
             this.regionManager.start();
 
             Utils.LOG.info("Loading all npcs to the cache..");
-            this.fakeplayerManager.start();
+            //this.fakeplayerManager.start();
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -94,26 +104,18 @@ public class Core extends Base {
             throw new RuntimeException(e);
         }
 
-        //abstractDatabaseFactory = new DatabaseFactory();
-        //PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
-
         settingsFile = new File(getDataFolder(), "settings.yml");
         databaseFile = new File(getDataFolder(), "database.json");
-
-        this.saveResource("settings.yml", false);
-        this.saveResource("database.json", false);
 
         configurationFactory = new ConfigurationHandlerFactory();
         settings = configurationFactory.createConfigHandler(settingsFile).orElse(null);
         databasecfg = configurationFactory.createConfigHandler(databaseFile).orElse(null);
+        //abstractDatabaseFactory = new DatabaseFactory();
+        //PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
+
 
         Utils.LOG.info("Connecting to the database..");
         //PDatabase.connect();
-
-        Utils.LOG.info("Creating necessary caches..");
-        lruCacheRegistry = new LRUCacheRegistry<>();
-        lruCacheRegistry.createCache("regions", 500);
-        lruCacheRegistry.createCache("fakeplayers", 4);
 
         this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.listeners");
         this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");

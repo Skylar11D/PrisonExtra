@@ -36,6 +36,7 @@ subprojects {
 
         implementation("org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT")
         implementation("org.spigotmc:minecraft-server:1.8.8-SNAPSHOT")
+        implementation("org.slf4j:slf4j-api:1.7.25")
 
         implementation("mysql:mysql-connector-java:8.0.33")
         implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
@@ -43,6 +44,7 @@ subprojects {
         implementation("com.github.patheloper.pathetic:pathetic-mapping:3.1")
 
         annotationProcessor("org.projectlombok:lombok:1.18.32")
+
     }
 
     tasks.withType<ShadowJar>{

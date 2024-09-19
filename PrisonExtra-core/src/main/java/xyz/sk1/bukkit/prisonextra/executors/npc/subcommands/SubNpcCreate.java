@@ -20,8 +20,6 @@ public class SubNpcCreate implements Subcommand {
 
         if(!args[0].equalsIgnoreCase("create")) {
             sender.sendMessage(Utils.colorize("&cInvalid first argument!"));
-            UserManager manager = (UserManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
-            manager.get(sender).getPlayer().sendMessage(Utils.colorize("&c[DEBUG] &aYou are a prisoner!"));
             return;
         }
 
@@ -29,8 +27,6 @@ public class SubNpcCreate implements Subcommand {
             sender.sendMessage(Utils.colorize("&cThe name left empty!"));
             return;
         }
-
-        Core.getInstance().getSettings().set("npcs.attributes.name", args[1]);
 
         subNpcType.dispatch(sender, args);
 

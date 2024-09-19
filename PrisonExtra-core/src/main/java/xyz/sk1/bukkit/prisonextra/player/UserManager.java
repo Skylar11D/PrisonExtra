@@ -1,14 +1,8 @@
 package xyz.sk1.bukkit.prisonextra.player;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import xyz.sk1.bukkit.prisonextra.Core;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.PrisonNPC;
+import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPCObserver;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.factory.NPCFactory;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
 import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
@@ -44,6 +38,10 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     public User get(Player player) {
         return (User) getPrisoners().keySet().stream().filter(
                 p -> p.getPlayer() == player).findFirst().orElse(null);
+    }
+
+    public NPCObserver[] toObservers(){
+        return (NPCObserver[])getPrisoners().keySet().stream().toArray();
     }
 
     @SuppressWarnings("all")
@@ -89,8 +87,6 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     @SuppressWarnings("unchecked")
     @Override
     public void load() {
-
-        //((FakePlayerManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).syncNPC(, (User)getPrisoners().keySet());
 
     }
 

@@ -10,10 +10,10 @@ import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 @Attributes(name = "npc", requiresPlayer = true, permission = "marsmc.admin")
 public class NPCCommand extends Executor {
 
-    private SubNpcCreate subNpcCreate;
-    private SubNpcRemove subNpcRemove;
+    private final SubNpcCreate subNpcCreate;
+    private final SubNpcRemove subNpcRemove;
 
-    private NPCCommand(){
+    public NPCCommand(){
         this.subNpcCreate = new SubNpcCreate();
         this.subNpcRemove = new SubNpcRemove();
     }
@@ -23,6 +23,7 @@ public class NPCCommand extends Executor {
         if(args.length < 1 || args.length > 4) {
             sender.sendMessage(Utils.colorize("&cSyntax: /npc create <name> type <general|null|null>"));
             sender.sendMessage(Utils.colorize("&cSyntax: /npc remove <name>"));
+            return;
         }
 
         switch (args[0]){

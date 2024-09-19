@@ -9,9 +9,8 @@ import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 public abstract class Executor implements CommandExecutor {
-
     @Getter
-    private Attributes attributes;
+    private final Attributes attributes;
 
     public Executor(){
         this.attributes = this.getClass().getDeclaredAnnotation(Attributes.class);
@@ -33,6 +32,7 @@ public abstract class Executor implements CommandExecutor {
                 return true;
             }
             execute((Player) sender, args);
+            return true;
         }
 
         execute((ConsoleCommandSender) sender, args);
@@ -41,6 +41,7 @@ public abstract class Executor implements CommandExecutor {
     }
 
     protected void execute(Player sender, String[] args){}
+
     protected void execute(ConsoleCommandSender sender, String[] args){}
 
 }

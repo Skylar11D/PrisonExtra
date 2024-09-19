@@ -16,13 +16,14 @@ public class JsonConfigurationHandler implements ConfigurationHandler<JsonObject
         this.file = file;
         this.load();
 
-        if(!file.exists())
-            Core.getInstance().saveResource(file.getName(), false);
-
     }
 
     @Override
     public void load() {
+
+        if(!file.exists())
+            Core.getInstance().saveResource(file.getName(), false);
+
         JsonParser parser = new JsonParser();
 
         try {
