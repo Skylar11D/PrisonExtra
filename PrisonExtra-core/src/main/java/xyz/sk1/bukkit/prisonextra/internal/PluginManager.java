@@ -39,7 +39,8 @@ public class PluginManager {
 
         for (Class<? extends Executor> command : subTypes){
             try {
-                Core.getInstance().getCommand(command.getDeclaredAnnotation(Attributes.class).name()).setExecutor(command.newInstance());
+                Core.getInstance().getCommand(command.getDeclaredAnnotation(Attributes.class).name())
+                        .setExecutor(command.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
                 throw new RuntimeException(e);
             } finally {

@@ -1,5 +1,6 @@
 package xyz.sk1.bukkit.prisonextra.entity.fakeplayer;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.server.v1_8_R3.*;
@@ -9,15 +10,17 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.type.NonPlayerType;
 
 public abstract class NPC {
 
-    private Player creator;
     @Getter
     private EntityPlayer npc;
-    @Getter
+    @Getter(AccessLevel.PROTECTED)
     private String name;
 
+    @Getter(AccessLevel.PROTECTED)
     private String texture;
+    @Getter(AccessLevel.PROTECTED)
     private String signature;
 
+    @Getter(AccessLevel.PROTECTED)
     private Location position;
 
     @Getter
@@ -28,15 +31,14 @@ public abstract class NPC {
     @Getter @Setter
     private int id;
 
-    public NPC(String name, Location location, Player player){
+    public NPC(String name, Location location){
         this.name = name;
         this.position = location;
-        this.creator = player;
 
     }
 
-    public NPC(String name, Location location, Player player, String texture, String signature){
-        this(name, location, player);
+    public NPC(String name, Location location, String texture, String signature){
+        this(name, location);
         this.texture = texture;
         this.signature = signature;
     }
