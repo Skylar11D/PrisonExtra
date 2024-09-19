@@ -1,12 +1,12 @@
 package xyz.sk1.bukkit.prisonextra.executors.npc;
 
 import org.bukkit.entity.Player;
-import xyz.sk1.bukkit.prisonextra.executors.ACommand;
+import xyz.sk1.bukkit.prisonextra.executors.Attributes;
 import xyz.sk1.bukkit.prisonextra.executors.Executor;
 import xyz.sk1.bukkit.prisonextra.executors.npc.subcommands.SubNpcCreate;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
-@ACommand(name = "npc", requiresPlayer = true, permission = "marsmc.admin")
+@Attributes(name = "npc", requiresPlayer = true, permission = "marsmc.admin")
 public class NPCCommand extends Executor {
 
     private SubNpcCreate subNpcCreate;

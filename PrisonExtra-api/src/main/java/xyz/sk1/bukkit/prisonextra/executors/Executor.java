@@ -11,23 +11,23 @@ import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 public abstract class Executor implements CommandExecutor {
 
     @Getter
-    private ACommand aCommand;
+    private Attributes attributes;
 
     public Executor(){
-        this.aCommand = this.getClass().getDeclaredAnnotation(ACommand.class);
+        this.attributes = this.getClass().getDeclaredAnnotation(Attributes.class);
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if(!aCommand.permission().isEmpty()){
-            if(!sender.hasPermission(aCommand.permission())){
+        if(!attributes.permission().isEmpty()){
+            if(!sender.hasPermission(attributes.permission())){
                 sender.sendMessage(Utils.COLORIZE("You can't access this command (permission required)"));
                 return false;
             }
         }
 
-        if(aCommand.requiresPlayer()){
+        if(attributes.requiresPlayer()){
             if(!(sender instanceof Player)) {
                 sender.sendMessage("You're not qualified to execute this command");
                 return true;

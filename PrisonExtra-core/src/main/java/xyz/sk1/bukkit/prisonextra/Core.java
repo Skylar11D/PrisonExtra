@@ -35,8 +35,11 @@ public class Core extends Base {
 
     private PluginManager pluginManager;
     @SuppressWarnings("all")
+    @Getter(AccessLevel.PRIVATE)
     private Manager userManager;
+    @Getter(AccessLevel.PRIVATE)
     private NPCManager fakeplayerManager;
+    @Getter(AccessLevel.PRIVATE)
     private RegionManager<House> regionManager;
 
     private ManagerRegistry managerRegistry;
