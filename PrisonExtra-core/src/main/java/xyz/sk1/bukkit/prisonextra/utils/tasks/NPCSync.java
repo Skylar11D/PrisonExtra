@@ -26,7 +26,9 @@ public class NPCSync extends BukkitRunnable {
     @Override
     public void run() {
 
+        Utils.LOG.info("outside the loop");
         for (Map.Entry entry : this.fakePlayerManager.getCACHE().entrySet()){
+            Utils.LOG.info("test" + entry.getValue());
             this.fakePlayerManager.syncNPC((PrisonNPC) entry.getValue(), this.fakePlayerManager.getNpcObservers());
         }
 

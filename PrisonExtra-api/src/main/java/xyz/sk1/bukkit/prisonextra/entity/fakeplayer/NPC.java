@@ -11,16 +11,17 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.type.NonPlayerType;
 public abstract class NPC {
 
     @Getter
+    @Setter
     private EntityPlayer npc;
-    @Getter(AccessLevel.PROTECTED)
+    @Getter
     private String name;
 
-    @Getter(AccessLevel.PROTECTED)
+    @Getter
     private String texture;
-    @Getter(AccessLevel.PROTECTED)
+    @Getter
     private String signature;
 
-    @Getter(AccessLevel.PROTECTED)
+    @Getter
     private Location position;
 
     @Getter

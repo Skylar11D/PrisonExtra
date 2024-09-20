@@ -7,12 +7,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.type.NonPlayerType;
 
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 public class PrisonNPC extends NPC {
 
@@ -43,7 +40,7 @@ public class PrisonNPC extends NPC {
 
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
-        this.npc = new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager);
+        setNpc(new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager));
         setId(npc.getBukkitEntity().getEntityId());
 
         PacketPlayOutPlayerInfo info = new PacketPlayOutPlayerInfo(
