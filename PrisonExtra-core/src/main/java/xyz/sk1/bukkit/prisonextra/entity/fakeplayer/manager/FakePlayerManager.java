@@ -64,7 +64,9 @@ public class FakePlayerManager implements NpcManager<NPC> {
     public void showNpcTo(Player player, NPC npc) {
 
         //Destory the npc entity if t's already shown
-        ((CraftPlayer)player).getHandle().playerConnection.sendPacket(npc.getDestroy());
+        if(npc.getId() != 0){
+            ((CraftPlayer)player).getHandle().playerConnection.sendPacket(npc.getDestroy());
+        }
         //Sends the required information about the entity to the client
         ((CraftPlayer)player).getHandle().playerConnection.sendPacket(npc.getInfoPacket());
         //Sends the appearance and game profile properties for the entity
