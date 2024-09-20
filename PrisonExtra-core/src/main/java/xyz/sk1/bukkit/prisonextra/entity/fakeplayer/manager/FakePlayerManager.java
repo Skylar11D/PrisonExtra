@@ -76,6 +76,9 @@ public class FakePlayerManager implements NpcManager<NPC> {
                 String texture = yamlConfigurationHandler.getString("entities.npcs.global.appearance.texture");
                 String signature = yamlConfigurationHandler.getString("entities.npcs.global.appearance.signature");
 
+                Utils.LOG.info("texture: " + texture);
+                Utils.LOG.info("signature: " + signature);
+
                 Location position = new Location(Bukkit.getWorld(worldName), xPoint, yPoint, zPoint);
 
                 NPC npc = npcFactory.createTextured(name, texture, signature, position);
