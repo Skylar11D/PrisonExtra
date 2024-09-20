@@ -1,13 +1,18 @@
 package xyz.sk1.bukkit.prisonextra.executors.npc;
 
+import com.mojang.authlib.GameProfile;
+import net.minecraft.server.v1_8_R3.*;
+import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import xyz.sk1.bukkit.prisonextra.Core;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.PrisonNPC;
 import xyz.sk1.bukkit.prisonextra.executors.Attributes;
 import xyz.sk1.bukkit.prisonextra.executors.Executor;
 import xyz.sk1.bukkit.prisonextra.executors.npc.subcommands.SubNpcCreate;
 import xyz.sk1.bukkit.prisonextra.executors.npc.subcommands.SubNpcRemove;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
+
+import java.util.UUID;
 
 @Attributes(name = "npc", requiresPlayer = true, permission = "marsmc.admin")
 public class NPCCommand extends Executor {

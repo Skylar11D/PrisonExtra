@@ -59,9 +59,7 @@ public class FakePlayerManager implements NpcManager<NPC> {
     }
 
     private void notifyPrisoners(NPC fakePlayer, List<NpcObserver> observers){
-        //Arrays.stream(observers).forEach(observer -> observer.displayNPC(fakePlayer));
         observers.stream().forEach(npcObserver -> npcObserver.displayNPC(fakePlayer));
-        Utils.LOG.info("notified observers");
     }
 
     @Override

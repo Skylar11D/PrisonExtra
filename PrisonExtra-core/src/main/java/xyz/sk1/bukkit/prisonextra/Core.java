@@ -95,7 +95,7 @@ public class Core extends Base {
             this.regionManager.start();
 
             Utils.LOG.info("Loading all npcs to the cache..");
-            //this.fakeplayerManager.start();
+            this.fakeplayerManager.start();
 
         } catch (SQLException e){
             e.printStackTrace();
