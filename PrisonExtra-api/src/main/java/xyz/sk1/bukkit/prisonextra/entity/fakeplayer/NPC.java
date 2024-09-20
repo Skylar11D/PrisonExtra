@@ -27,7 +27,7 @@ public abstract class NPC {
     @Getter
     protected PacketPlayOutPlayerInfo infoPacket;
     @Getter
-    protected PacketPlayOutSpawnEntity spawnPacket;
+    protected PacketPlayOutNamedEntitySpawn spawnPacket;
 
     @Getter @Setter
     private int id;

@@ -19,7 +19,7 @@ entities:
         attributes:
           type: "general"
         coordinates:
-          x: 1.6
-          y: 1.6
-          z: 1.6
-          world: "World"
+          x: 100
+          y: 100
+          z: 100
+          world: "world"

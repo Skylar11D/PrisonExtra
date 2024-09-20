@@ -13,8 +13,6 @@ import java.util.UUID;
 
 public class PrisonNPC extends NPC {
 
-    private EntityPlayer npc;
-
     public PrisonNPC(String name, Location location) {
         super(name, location);
         customize();
@@ -40,15 +38,15 @@ public class PrisonNPC extends NPC {
 
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
-        setNpc(new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager));
-        setId(npc.getBukkitEntity().getEntityId());
+        super.setNpc(new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager));
+        setId(getNpc().getBukkitEntity().getEntityId());
 
         PacketPlayOutPlayerInfo info = new PacketPlayOutPlayerInfo(
-                PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc);
+                PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, super.getNpc());
 
-        PacketPlayOutSpawnEntity spawnEntity = new PacketPlayOutSpawnEntity(npc, getId());
+        PacketPlayOutNamedEntitySpawn spawnEntity = new PacketPlayOutNamedEntitySpawn(getNpc());
 
-        this.npc.setPosition(getPosition().getX(), getPosition().getY(), getPosition().getZ());
+        super.getNpc().setLocation(getPosition().getX(), getPosition().getY(), getPosition().getZ(), getPosition().getYaw(), getPosition().getPitch());
 
         this.infoPacket = info;
         this.spawnPacket = spawnEntity;
