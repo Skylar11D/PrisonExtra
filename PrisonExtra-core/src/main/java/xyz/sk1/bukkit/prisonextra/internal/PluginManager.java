@@ -2,19 +2,11 @@ package xyz.sk1.bukkit.prisonextra.internal;
 
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.reflections.Reflections;
 import xyz.sk1.bukkit.prisonextra.Core;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPCObserver;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.PrisonNPC;
 import xyz.sk1.bukkit.prisonextra.executors.Attributes;
 import xyz.sk1.bukkit.prisonextra.executors.Executor;
-import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.listeners.BaseListener;
-import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
-import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.lang.reflect.InvocationTargetException;

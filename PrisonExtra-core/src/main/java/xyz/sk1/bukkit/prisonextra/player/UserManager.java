@@ -1,7 +1,8 @@
 package xyz.sk1.bukkit.prisonextra.player;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPCObserver;
+import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NpcObserver;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
@@ -11,6 +12,7 @@ import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 import xyz.sk1.bukkit.prisonextra.utilities.tasks.PrisonTask;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author <a href="https://github.com/skylar11d">skylar</a>
@@ -40,8 +42,8 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
                 p -> p.getPlayer() == player).findFirst().orElse(null);
     }
 
-    public NPCObserver[] toObservers(){
-        return (NPCObserver[])getPrisoners().keySet().stream().toArray();
+    public NpcObserver[] toObservers(){
+        return (NpcObserver[])getPrisoners().keySet().stream().toArray();
     }
 
     @SuppressWarnings("all")
@@ -95,7 +97,9 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     @SuppressWarnings("unchecked")
     @Override
     public void load() {
-
+        CompletableFuture.runAsync(() -> {
+            Bukkit.getOnlinePlayers().forEach(p -> imprison(p));
+        });
     }
 
     @Override

@@ -22,7 +22,7 @@ public class NPCCommand extends Executor {
 
     @Override
     protected void execute(Player sender, String[] args) {
-        if(args.length < 1 || args.length > 4) {
+        if(args.length < 2) {
             sender.sendMessage(Utils.colorize("&cSyntax: /npc create <name> type <general|null|null>"));
             sender.sendMessage(Utils.colorize("&cSyntax: /npc remove <name>"));
             return;

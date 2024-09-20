@@ -1,12 +1,12 @@
 package xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager;
 
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPCObserver;
+import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NpcObserver;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 
 import java.util.List;
 
-public interface NPCManager<N extends NPC> extends Manager {
+public interface NpcManager<N extends NPC> extends Manager {
 
     /**
      * register the NPC entity into the local cache
@@ -26,18 +26,18 @@ public interface NPCManager<N extends NPC> extends Manager {
      * @param fakePlayer the npc to have its packets synchronized with the server
      * @param npcObservers users who will be acknowledged about <code>fakePlayer</code>'s existence
      */
-    void syncNPC(N fakePlayer, List<NPCObserver> npcObservers);
+    void syncNPC(N fakePlayer, List<NpcObserver> npcObservers);
 
     /**
      * Register the player who will be able to observe all fake players in the server
      * @param observer
      */
-    void registerObserver(NPCObserver observer);
+    void registerObserver(NpcObserver observer);
 
     /**
      * Removes the observers
      * @param observer
      */
-    void removeObserver(NPCObserver observer);
+    void removeObserver(NpcObserver observer);
 
 }
