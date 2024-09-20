@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.type.NonPlayerType;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.util.UUID;
 
@@ -36,6 +37,7 @@ public class PrisonNPC extends NPC {
         if((getSignature() != null) && (getTexture() != null)){
             gameProfile.getProperties().put("textures", new Property("textures", super.getTexture(), super.getSignature()));
         }
+        Utils.LOG.info("{DEBUG] profile: "+gameProfile);
 
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
@@ -46,6 +48,10 @@ public class PrisonNPC extends NPC {
         //watcher.register(new DataWatcherObject<>(10, DataWatcherRegistry.a), (byte) (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x40));
        // watcher.watch(0, (byte) (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x40));
 
+        DataWatcher dw = new DataWatcher(null);
+        dw.a(10, (byte) (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x40));
+        PacketPlayOutEntityMetadata metaPacket = new PacketPlayOutEntityMetadata(getNpc().getId(), dw, true);
+
         super.getNpc().setPosition(getPosition().getX(), getPosition().getY(), getPosition().getZ());
 
         PacketPlayOutPlayerInfo info = new PacketPlayOutPlayerInfo(
@@ -55,6 +61,7 @@ public class PrisonNPC extends NPC {
 
         super.infoPacket = info;
         super.spawnPacket = spawnEntity;
+        super.metadata = metaPacket;
 
     }
 

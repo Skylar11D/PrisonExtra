@@ -11,6 +11,7 @@ public abstract class User implements Prisoner, NpcObserver {
     public void displayNPC(NPC npc) {
         ((CraftPlayer)getPlayer()).getHandle().playerConnection.sendPacket(npc.getInfoPacket());
         ((CraftPlayer)getPlayer()).getHandle().playerConnection.sendPacket(npc.getSpawnPacket());
+        ((CraftPlayer)getPlayer()).getHandle().playerConnection.sendPacket(npc.getMetadata());
         getPlayer().sendMessage("notified!");
         getPlayer().sendMessage("name npc: " +npc.getNpc().displayName);
         getPlayer().sendMessage("x:"+npc.getNpc().locX);
