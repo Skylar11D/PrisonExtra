@@ -14,19 +14,25 @@ import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandle
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
+import xyz.sk1.bukkit.prisonextra.utils.tasks.NPCSync;
 
+import java.io.File;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FakePlayerManager implements NPCManager<PrisonNPC> {
 
+    //@Getter
+    //private final Cache<Integer, PrisonNPC> CACHE;
     @Getter
-    private final Cache<Integer, PrisonNPC> CACHE;
+    private final Map<Integer, PrisonNPC> CACHE;
     @Getter
     private final NPCFactory npcFactory;
 
     @SuppressWarnings("unchecked")
     public FakePlayerManager(){
-        this.CACHE = Core.getInstance().getLruCacheRegistry().getCache("fakeplayers");
+        this.CACHE = new HashMap<>();
         this.npcFactory = new NPCFactory();
     }
 
@@ -53,21 +59,26 @@ public class FakePlayerManager implements NPCManager<PrisonNPC> {
     public void load() throws Exception {
         try {
             FileConfiguration yamlConfigurationHandler = ((YamlConfigurationHandler)Core.getInstance().getSettings()).get();
-            UserManager userManager = ((UserManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON));
 
-            for(String name : yamlConfigurationHandler.getConfigurationSection("entities.npcs").getKeys(false)){
-                double xPoint = yamlConfigurationHandler.getDouble("entities.npcs."+name+".coordinates.x");
-                double yPoint = yamlConfigurationHandler.getDouble("entities.npcs."+name+".coordinates.y");
-                double zPoint = yamlConfigurationHandler.getDouble("entities.npcs."+name+".coordinates.z");
-                String worldName = yamlConfigurationHandler.getString("entities.npcs."+name+".coordinates.world");
+            for(String name : yamlConfigurationHandler.getConfigurationSection("entities.npcs.list").getKeys(false)){
+                double xPoint = yamlConfigurationHandler.getDouble("entities.npcs.list."+name+".coordinates.x");
+                double yPoint = yamlConfigurationHandler.getDouble("entities.npcs.list."+name+".coordinates.y");
+                double zPoint = yamlConfigurationHandler.getDouble("entities.npcs.list."+name+".coordinates.z");
+                String worldName = yamlConfigurationHandler.getString("entities.npcs.list."+name+".coordinates.world");
 
-                String texture = yamlConfigurationHandler.getString("entities.npcs."+name+".appearance.texture");
-                String signature = yamlConfigurationHandler.getString("entities.npcs."+name+".appearance.signature");
+                String texture = yamlConfigurationHandler.getString("entities.npcs.global.appearance.texture");
+                String signature = yamlConfigurationHandler.getString("entities.npcs.global.appearance.signature");
+
+                Utils.LOG.info("[DEBUG]"+xPoint);
+                Utils.LOG.info("[DEBUG]"+yPoint);
+                Utils.LOG.info("[DEBUG]"+zPoint);
+                Utils.LOG.info("[DEBUG]"+worldName);
 
                 Location position = new Location(Bukkit.getWorld(worldName), xPoint, yPoint, zPoint);
 
                 NPC npc = npcFactory.createTextured(name, texture, signature, position);
 
+                Utils.LOG.info("[DEBUG] loaded npc: "+name);
                 CACHE.put(npc.getId(), (PrisonNPC) npc);
 
             }
@@ -75,6 +86,8 @@ public class FakePlayerManager implements NPCManager<PrisonNPC> {
             Utils.LOG.severe("Failed to load npcs from the yaml to cache");
             e.printStackTrace();
         }
+
+        new NPCSync().runTaskTimerAsynchronously(Core.getInstance(), 20*5, 20*14);
 
     }
 

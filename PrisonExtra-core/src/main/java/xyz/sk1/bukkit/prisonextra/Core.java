@@ -54,10 +54,6 @@ public class Core extends Base {
     @Getter(AccessLevel.PRIVATE)
     private ConfigurationHandlerFactory configurationFactory;
 
-    @Getter(AccessLevel.PRIVATE)
-    private File settingsFile;
-    @Getter(AccessLevel.PRIVATE)
-    private File databaseFile;
     private ConfigurationHandler settings;
     private ConfigurationHandler databasecfg;
 
@@ -73,6 +69,12 @@ public class Core extends Base {
         lruCacheRegistry.createCache("fakeplayers", 4);
 
 
+        this.saveResource("settings.yml", false);
+        this.saveResource("database.json", false);
+
+        configurationFactory = new ConfigurationHandlerFactory();
+        settings = configurationFactory.createConfigHandler(new File(getDataFolder(), "settings.yml")).orElse(null);
+        databasecfg = configurationFactory.createConfigHandler(new File(getDataFolder(), "database.json")).orElse(null);
 
 
         this.pluginManager = new PluginManager();
@@ -96,7 +98,7 @@ public class Core extends Base {
             this.regionManager.start();
 
             Utils.LOG.info("Loading all npcs to the cache..");
-            //this.fakeplayerManager.start();
+            this.fakeplayerManager.start();
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -104,12 +106,6 @@ public class Core extends Base {
             throw new RuntimeException(e);
         }
 
-        settingsFile = new File(getDataFolder(), "settings.yml");
-        databaseFile = new File(getDataFolder(), "database.json");
-
-        configurationFactory = new ConfigurationHandlerFactory();
-        settings = configurationFactory.createConfigHandler(settingsFile).orElse(null);
-        databasecfg = configurationFactory.createConfigHandler(databaseFile).orElse(null);
         //abstractDatabaseFactory = new DatabaseFactory();
         //PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
 

@@ -20,7 +20,7 @@ public class YamlConfigurationHandler implements ConfigurationHandler<FileConfig
     @Override
     public void load() {
         if(!file.exists()){
-            Core.getInstance().saveResource(file.getName(), false);
+            Core.getInstance().saveResource(file.getName()+".yml", false);
             this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
 
         }

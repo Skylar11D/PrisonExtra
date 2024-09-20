@@ -22,7 +22,7 @@ public class JsonConfigurationHandler implements ConfigurationHandler<JsonObject
     public void load() {
 
         if(!file.exists())
-            Core.getInstance().saveResource(file.getName(), false);
+            Core.getInstance().saveResource(file.getName()+".json", false);
 
         JsonParser parser = new JsonParser();
 

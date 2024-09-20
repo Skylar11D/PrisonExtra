@@ -28,23 +28,21 @@ public class SubNpcType implements Subcommand {
             return;
         }
 
-        yamlSettings.get().set("entities.npcs."+args[1]+".coordinates.x", sender.getLocation().getX());
-        yamlSettings.get().set("entities.npcs."+args[1]+".coordinates.y", sender.getLocation().getY());
-        yamlSettings.get().set("entities.npcs."+args[1]+".coordinates.z", sender.getLocation().getZ());
-        yamlSettings.get().set("entities.npcs."+args[1]+".coordinates.world", sender.getLocation().getWorld().getName());
+        yamlSettings.get().set("entities.npcs.list."+args[1]+".coordinates.x", sender.getLocation().getX());
+        yamlSettings.get().set("entities.npcs.list."+args[1]+".coordinates.y", sender.getLocation().getY());
+        yamlSettings.get().set("entities.npcs.list."+args[1]+".coordinates.z", sender.getLocation().getZ());
+        yamlSettings.get().set("entities.npcs.list."+args[1]+".coordinates.world", sender.getLocation().getWorld().getName());
 
-       yamlSettings.get().set("entities.npcs."+args[1]+".attributes.type", args[3]);
+       yamlSettings.get().set("entities.npcs.list."+args[1]+".attributes.type", args[3]);
+
+       yamlSettings.save();
 
         ((FakePlayerManager)Core.getInstance().
                 getManagerRegistry().getManager(ManagerType.NPC)).
                 getNpcFactory().createPlain(args[1], sender.getLocation());
 
-        sender.playSound(sender.getLocation(), Sound.LEVEL_UP, 0.9f, 0.9f);
+        sender.playSound(sender.getLocation(), Sound.LEVEL_UP, 20f, 20f);
 
         sender.sendMessage(Utils.colorize("&fSuccessfully created &b"+args[1].toUpperCase()+" &fas a NPC!"));
-
-        UserManager manager = (UserManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
-        manager.get(sender).getPlayer().sendMessage(Utils.colorize("&c[DEBUG] &aYou are a prisoner!"));
-        Utils.LOG.info("player is: " + manager.get(sender).getPlayer().getDisplayName());
     }
 }

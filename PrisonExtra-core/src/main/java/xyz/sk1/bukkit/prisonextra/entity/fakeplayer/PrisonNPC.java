@@ -37,7 +37,9 @@ public class PrisonNPC extends NPC {
 
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), getName());
 
-        gameProfile.getProperties().put("textures", new Property("textures", getTexture(), getSignature()));
+        if((getSignature() != null) && (getTexture() != null)){
+            gameProfile.getProperties().put("textures", new Property("textures", getTexture(), getSignature()));
+        }
 
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
