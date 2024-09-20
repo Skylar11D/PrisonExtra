@@ -1,5 +1,6 @@
 package xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager;
 
+import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NpcObserver;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
@@ -39,5 +40,12 @@ public interface NpcManager<N extends NPC> extends Manager {
      * @param observer
      */
     void removeObserver(NpcObserver observer);
+
+    /**
+     * Special method to display a loaded npc to the player
+     * @param player
+     * @param npc
+     */
+    void showNpcTo(Player player, N npc);
 
 }

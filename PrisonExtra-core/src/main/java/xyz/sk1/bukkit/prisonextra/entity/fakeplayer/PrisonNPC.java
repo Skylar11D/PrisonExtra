@@ -34,10 +34,11 @@ public class PrisonNPC extends NPC {
 
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), getName());
 
-        if((getSignature() != null) && (getTexture() != null)){
-            gameProfile.getProperties().put("textures", new Property("textures", super.getTexture(), super.getSignature()));
-        }
-        Utils.LOG.info("{DEBUG] profile: "+gameProfile);
+        Property woman = new Property("textures", super.getTexture(), super.getSignature());
+
+        gameProfile.getProperties().put("textures", woman);
+
+        Utils.LOG.info("{DEBUG] profile: "+gameProfile.getProperties().toString()+" {the new");
 
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
@@ -59,9 +60,13 @@ public class PrisonNPC extends NPC {
 
         PacketPlayOutNamedEntitySpawn spawnEntity = new PacketPlayOutNamedEntitySpawn(getNpc());
 
+        PacketPlayOutEntityDestroy entityRemoval = new PacketPlayOutEntityDestroy(getId());
+
         super.infoPacket = info;
         super.spawnPacket = spawnEntity;
         super.metadata = metaPacket;
+        super.destroy = entityRemoval;
+
 
     }
 

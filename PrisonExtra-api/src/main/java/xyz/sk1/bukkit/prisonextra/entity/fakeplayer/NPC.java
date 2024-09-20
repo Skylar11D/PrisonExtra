@@ -30,6 +30,8 @@ public abstract class NPC {
     protected PacketPlayOutNamedEntitySpawn spawnPacket;
     @Getter
     protected PacketPlayOutEntityMetadata metadata;
+    @Getter
+    protected PacketPlayOutEntityDestroy destroy;
 
     @Getter @Setter
     private int id;

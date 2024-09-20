@@ -54,7 +54,7 @@ subprojects {
         archiveVersion.set(this.project.version.toString())
 
         var classifier: String
-        if(this.project.name.equals("PrisonExtra-api")){
+        if(this.project.name == "PrisonExtra-api"){
             classifier = "api"
         } else {
             classifier = "core"
