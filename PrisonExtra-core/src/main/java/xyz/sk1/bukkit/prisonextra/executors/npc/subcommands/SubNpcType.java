@@ -4,6 +4,8 @@ package xyz.sk1.bukkit.prisonextra.executors.npc.subcommands;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.Core;
+import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
+import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.PrisonNPC;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.executors.Subcommand;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandler;
@@ -37,9 +39,11 @@ public class SubNpcType implements Subcommand {
 
        yamlSettings.save();
 
-        ((FakePlayerManager)Core.getInstance().
+        NPC npc = ((FakePlayerManager)Core.getInstance().
                 getManagerRegistry().getManager(ManagerType.NPC)).
                 getNpcFactory().createPlain(args[1], sender.getLocation());
+
+        ((FakePlayerManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).getCACHE().put(npc.getId(), (PrisonNPC) npc);
 
         sender.playSound(sender.getLocation(), Sound.LEVEL_UP, 20f, 20f);
 

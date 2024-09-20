@@ -9,17 +9,12 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPCObserver;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.PrisonNPC;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.factory.NPCFactory;
-import xyz.sk1.bukkit.prisonextra.internal.cache.Cache;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
-import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 import xyz.sk1.bukkit.prisonextra.utils.tasks.NPCSync;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FakePlayerManager implements NPCManager<PrisonNPC> {
 
@@ -28,12 +23,15 @@ public class FakePlayerManager implements NPCManager<PrisonNPC> {
     @Getter
     private final Map<Integer, PrisonNPC> CACHE;
     @Getter
+    private final List<NPCObserver> npcObservers;
+    @Getter
     private final NPCFactory npcFactory;
 
     @SuppressWarnings("unchecked")
     public FakePlayerManager(){
         this.CACHE = new HashMap<>();
         this.npcFactory = new NPCFactory();
+        this.npcObservers = new ArrayList<>();
     }
 
     @Override
@@ -47,12 +45,23 @@ public class FakePlayerManager implements NPCManager<PrisonNPC> {
     }
 
     @Override
-    public void syncNPC(PrisonNPC fakePlayer, NPCObserver... observers) {
+    public void syncNPC(PrisonNPC fakePlayer, List<NPCObserver> observers) {
         this.notifyPrisoners(fakePlayer, observers);
     }
 
-    private void notifyPrisoners(PrisonNPC fakePlayer, NPCObserver... observers){
-        Arrays.stream(observers).forEach(observer -> observer.displayNPC(fakePlayer));
+    @Override
+    public void registerObserver(NPCObserver observer) {
+        npcObservers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(NPCObserver observer) {
+        npcObservers.remove(observer);
+    }
+
+    private void notifyPrisoners(PrisonNPC fakePlayer, List<NPCObserver> observers){
+        //Arrays.stream(observers).forEach(observer -> observer.displayNPC(fakePlayer));
+        observers.stream().forEach(npcObserver -> npcObserver.displayNPC(fakePlayer));
     }
 
     @Override
@@ -69,16 +78,10 @@ public class FakePlayerManager implements NPCManager<PrisonNPC> {
                 String texture = yamlConfigurationHandler.getString("entities.npcs.global.appearance.texture");
                 String signature = yamlConfigurationHandler.getString("entities.npcs.global.appearance.signature");
 
-                Utils.LOG.info("[DEBUG]"+xPoint);
-                Utils.LOG.info("[DEBUG]"+yPoint);
-                Utils.LOG.info("[DEBUG]"+zPoint);
-                Utils.LOG.info("[DEBUG]"+worldName);
-
                 Location position = new Location(Bukkit.getWorld(worldName), xPoint, yPoint, zPoint);
 
                 NPC npc = npcFactory.createTextured(name, texture, signature, position);
 
-                Utils.LOG.info("[DEBUG] loaded npc: "+name);
                 CACHE.put(npc.getId(), (PrisonNPC) npc);
 
             }

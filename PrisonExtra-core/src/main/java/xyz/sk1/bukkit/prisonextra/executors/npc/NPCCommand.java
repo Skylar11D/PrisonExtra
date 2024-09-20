@@ -9,9 +9,6 @@ import xyz.sk1.bukkit.prisonextra.executors.npc.subcommands.SubNpcCreate;
 import xyz.sk1.bukkit.prisonextra.executors.npc.subcommands.SubNpcRemove;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
-import java.util.Iterator;
-import java.util.Map;
-
 @Attributes(name = "npc", requiresPlayer = true, permission = "marsmc.admin")
 public class NPCCommand extends Executor {
 

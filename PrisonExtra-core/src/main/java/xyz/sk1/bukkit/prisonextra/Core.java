@@ -80,10 +80,9 @@ public class Core extends Base {
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();
 
-        this.userManager = new UserManager();
-        this.regionManager = new HouseManager();
-
         this.fakeplayerManager = new FakePlayerManager();
+        this.userManager = new UserManager((FakePlayerManager) fakeplayerManager);
+        this.regionManager = new HouseManager();
 
         this.managerRegistry.register(userManager);
         this.managerRegistry.register(regionManager);

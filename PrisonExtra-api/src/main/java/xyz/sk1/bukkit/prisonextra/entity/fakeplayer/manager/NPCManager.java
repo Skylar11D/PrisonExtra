@@ -4,6 +4,8 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPCObserver;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 
+import java.util.List;
+
 public interface NPCManager<N extends NPC> extends Manager {
 
     /**
@@ -19,11 +21,23 @@ public interface NPCManager<N extends NPC> extends Manager {
     void unregister(N fakePlayer);
 
     /**
-     * Acknowledge all players in this case prisoners about
+     * Acknowledge all npc observers about
      * the fakePlayer entity to make it visible and interactable
      * @param fakePlayer the npc to have its packets synchronized with the server
      * @param npcObservers users who will be acknowledged about <code>fakePlayer</code>'s existence
      */
-    void syncNPC(N fakePlayer, NPCObserver... npcObservers);
+    void syncNPC(N fakePlayer, List<NPCObserver> npcObservers);
+
+    /**
+     * Register the player who will be able to observe all fake players in the server
+     * @param observer
+     */
+    void registerObserver(NPCObserver observer);
+
+    /**
+     * Removes the observers
+     * @param observer
+     */
+    void removeObserver(NPCObserver observer);
 
 }
