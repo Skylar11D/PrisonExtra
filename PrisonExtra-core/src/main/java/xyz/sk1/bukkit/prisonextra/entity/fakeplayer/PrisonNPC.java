@@ -38,7 +38,7 @@ public class PrisonNPC extends NPC {
 
         gameProfile.getProperties().put("textures", woman);
 
-        Utils.LOG.info("{DEBUG] profile: "+gameProfile.getProperties().toString()+" {the new");
+        Utils.LOG.info("{DEBUG] profile: "+gameProfile.getProperties().toString()+" (the new)");
 
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 

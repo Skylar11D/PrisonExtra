@@ -20,8 +20,6 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 
-import java.util.Arrays;
-
 public abstract class User implements Prisoner, NpcObserver {
 
     @Override

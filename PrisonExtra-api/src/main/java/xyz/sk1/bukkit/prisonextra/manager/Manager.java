@@ -1,12 +1,8 @@
 package xyz.sk1.bukkit.prisonextra.manager;
 
-/**
- * @param <T> the exception that the loading process for each manager
- *           may throw
- */
-public interface Manager<T extends Exception> {
+public interface Manager {
 
-    default void start() throws T {
+    default void start() {
 
         load();
 
