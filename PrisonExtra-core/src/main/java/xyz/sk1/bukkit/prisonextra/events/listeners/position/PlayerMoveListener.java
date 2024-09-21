@@ -1,5 +1,6 @@
 package xyz.sk1.bukkit.prisonextra.events.listeners.position;
 
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import xyz.sk1.bukkit.prisonextra.events.handler.position.StareHandler;
 import xyz.sk1.bukkit.prisonextra.listeners.BaseListener;
@@ -11,6 +12,11 @@ public class PlayerMoveListener extends BaseListener {
 
     public PlayerMoveListener(){
         this.stareHandler = new StareHandler();
+    }
+
+    @EventHandler
+    public void onMoving(PlayerMoveEvent event){
+        this.stareHandler.handle(event);
     }
 
 }

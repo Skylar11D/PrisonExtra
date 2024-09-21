@@ -18,28 +18,30 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
 
     @Override
     public void handle(PlayerMoveEvent event) {
+        Core core = Core.getInstance();
+        FakePlayerManager fakePlayerManager = (FakePlayerManager) core.getManagerRegistry().getManager(ManagerType.NPC);
+        ProtocolManager networkManager = core.getProtocolManager();
         Player player = event.getPlayer();
-        Location location = player.getLocation();
-        Entity npc = event.getRightClicked();
-        Location npcLoc = npc.getLocation();
-        npcLoc.setDirection(location.subtract(npcLoc).toVector());
-        float yaw = npcLoc.getYaw();
-        float PITCH = npcLoc.getPitch();
-        ProtocolManager manager = Core.getInstance().getProtocolManager();
+        Location pLoc = player.getLocation();
 
-        ((FakePlayerManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).
+        fakePlayerManager.getCache().values().forEach(npc -> {
+            Location location = npc.getNpc().getBukkitEntity().getLocation();
+            location.setDirection(pLoc.subtract(location).toVector());
+            float yaw = location.getYaw();
 
-        PacketContainer staringPacket = manager.createPacket(PacketType.Play.Server.ENTITY_HEAD_ROTATION);
-        PacketContainer bodyPacket = manager.createPacket(PacketType.Play.Server.ENTITY_LOOK);
+            PacketContainer container = networkManager.createPacket(PacketType.Play.Server.ENTITY_HEAD_ROTATION);
 
-        staringPacket.getIntegers().write(0, npc.getEntityId());
-        staringPacket.getBytes().write(0, (byte)((yaw%360)*256/360));
+            container.getIntegers().write(0, npc.getId());
+            container.getBytes().write(0, (byte)((yaw%360)*256/360));
 
-        try {
-            manager.sendServerPacket(player, staringPacket);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
+            try {
+                networkManager.sendServerPacket(player, container);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+
     }
 
 }
