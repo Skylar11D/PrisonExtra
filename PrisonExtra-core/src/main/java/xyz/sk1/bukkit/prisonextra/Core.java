@@ -1,5 +1,7 @@
 package xyz.sk1.bukkit.prisonextra;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import lombok.AccessLevel;
 import lombok.Getter;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
@@ -41,6 +43,7 @@ public class Core extends Base {
     private NpcManager fakeplayerManager;
     @Getter(AccessLevel.PRIVATE)
     private RegionManager<House> regionManager;
+    private ProtocolManager protocolManager;
 
     private ManagerRegistry managerRegistry;
     @SuppressWarnings("all")
@@ -78,7 +81,9 @@ public class Core extends Base {
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();
 
+        this.protocolManager = ProtocolLibrary.getProtocolManager();
         this.fakeplayerManager = new FakePlayerManager();
+
         this.userManager = new UserManager((FakePlayerManager) fakeplayerManager);
         this.regionManager = new HouseManager();
 

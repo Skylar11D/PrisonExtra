@@ -8,5 +8,7 @@ public class KeyFindingHandler implements PrisonEventHandler<BlockBreakEvent> {
     @Override
     public void handle(BlockBreakEvent event) {
 
+        //TODO finding the key logic
+
     }
 }
