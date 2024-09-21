@@ -16,15 +16,13 @@ import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.util.*;
 
+@Getter
 public class FakePlayerManager implements NpcManager<NPC> {
 
     //@Getter
     //private final Cache<Integer, PrisonNPC> cache;
-    @Getter
     private final Map<Integer, NPC> cache;
-    @Getter
     private final List<NpcObserver> npcObservers;
-    @Getter
     private final NPCFactory npcFactory;
 
     @SuppressWarnings("unchecked")
@@ -76,7 +74,7 @@ public class FakePlayerManager implements NpcManager<NPC> {
     }
 
     @Override
-    public void load() throws Exception {
+    public void load() {
         Utils.LOG.info("Loading npcs into the cache...");
         try {
             FileConfiguration yamlConfigurationHandler = ((YamlConfigurationHandler)Core.getInstance().getSettings()).get();

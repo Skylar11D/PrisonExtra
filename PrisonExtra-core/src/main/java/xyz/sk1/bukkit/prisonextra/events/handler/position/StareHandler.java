@@ -24,7 +24,7 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
         Player player = event.getPlayer();
         Location pLoc = player.getLocation();
 
-        fakePlayerManager.getCache().values().forEach(npc -> {
+        /*fakePlayerManager.getCache().values().forEach(npc -> {
             Location location = npc.getNpc().getBukkitEntity().getLocation();
             location.setDirection(pLoc.subtract(location).toVector());
             float yaw = location.getYaw();
@@ -42,11 +42,12 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
 
             try {
                 networkManager.sendServerPacket(player, container);
+                networkManager.sendServerPacket(player, container1);
             } catch (InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
 
-        });
+        });*/
 
     }
 

@@ -18,6 +18,7 @@ public class SubNpcType implements Subcommand {
     public void dispatch(Player sender, String[] args) {
 
         YamlConfigurationHandler yamlSettings = (YamlConfigurationHandler) Core.getInstance().getSettings();
+        FakePlayerManager fakePlayerManager = (FakePlayerManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC);
 
         if(!args[2].equalsIgnoreCase("type")) {
             sender.sendMessage(Utils.colorize("&cInvalid third argument!"));
@@ -42,7 +43,8 @@ public class SubNpcType implements Subcommand {
                 getManagerRegistry().getManager(ManagerType.NPC)).
                 getNpcFactory().createPlain(args[1], sender.getLocation());
 
-        ((FakePlayerManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).getCache().put(npc.getId(), (PrisonNPC) npc);
+        fakePlayerManager.getCache().put(npc.getId(), npc);
+        fakePlayerManager.showNpcTo(sender, npc);
 
         sender.playSound(sender.getLocation(), Sound.LEVEL_UP, 20f, 20f);
 

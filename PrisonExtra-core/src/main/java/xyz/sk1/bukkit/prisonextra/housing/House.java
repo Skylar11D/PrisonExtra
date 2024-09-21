@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.utils.housing;
+package xyz.sk1.bukkit.prisonextra.housing;
 
 import lombok.Getter;
 import org.bukkit.Location;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.region.features.Accessable;
 import xyz.sk1.bukkit.prisonextra.region.strategies.AccessStrategy;
 import xyz.sk1.bukkit.prisonextra.region.Region;
-import xyz.sk1.bukkit.prisonextra.utils.housing.strategy.WhitelistAccessStrategy;
+import xyz.sk1.bukkit.prisonextra.housing.strategy.WhitelistAccessStrategy;
 
 import java.util.List;
 

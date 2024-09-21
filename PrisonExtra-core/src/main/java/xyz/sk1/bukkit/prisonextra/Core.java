@@ -18,13 +18,13 @@ import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
-import xyz.sk1.bukkit.prisonextra.utils.housing.House;
-import xyz.sk1.bukkit.prisonextra.utils.housing.HouseManager;
+import xyz.sk1.bukkit.prisonextra.housing.House;
+import xyz.sk1.bukkit.prisonextra.housing.HouseManager;
 import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author <a href="https://github.com/skylar11d">skylar</a>
@@ -109,19 +109,15 @@ public class Core extends Base {
     }
 
     private void loadCaches() {
-        try {
-
-            this.userManager.start();
-
-            this.regionManager.start();
-
-            this.fakeplayerManager.start();
-
-        } catch (SQLException e){
-            e.printStackTrace();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        CompletableFuture.runAsync(() -> {
+            try {
+                this.userManager.start();
+                this.regionManager.start();
+                this.fakeplayerManager.start();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override

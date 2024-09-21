@@ -1,10 +1,9 @@
-package xyz.sk1.bukkit.prisonextra.utils.housing.factory;
+package xyz.sk1.bukkit.prisonextra.housing.factory;
 
 import org.bukkit.Location;
-import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.region.Region;
 import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractRegionFactory;
-import xyz.sk1.bukkit.prisonextra.utils.housing.House;
+import xyz.sk1.bukkit.prisonextra.housing.House;
 
 /**
  * @author <a href="https://github.com/skylar11d">skylar</a>

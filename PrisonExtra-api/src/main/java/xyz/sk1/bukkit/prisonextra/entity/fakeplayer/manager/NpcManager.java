@@ -7,7 +7,7 @@ import xyz.sk1.bukkit.prisonextra.manager.Manager;
 
 import java.util.List;
 
-public interface NpcManager<N extends NPC> extends Manager {
+public interface NpcManager<N extends NPC> extends Manager<Exception> {
 
     /**
      * register the NPC entity into the local cache

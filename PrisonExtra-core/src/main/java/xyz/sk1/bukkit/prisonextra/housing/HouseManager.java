@@ -1,6 +1,5 @@
-package xyz.sk1.bukkit.prisonextra.utils.housing;
+package xyz.sk1.bukkit.prisonextra.housing;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.internal.cache.Cache;
@@ -9,9 +8,6 @@ import xyz.sk1.bukkit.prisonextra.region.Region;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Map;
 import java.util.Optional;
 
@@ -59,7 +55,7 @@ public final class HouseManager implements RegionManager<House> {
     }
 
     @Override
-    public void load() throws Exception {
+    public void load() {
         Utils.LOG.info("Loading regions into the cache...");
         /*Connection connection = Core.getInstance().getPDatabase().getConnection();
 
