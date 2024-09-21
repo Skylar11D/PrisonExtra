@@ -12,4 +12,8 @@ public interface Manager {
 
     ManagerType getType();
 
+    default void finish(){
+
+    }
+
 }

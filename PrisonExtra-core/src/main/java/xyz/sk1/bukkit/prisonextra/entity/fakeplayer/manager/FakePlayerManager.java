@@ -69,8 +69,11 @@ public class FakePlayerManager implements NpcManager<NPC> {
 
     }
 
-    private void notifyPrisoners(NPC fakePlayer, List<NpcObserver> observers){
-        observers.stream().forEach(npcObserver -> npcObserver.displayNPC(fakePlayer));
+    private void notifyPrisoners(NPC fakePlayer, List<NpcObserver> observers, boolean shouldRemove){
+        if (!shouldRemove)
+            observers.forEach(npcObserver -> npcObserver.displayNPC(fakePlayer));
+        else
+            observers.forEach(npcObserver -> npcObserver.terminateNPC(fakePlayer));
     }
 
     @Override
@@ -93,7 +96,7 @@ public class FakePlayerManager implements NpcManager<NPC> {
                 NPC npc = npcFactory.createTextured(name, texture, signature, position);
 
                 register(npc);
-                this.notifyPrisoners(npc, npcObservers);
+                this.notifyPrisoners(npc, npcObservers, false);
 
             }
         } catch (Exception e){
@@ -102,6 +105,13 @@ public class FakePlayerManager implements NpcManager<NPC> {
         }
 
 
+    }
+
+    @Override
+    public void finish() {
+        cache.values().stream().forEach(npc -> {
+            this.notifyPrisoners(npc, npcObservers, true);
+        });
     }
 
     @Override

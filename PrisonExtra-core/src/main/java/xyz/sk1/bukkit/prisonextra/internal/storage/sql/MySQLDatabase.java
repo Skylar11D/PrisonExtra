@@ -11,7 +11,7 @@ import java.sql.*;
 
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true)
-public class MySQLPDatabase extends PDatabase {
+public class MySQLDatabase extends PDatabase {
 
     private Connection connection;
 
@@ -27,17 +27,20 @@ public class MySQLPDatabase extends PDatabase {
 
     @Override
     public void connect() {
-        String connectionUrl = "jdbc:mysql://"+hostname+":"+port+"/"+database;
-        ConfigurationHandler<JsonObject> ch = Core.getInstance().getDatabasecfg();
+        Utils.LOG.info("Connecting to the database..");
 
-        try {
-            //only one thread allowed
-            synchronized (this){
+        //only one thread allowed
+        synchronized (this){
+
+            try {
+
+                String connectionUrl = "jdbc:mysql://"+hostname+":"+port+"/"+database;
+                ConfigurationHandler<JsonObject> ch = Core.getInstance().getDatabasecfg();
+
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(connectionUrl, username, passphrase);
 
-                Utils.LOG.info("Checking tables specified in (database.json)..");
-
+                Utils.LOG.info("Checking tables specified in file: database.json");
 
                 JsonObject service = ch.get("service");
                 JsonObject db = service.getAsJsonObject("database");
@@ -55,11 +58,12 @@ public class MySQLPDatabase extends PDatabase {
                 checkRegionTable(rName);
                 checkMinionTable(mName);
                 checkPrisonersTable(pName);
+
+            } catch (ClassNotFoundException | RuntimeException | SQLException e) {
+                e.printStackTrace();
+                Utils.LOG.warning("Failed to connect to the database, please define it in database.json");
             }
 
-        } catch (ClassNotFoundException | RuntimeException | SQLException e) {
-            e.printStackTrace();
-            Utils.LOG.warning("Failed to connect to the database, please define it in database.json");
         }
 
     }

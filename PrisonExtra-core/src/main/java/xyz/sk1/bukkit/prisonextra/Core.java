@@ -97,7 +97,6 @@ public class Core extends Base {
         abstractDatabaseFactory = new DatabaseFactory();
         PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
 
-        Utils.LOG.info("Connecting to the database..");
         PDatabase.connect();
 
         loadCaches();
@@ -122,6 +121,8 @@ public class Core extends Base {
 
     @Override
     public void fini() {
+
+        this.fakeplayerManager.finish();
 
         try {
             Utils.LOG.info("Closing any connection to the database..");

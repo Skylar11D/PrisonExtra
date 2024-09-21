@@ -1,7 +1,7 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage.factory;
 
 import xyz.sk1.bukkit.prisonextra.internal.storage.PDatabase;
-import xyz.sk1.bukkit.prisonextra.internal.storage.sql.MySQLPDatabase;
+import xyz.sk1.bukkit.prisonextra.internal.storage.sql.MySQLDatabase;
 import xyz.sk1.bukkit.prisonextra.internal.storage.mongo.MongoPDatabase;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
@@ -21,7 +21,7 @@ public class DatabaseFactory extends AbstractDatabaseFactory {
             }
 
             case MONGODB: {
-                return new MySQLPDatabase();
+                return new MySQLDatabase();
             }
         }
 

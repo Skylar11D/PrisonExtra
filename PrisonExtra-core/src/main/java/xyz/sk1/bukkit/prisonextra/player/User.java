@@ -33,6 +33,11 @@ public abstract class User implements Prisoner, NpcObserver {
     }
 
     @Override
+    public void terminateNPC(NPC npc) {
+        ((CraftPlayer)getPlayer()).getHandle().playerConnection.sendPacket(npc.getDestroy());
+    }
+
+    @Override
     public void openMenu(){
 
         Gui gui = Gui.gui()

@@ -34,16 +34,15 @@ public class PrisonNPC extends NPC {
 
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), getName());
 
-        Property woman = new Property("textures", super.getTexture(), super.getSignature());
-
-        gameProfile.getProperties().put("textures", woman);
+        if(super.getSignature() != null && super.getTexture() != null)
+            gameProfile.getProperties().put("textures", new Property("textures", super.getTexture(), super.getSignature()));
 
         Utils.LOG.info("{DEBUG] profile: "+gameProfile.getProperties().toString()+" (the new)");
 
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
         super.setNpc(new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager));
-        super.setId(getNpc().getBukkitEntity().getEntityId());
+        super.setId(getNpc().getId());
 
         //DataWatcher watcher = getNpc().getDataWatcher();
         //watcher.register(new DataWatcherObject<>(10, DataWatcherRegistry.a), (byte) (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x40));
