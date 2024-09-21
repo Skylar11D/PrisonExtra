@@ -35,7 +35,7 @@ public abstract class User implements Prisoner, NpcObserver {
     @Override
     public void openMenu(){
 
-        Inventory inventory = Bukkit.createInventory(null, 54, "           §c§lPrisonExtra");
+        Inventory inventory = Bukkit.createInventory(null, 54, "              §c§lPrison");
 
         ItemStack background = new ItemStackBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 7)
                 .setName("")
