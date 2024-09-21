@@ -10,7 +10,6 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.executors.Subcommand;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
-import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 public class SubNpcType implements Subcommand {
@@ -43,7 +42,7 @@ public class SubNpcType implements Subcommand {
                 getManagerRegistry().getManager(ManagerType.NPC)).
                 getNpcFactory().createPlain(args[1], sender.getLocation());
 
-        ((FakePlayerManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).getCACHE().put(npc.getId(), (PrisonNPC) npc);
+        ((FakePlayerManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC)).getCache().put(npc.getId(), (PrisonNPC) npc);
 
         sender.playSound(sender.getLocation(), Sound.LEVEL_UP, 20f, 20f);
 

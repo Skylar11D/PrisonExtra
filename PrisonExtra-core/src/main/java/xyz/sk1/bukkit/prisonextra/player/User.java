@@ -20,4 +20,12 @@ public abstract class User implements Prisoner, NpcObserver {
         npcManager.showNpcTo(getPlayer(), npc);
 
     }
+
+    @Override
+    public void openMenu(){
+
+
+
+    }
+
 }

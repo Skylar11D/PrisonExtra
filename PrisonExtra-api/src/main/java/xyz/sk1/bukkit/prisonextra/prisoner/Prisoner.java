@@ -9,4 +9,6 @@ public interface Prisoner {
 
     default Minion getMiner(Minion miner){return null;}
 
+    default void openMenu(){}
+
 }

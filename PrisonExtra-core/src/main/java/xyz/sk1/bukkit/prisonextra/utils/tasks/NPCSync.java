@@ -21,7 +21,7 @@ public class NPCSync extends BukkitRunnable {
     @Override
     public void run() {
 
-        for (Map.Entry<Integer, NPC> entry : this.fakePlayerManager.getCACHE().entrySet()){
+        for (Map.Entry<Integer, NPC> entry : this.fakePlayerManager.getCache().entrySet()){
             this.fakePlayerManager.syncNPC(entry.getValue(), this.fakePlayerManager.getNpcObservers());
         }
 

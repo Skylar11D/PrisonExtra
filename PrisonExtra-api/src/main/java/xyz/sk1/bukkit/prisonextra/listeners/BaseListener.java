@@ -4,6 +4,4 @@ import org.bukkit.event.Listener;
 
 public abstract class BaseListener implements Listener {
 
-
-
 }

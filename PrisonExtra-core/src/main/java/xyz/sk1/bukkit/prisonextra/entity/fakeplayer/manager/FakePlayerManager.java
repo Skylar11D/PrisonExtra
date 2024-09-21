@@ -20,9 +20,9 @@ import java.util.*;
 public class FakePlayerManager implements NpcManager<NPC> {
 
     //@Getter
-    //private final Cache<Integer, PrisonNPC> CACHE;
+    //private final Cache<Integer, PrisonNPC> cache;
     @Getter
-    private final Map<Integer, NPC> CACHE;
+    private final Map<Integer, NPC> cache;
     @Getter
     private final List<NpcObserver> npcObservers;
     @Getter
@@ -30,19 +30,19 @@ public class FakePlayerManager implements NpcManager<NPC> {
 
     @SuppressWarnings("unchecked")
     public FakePlayerManager(){
-        this.CACHE = new HashMap<>();
+        this.cache = new HashMap<>();
         this.npcFactory = new NPCFactory();
         this.npcObservers = new ArrayList<>();
     }
 
     @Override
     public void register(NPC fakePlayer) {
-        CACHE.put(fakePlayer.getId(), fakePlayer);
+        cache.put(fakePlayer.getId(), fakePlayer);
     }
 
     @Override
     public void unregister(NPC fakePlayer) {
-        CACHE.remove(fakePlayer.getId());
+        cache.remove(fakePlayer.getId());
     }
 
     @Override
