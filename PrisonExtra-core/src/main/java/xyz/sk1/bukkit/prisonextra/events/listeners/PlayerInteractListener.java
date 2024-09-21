@@ -4,6 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.events.PacketListener;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
@@ -24,6 +25,7 @@ public class PlayerInteractListener extends PacketAdapter {
 
     public PlayerInteractListener(){
         super(Core.getInstance(), PacketType.Play.Client.USE_ENTITY);
+        Utils.LOG.info("registered a packet listener");
         this.npcHandler = new NpcInteractHandler();
     }
 

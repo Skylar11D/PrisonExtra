@@ -2,10 +2,13 @@ package xyz.sk1.bukkit.prisonextra;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
 import lombok.AccessLevel;
 import lombok.Getter;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.NpcManager;
+import xyz.sk1.bukkit.prisonextra.events.listeners.PlayerInteractListener;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
@@ -38,11 +41,10 @@ public class Core extends Base {
     private static volatile Core instance;
 
     private PluginManager pluginManager;
-    @SuppressWarnings("all")
     @Getter(AccessLevel.PRIVATE)
     private Manager userManager;
     @Getter(AccessLevel.PRIVATE)
-    private NpcManager fakeplayerManager;
+    private NpcManager<?> fakeplayerManager;
     @Getter(AccessLevel.PRIVATE)
     private RegionManager<House> regionManager;
     private ProtocolManager protocolManager;
@@ -57,8 +59,8 @@ public class Core extends Base {
     @Getter(AccessLevel.PRIVATE)
     private ConfigurationHandlerFactory configurationFactory;
 
-    private ConfigurationHandler settings;
-    private ConfigurationHandler databasecfg;
+    private ConfigurationHandler<?> settings;
+    private ConfigurationHandler<?> databasecfg;
 
     @Override
     public void init() {
@@ -79,6 +81,7 @@ public class Core extends Base {
         settings = configurationFactory.createConfigHandler(new File(getDataFolder(), "settings.yml")).orElse(null);
         databasecfg = configurationFactory.createConfigHandler(new File(getDataFolder(), "database.json")).orElse(null);
 
+        protocolManager.addPacketListener(new PlayerInteractListener());
 
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();
