@@ -13,7 +13,6 @@ import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.factory.NPCFactory;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
-import xyz.sk1.bukkit.prisonextra.utils.tasks.NPCSync;
 
 import java.util.*;
 
@@ -46,13 +45,9 @@ public class FakePlayerManager implements NpcManager<NPC> {
     }
 
     @Override
-    public void syncNPC(NPC fakePlayer, List<NpcObserver> observers) {
-        this.notifyPrisoners(fakePlayer, observers);
-    }
-
-    @Override
     public void registerObserver(NpcObserver observer) {
         npcObservers.add(observer);
+        cache.values().forEach(observer::displayNPC);
     }
 
     @Override
@@ -82,6 +77,7 @@ public class FakePlayerManager implements NpcManager<NPC> {
 
     @Override
     public void load() throws Exception {
+        Utils.LOG.info("Loading npcs into the cache...");
         try {
             FileConfiguration yamlConfigurationHandler = ((YamlConfigurationHandler)Core.getInstance().getSettings()).get();
 
@@ -99,6 +95,7 @@ public class FakePlayerManager implements NpcManager<NPC> {
                 NPC npc = npcFactory.createTextured(name, texture, signature, position);
 
                 register(npc);
+                this.notifyPrisoners(npc, npcObservers);
 
             }
         } catch (Exception e){
@@ -106,8 +103,6 @@ public class FakePlayerManager implements NpcManager<NPC> {
             e.printStackTrace();
         }
 
-        //runs the cycl to synchronize the available npcs
-        new NPCSync().runTaskTimer(Core.getInstance(), 20*5, 20*14);
 
     }
 

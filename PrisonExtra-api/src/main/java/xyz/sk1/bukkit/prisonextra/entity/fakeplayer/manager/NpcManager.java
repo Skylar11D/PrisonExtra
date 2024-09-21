@@ -22,14 +22,6 @@ public interface NpcManager<N extends NPC> extends Manager {
     void unregister(N fakePlayer);
 
     /**
-     * Acknowledge all npc observers about
-     * the fakePlayer entity to make it visible and interactable
-     * @param fakePlayer the npc to have its packets synchronized with the server
-     * @param npcObservers users who will be acknowledged about <code>fakePlayer</code>'s existence
-     */
-    void syncNPC(N fakePlayer, List<NpcObserver> npcObservers);
-
-    /**
      * Register the player who will be able to observe all fake players in the server
      * @param observer
      */

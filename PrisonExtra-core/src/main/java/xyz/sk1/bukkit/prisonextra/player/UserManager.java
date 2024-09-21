@@ -9,8 +9,10 @@ import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
 import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
 import xyz.sk1.bukkit.prisonextra.prisoner.PrisonManager;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 import xyz.sk1.bukkit.prisonextra.utilities.tasks.PrisonTask;
 
+import javax.rmi.CORBA.Util;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -97,6 +99,7 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     @SuppressWarnings("unchecked")
     @Override
     public void load() {
+        Utils.LOG.info("Loading players into the cache...");
         CompletableFuture.runAsync(() -> {
             Bukkit.getOnlinePlayers().forEach(p -> imprison(p));
         });

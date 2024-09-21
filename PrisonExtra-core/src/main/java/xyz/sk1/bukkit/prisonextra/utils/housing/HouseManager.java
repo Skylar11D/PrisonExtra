@@ -7,6 +7,7 @@ import xyz.sk1.bukkit.prisonextra.internal.cache.Cache;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.region.Region;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -59,6 +60,7 @@ public final class HouseManager implements RegionManager<House> {
 
     @Override
     public void load() throws Exception {
+        Utils.LOG.info("Loading regions into the cache...");
         /*Connection connection = Core.getInstance().getPDatabase().getConnection();
 
         Statement statement = connection.createStatement();

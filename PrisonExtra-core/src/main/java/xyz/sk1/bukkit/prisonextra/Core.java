@@ -12,6 +12,8 @@ import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationHandlerFactory;
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.storage.PDatabase;
+import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
+import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
@@ -91,15 +93,28 @@ public class Core extends Base {
         this.managerRegistry.register(regionManager);
         this.managerRegistry.register(fakeplayerManager);
 
+
+        abstractDatabaseFactory = new DatabaseFactory();
+        PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
+
+        Utils.LOG.info("Connecting to the database..");
+        PDatabase.connect();
+
+        loadCaches();
+
+        this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.events.listeners");
+        this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");
+
+
+    }
+
+    private void loadCaches() {
         try {
 
-            Utils.LOG.info("Loading all players to the cache..");
             this.userManager.start();
 
-            Utils.LOG.info("Loading all regions to the cache..");
             this.regionManager.start();
 
-            Utils.LOG.info("Loading all npcs to the cache..");
             this.fakeplayerManager.start();
 
         } catch (SQLException e){
@@ -107,18 +122,6 @@ public class Core extends Base {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        //abstractDatabaseFactory = new DatabaseFactory();
-        //PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
-
-
-        Utils.LOG.info("Connecting to the database..");
-        //PDatabase.connect();
-
-        this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.events.listeners");
-        this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");
-
-
     }
 
     @Override

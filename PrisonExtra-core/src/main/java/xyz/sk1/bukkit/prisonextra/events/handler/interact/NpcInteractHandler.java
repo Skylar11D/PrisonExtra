@@ -13,6 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.listeners.PrisonEventHandler;
+import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
+import xyz.sk1.bukkit.prisonextra.player.User;
+import xyz.sk1.bukkit.prisonextra.player.UserManager;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -20,7 +23,10 @@ public class NpcInteractHandler implements PrisonEventHandler<PlayerInteractEnti
 
     @Override
     public void handle(PlayerInteractEntityEvent event) {
+        UserManager userManager = (UserManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
+        User user = userManager.get(event.getPlayer());
 
+        user.openMenu();
 
     }
 }

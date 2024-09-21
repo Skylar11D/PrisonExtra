@@ -28,11 +28,17 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
             Location location = npc.getNpc().getBukkitEntity().getLocation();
             location.setDirection(pLoc.subtract(location).toVector());
             float yaw = location.getYaw();
+            float PITCH = location.getPitch();
 
             PacketContainer container = networkManager.createPacket(PacketType.Play.Server.ENTITY_HEAD_ROTATION);
+            PacketContainer container1 = networkManager.createPacket(PacketType.Play.Server.ENTITY_LOOK);
 
             container.getIntegers().write(0, npc.getId());
             container.getBytes().write(0, (byte)((yaw%360)*256/360));
+
+            container1.getIntegers().write(0, npc.getId());
+            container1.getBytes().write(0, (byte)((yaw%360)*256/360));
+            container1.getBytes().write(1, (byte)((PITCH%360)*256/360));
 
             try {
                 networkManager.sendServerPacket(player, container);
