@@ -1,24 +1,19 @@
 package xyz.sk1.bukkit.prisonextra.player;
 
-import dev.triumphteam.gui.builder.item.ItemBuilder;
-import dev.triumphteam.gui.components.GuiType;
-import dev.triumphteam.gui.guis.Gui;
-import dev.triumphteam.gui.guis.GuiItem;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Color;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NpcObserver;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
+import xyz.sk1.bukkit.prisonextra.utils.builder.ItemStackBuilder;
 
 public abstract class User implements Prisoner, NpcObserver {
 
@@ -40,81 +35,55 @@ public abstract class User implements Prisoner, NpcObserver {
     @Override
     public void openMenu(){
 
-        Gui gui = Gui.gui()
-                .title(
-                        Component.text("Prison menu")
-                                .decorate(TextDecoration.BOLD)
-                                .color(NamedTextColor.RED)
+        Inventory inventory = Bukkit.createInventory(null, 54, "           §c§lPrisonExtra");
+
+        ItemStack background = new ItemStackBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 7)
+                .setName("")
+                .setEnchanted(true)
+                .build();
+
+        ItemStack house = new ItemStackBuilder(Material.WOOD_DOOR)
+                .setName("§a§lHouse")
+                .setLore("",
+                        "§2Look up for a good safe place for rent or on sale",
+                        "§2and even sell your items in it!"
                 )
-                .type(GuiType.CHEST)
-                .rows(6)
-                .create();
+                .build();
 
-        GuiItem cosmetics = ItemBuilder.from(Material.BLAZE_POWDER)
-                .name(
-                        Component.text("Cosmetics")
-                                .color(NamedTextColor.AQUA)
-                                .decorate(TextDecoration.BOLD)
-
+        ItemStack minion = new ItemStackBuilder(Material.STONE_PICKAXE)
+                .setName("§e§lMinion")
+                .setLore("",
+                        "§6Your personal friendly minion that mines for you!",
+                        "§6Purchase or rent one for your favor"
                 )
-                .lore(
-                        Component.text(""),
-                        Component.text("Fetch yourself some magical particles")
-                                .color(NamedTextColor.DARK_AQUA),
-                        Component.text("and brag about them among prisoners!")
-                                .color(NamedTextColor.GREEN)
+                .build();
+
+        ItemStack cosmetics = new ItemStackBuilder(Material.BLAZE_POWDER)
+                .setName("§d§lCosmetics")
+                .setLore("",
+                        "§5Bring some particles around you and brag",
+                        "§5about them among other prisoners!"
                 )
-                .asGuiItem(action -> {
+                .build();
 
-        });
 
-        GuiItem house = ItemBuilder.from(Material.DARK_OAK_DOOR)
-                .name(
-                        Component.text("Housing")
-                                .color(NamedTextColor.DARK_GREEN)
-                                .decorate(TextDecoration.BOLD)
-                )
-                .lore(
-                        Component.text(" "),
-                        Component.text("Discover and rent a house for you now!")
-                                .color(NamedTextColor.GREEN),
-                        Component.text("DISCOUNT 50%!")
-                                .color(NamedTextColor.GREEN)
-                )
-                .asGuiItem(action -> {
 
-        });
+        for (int i = 0; i < 54; i++) {
+            inventory.setItem(i, background);
 
-        GuiItem minions = ItemBuilder.from(Material.STONE_PICKAXE)
-                .name(
-                        Component.text("Minions")
-                                .color(NamedTextColor.YELLOW)
-                                .decorate(TextDecoration.BOLD)
-                )
-                .lore(
-                        Component.text(" "),
-                        Component.text("Your personal friendly minion that will")
-                                .color(NamedTextColor.GOLD),
-                        Component.text("catch your back even in harsh environments!")
-                                .color(NamedTextColor.GOLD),
-                        Component.text("look for your favorite type and purchase or even rent it!")
-                                .color(NamedTextColor.GOLD)
-                )
-                .asGuiItem(action -> {
+            if(i == 20)
+                inventory.setItem(i, house);
 
-        });
+            if(i == 22)
+                inventory.setItem(i, minion);
 
-        gui.getFiller().fill(ItemBuilder.from(Material.STAINED_GLASS_PANE).asGuiItem());
+            if(i == 24)
+                inventory.setItem(i, cosmetics);
 
-        gui.setItem(20, house);
-        gui.setItem(22, minions);
-        gui.setItem(24, cosmetics);
+        }
 
-        gui.setDefaultClickAction(action -> action.setCancelled(true));
-
+        getPlayer().openInventory(inventory);
         getPlayer().playSound(getPlayer().getLocation(), Sound.LEVEL_UP, 15f, 15f);
-
-        gui.open(getPlayer());
 
     }
 

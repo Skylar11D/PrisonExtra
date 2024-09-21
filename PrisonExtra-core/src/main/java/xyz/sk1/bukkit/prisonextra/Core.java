@@ -50,7 +50,6 @@ public class Core extends Base {
     private ProtocolManager protocolManager;
 
     private ManagerRegistry managerRegistry;
-    @SuppressWarnings("all")
     private LRUCacheRegistry lruCacheRegistry;
 
     private PDatabase PDatabase;
@@ -59,8 +58,8 @@ public class Core extends Base {
     @Getter(AccessLevel.PRIVATE)
     private ConfigurationHandlerFactory configurationFactory;
 
-    private ConfigurationHandler<?> settings;
-    private ConfigurationHandler<?> databasecfg;
+    private ConfigurationHandler settings;
+    private ConfigurationHandler databasecfg;
 
     @Override
     public void init() {
@@ -81,7 +80,6 @@ public class Core extends Base {
         settings = configurationFactory.createConfigHandler(new File(getDataFolder(), "settings.yml")).orElse(null);
         databasecfg = configurationFactory.createConfigHandler(new File(getDataFolder(), "database.json")).orElse(null);
 
-        protocolManager.addPacketListener(new PlayerInteractListener());
 
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();
@@ -104,6 +102,7 @@ public class Core extends Base {
 
         loadCaches();
 
+        protocolManager.addPacketListener(new PlayerInteractListener());
         this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.events.listeners");
         this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");
 

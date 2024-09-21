@@ -21,7 +21,7 @@ import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 public class PlayerInteractListener extends PacketAdapter {
 
-    private final PrisonEventHandler<PlayerInteractAtEntityEvent> npcHandler;
+    private final NpcInteractHandler npcHandler;
 
     public PlayerInteractListener(){
         super(Core.getInstance(), PacketType.Play.Client.USE_ENTITY);
@@ -31,29 +31,21 @@ public class PlayerInteractListener extends PacketAdapter {
 
     @Override
     public void onPacketReceiving(PacketEvent event) {
-        FakePlayerManager fakePlayerManager = (FakePlayerManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.NPC);
-        UserManager userManager = (UserManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
-        User user = userManager.get(event.getPlayer());
+        FakePlayerManager fakePlayerManager = (FakePlayerManager) Core.getInstance().
+                getManagerRegistry().getManager(ManagerType.NPC);
 
-        PacketContainer packet = event.getPacket();
         int targetId = event.getPacket().getIntegers().read(0);
-        Utils.LOG.info("ignited");
-        if(!fakePlayerManager.getCache().containsKey(targetId)) {
-            Utils.LOG.info("avoided");
+
+        if(!(fakePlayerManager.getCache().containsKey(targetId)))
             return;
-        }
 
-        EnumWrappers.Hand hand = packet.getHands().read(0);
-        EnumWrappers.EntityUseAction use = packet.getEnumEntityUseActions().read(0).getAction();
+        EnumWrappers.EntityUseAction action = event.getPacket().getEntityUseActions().read(0);
+        EnumWrappers.Hand hand = event.getPacket().getHands().read(0);
 
-        if(hand == EnumWrappers.Hand.MAIN_HAND &&
-                (use == EnumWrappers.EntityUseAction.INTERACT_AT || use == EnumWrappers.EntityUseAction.INTERACT)){
+        if(hand != EnumWrappers.Hand.MAIN_HAND && action != EnumWrappers.EntityUseAction.INTERACT)
+            return;
 
-            Utils.LOG.info("succeeded");
-
-
-
-        }
+        npcHandler.handle(event);
 
     }
 }

@@ -3,8 +3,10 @@ package xyz.sk1.bukkit.prisonextra.events.handler.position;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
+import lombok.var;
+import net.minecraft.server.v1_8_R3.PacketPlayOutEntity;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 import xyz.sk1.bukkit.prisonextra.Core;
@@ -24,7 +26,7 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
         Player player = event.getPlayer();
         Location pLoc = player.getLocation();
 
-        /*fakePlayerManager.getCache().values().forEach(npc -> {
+        fakePlayerManager.getCache().values().forEach(npc -> {
             Location location = npc.getNpc().getBukkitEntity().getLocation();
             location.setDirection(pLoc.subtract(location).toVector());
             float yaw = location.getYaw();
@@ -34,20 +36,22 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
             PacketContainer container1 = networkManager.createPacket(PacketType.Play.Server.ENTITY_LOOK);
 
             container.getIntegers().write(0, npc.getId());
-            container.getBytes().write(0, (byte)((yaw%360)*256/360));
+            container.getBytes().write(0, (byte)(yaw*270.0f/360.0f));
 
-            container1.getIntegers().write(0, npc.getId());
+            /*container1.getIntegers().write(0, npc.getId());
             container1.getBytes().write(0, (byte)((yaw%360)*256/360));
-            container1.getBytes().write(1, (byte)((PITCH%360)*256/360));
+            container1.getBytes().write(1, (byte)((PITCH%360)*256/360));*/
 
             try {
-                networkManager.sendServerPacket(player, container);
-                networkManager.sendServerPacket(player, container1);
+                    networkManager.sendServerPacket(player, container);
+                    //networkManager.sendServerPacket(player, container1);
+                    var t = new PacketPlayOutEntity.PacketPlayOutEntityLook(npc.getId(), (byte) (yaw*276.0f/360.0f), (byte) (PITCH*276.0f/360.0f),true);
+                    ((CraftPlayer)player).getHandle().playerConnection.sendPacket(t);
             } catch (InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
 
-        });*/
+        });
 
     }
 
