@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.events.listeners.connection;
+package xyz.sk1.bukkit.prisonextra.events.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;

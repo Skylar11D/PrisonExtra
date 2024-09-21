@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.events.listeners.block;
+package xyz.sk1.bukkit.prisonextra.events.listeners;
 
 import org.bukkit.event.block.BlockBreakEvent;
 import xyz.sk1.bukkit.prisonextra.events.handler.block.KeyFindingHandler;

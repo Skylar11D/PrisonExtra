@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.events.listeners.interaction;
+package xyz.sk1.bukkit.prisonextra.events.listeners;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

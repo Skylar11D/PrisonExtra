@@ -115,7 +115,7 @@ public class Core extends Base {
         Utils.LOG.info("Connecting to the database..");
         //PDatabase.connect();
 
-        this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.listeners");
+        this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.events.listeners");
         this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");
 
 
