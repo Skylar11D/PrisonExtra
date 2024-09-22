@@ -7,7 +7,6 @@ import xyz.sk1.bukkit.prisonextra.player.User;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.CompletableFuture;
 
 public class NpcInteractHandler {
@@ -19,9 +18,7 @@ public class NpcInteractHandler {
 
         Utils.LOG.info("interact handled!");
 
-        CompletableFuture.runAsync(() -> {
-            user.openMenu();
-        });
+        CompletableFuture.runAsync(user::openMainMenu);
 
     }
 }

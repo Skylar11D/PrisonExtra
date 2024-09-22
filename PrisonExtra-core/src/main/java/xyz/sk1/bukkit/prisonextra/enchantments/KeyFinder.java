@@ -4,6 +4,10 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 public class KeyFinder extends Enchantment {
 
     public KeyFinder(int id) {

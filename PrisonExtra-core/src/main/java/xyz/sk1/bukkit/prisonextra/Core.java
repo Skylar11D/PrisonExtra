@@ -18,6 +18,7 @@ import xyz.sk1.bukkit.prisonextra.internal.storage.PDatabase;
 import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
+import xyz.sk1.bukkit.prisonextra.menu.MenuFactory;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
@@ -57,6 +58,7 @@ public class Core extends Base {
     private AbstractDatabaseFactory abstractDatabaseFactory;
     @Getter(AccessLevel.PRIVATE)
     private ConfigurationHandlerFactory configurationFactory;
+    private MenuFactory menuFactory;
 
     private ConfigurationHandler settings;
     private ConfigurationHandler databasecfg;
@@ -94,6 +96,8 @@ public class Core extends Base {
         this.managerRegistry.register(regionManager);
         this.managerRegistry.register(fakeplayerManager);
 
+
+        this.menuFactory = new MenuFactory();
 
         abstractDatabaseFactory = new DatabaseFactory();
         PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);

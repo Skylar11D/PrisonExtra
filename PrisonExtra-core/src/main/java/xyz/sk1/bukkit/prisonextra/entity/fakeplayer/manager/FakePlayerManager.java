@@ -16,6 +16,10 @@ import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.util.*;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 @Getter
 public class FakePlayerManager implements NpcManager<NPC> {
 

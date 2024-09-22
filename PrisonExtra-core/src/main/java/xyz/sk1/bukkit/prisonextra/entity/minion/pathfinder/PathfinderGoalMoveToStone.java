@@ -3,6 +3,10 @@ package xyz.sk1.bukkit.prisonextra.entity.minion.pathfinder;
 import net.minecraft.server.v1_8_R3.*;
 import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 public class PathfinderGoalMoveToStone extends PathfinderGoal {
 
     //experimental

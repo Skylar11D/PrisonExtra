@@ -14,7 +14,7 @@ import java.util.List;
  * @author <a href="https://github.com/skylar11d">skylar</a>
  */
 
-public class House extends Region implements Accessable {
+public final class House extends Region implements Accessable {
 
     @Getter
     private List<String> deniedPlayers;
