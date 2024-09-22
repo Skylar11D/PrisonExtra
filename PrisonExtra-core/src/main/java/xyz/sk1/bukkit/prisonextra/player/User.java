@@ -28,9 +28,9 @@ public abstract class User implements Prisoner, NpcObserver {
     }
 
     @Override
-    public void openMainMenu(){
+    public void openMenu(MenuType type){
 
-        getPlayer().openInventory(Core.getInstance().getMenuFactory().createMenu(MenuType.MAIN));
+        getPlayer().openInventory(Core.getInstance().getMenuFactory().createMenu(type));
         getPlayer().playSound(getPlayer().getLocation(), Sound.LEVEL_UP, 15f, 15f);
 
     }

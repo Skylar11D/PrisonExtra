@@ -2,6 +2,8 @@ package xyz.sk1.bukkit.prisonextra.events.handler.interact;
 
 import com.comphenix.protocol.events.PacketEvent;
 import xyz.sk1.bukkit.prisonextra.Core;
+import xyz.sk1.bukkit.prisonextra.inventory.Menu;
+import xyz.sk1.bukkit.prisonextra.inventory.MenuType;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.player.User;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
@@ -18,7 +20,7 @@ public class NpcInteractHandler {
 
         Utils.LOG.info("interact handled!");
 
-        CompletableFuture.runAsync(user::openMainMenu);
+        CompletableFuture.runAsync(() -> user.openMenu(MenuType.MAIN));
 
     }
 }

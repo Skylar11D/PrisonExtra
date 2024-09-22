@@ -2,8 +2,6 @@ package xyz.sk1.bukkit.prisonextra;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.PacketAdapter;
-import com.comphenix.protocol.events.PacketEvent;
 import lombok.AccessLevel;
 import lombok.Getter;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
@@ -18,7 +16,7 @@ import xyz.sk1.bukkit.prisonextra.internal.storage.PDatabase;
 import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
-import xyz.sk1.bukkit.prisonextra.menu.MenuFactory;
+import xyz.sk1.bukkit.prisonextra.inventory.MenuFactory;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;

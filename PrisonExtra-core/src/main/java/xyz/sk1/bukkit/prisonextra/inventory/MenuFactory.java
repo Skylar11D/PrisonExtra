@@ -1,8 +1,7 @@
-package xyz.sk1.bukkit.prisonextra.menu;
+package xyz.sk1.bukkit.prisonextra.inventory;
 
-import xyz.sk1.bukkit.prisonextra.inventory.Menu;
-import xyz.sk1.bukkit.prisonextra.inventory.MenuType;
-import xyz.sk1.bukkit.prisonextra.inventory.PrisonMenu;
+import xyz.sk1.bukkit.prisonextra.inventory.menus.MinionMenu;
+import xyz.sk1.bukkit.prisonextra.inventory.menus.PrisonMenu;
 
 public class MenuFactory {
 
@@ -13,13 +12,13 @@ public class MenuFactory {
                 return new PrisonMenu(54, "              §c§lPrison");
             }
 
-            /*case MINIONS: {
-                return null;
+            case MINIONS: {
+                return new MinionMenu(27, "              §e§lMinion");
             }
 
             case COSMETICS: {
                 return null;
-            }*/
+            }
 
         }
 

@@ -1,6 +1,9 @@
 package xyz.sk1.bukkit.prisonextra.utils.builder;
 
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_8_R3.NBTTagString;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -73,6 +76,19 @@ public class ItemStackBuilder {
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 
         this.itemStack.setItemMeta(meta);
+
+        return this;
+    }
+
+    public ItemStackBuilder setMetaData(String key, String value){
+
+        net.minecraft.server.v1_8_R3.ItemStack craftItemStack = CraftItemStack.asNMSCopy(this.itemStack);
+
+        NBTTagCompound nbtTag = (craftItemStack.hasTag()) ? craftItemStack.getTag() : new NBTTagCompound();
+
+        nbtTag.set(key, new NBTTagString(value));
+
+        craftItemStack.setTag(nbtTag);
 
         return this;
     }
