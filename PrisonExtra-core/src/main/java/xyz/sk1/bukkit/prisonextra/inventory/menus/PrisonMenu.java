@@ -5,12 +5,9 @@ import org.bukkit.inventory.ItemStack;
 import xyz.sk1.bukkit.prisonextra.inventory.Menu;
 import xyz.sk1.bukkit.prisonextra.utils.builder.ItemStackBuilder;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class PrisonMenu extends Menu {
-
-    private final Map<Integer, ItemStack> MAP = new HashMap<>();
 
     public PrisonMenu(int size, String title) {
         super(size, title);
@@ -53,11 +50,11 @@ public class PrisonMenu extends Menu {
                 )
                 .build();
 
-        MAP.put(20, housing);
-        MAP.put(22, minion);
-        MAP.put(24, cosmetics);
+        strictedMap.put(20, housing);
+        strictedMap.put(22, minion);
+        strictedMap.put(24, cosmetics);
 
-        return MAP;
+        return strictedMap;
     }
 
 }

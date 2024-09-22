@@ -19,12 +19,17 @@ public class SubNpcCreate implements Subcommand {
     public void dispatch(Player sender, String[] args) {
 
         if(!args[0].equalsIgnoreCase("create")) {
-            sender.sendMessage(Utils.colorize("&cInvalid first argument!"));
+            sender.sendMessage(Utils.colorize("&cInvalid argument"));
             return;
         }
 
         if(args[1].isEmpty()) {
             sender.sendMessage(Utils.colorize("&cThe name left empty!"));
+            return;
+        }
+
+        if(args.length < 4){
+            sender.sendMessage(Utils.colorize("&cInvalid arguments"));
             return;
         }
 

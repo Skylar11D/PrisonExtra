@@ -3,6 +3,7 @@ package xyz.sk1.bukkit.prisonextra.inventory;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftInventoryCustom;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -13,11 +14,11 @@ import java.util.Set;
 
 public abstract class Menu extends CraftInventoryCustom {
 
-    Set<Integer> exceptionSlots;
+    private final Set<Integer> exceptionSlots = new HashSet<>();;
+    protected final Map<Integer, ItemStack> strictedMap = new HashMap<>();
 
     public Menu(int size, String title) {
         super(null, size, title);
-        exceptionSlots = new HashSet<>();
     }
 
 

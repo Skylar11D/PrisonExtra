@@ -22,6 +22,7 @@ public class Utils {
     public static boolean hasTag(ItemStack item, String key){
 
         net.minecraft.server.v1_8_R3.ItemStack nmsCopy = CraftItemStack.asNMSCopy(item);
+        Utils.LOG.info("its nms copy: "+nmsCopy.getTag());
 
         if(!nmsCopy.hasTag())
             return false;
