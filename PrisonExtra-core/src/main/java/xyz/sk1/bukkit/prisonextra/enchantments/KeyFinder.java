@@ -41,6 +41,6 @@ public class KeyFinder extends Enchantment {
 
     @Override
     public boolean canEnchantItem(ItemStack itemStack) {
-        return false;
+        return true;
     }
 }

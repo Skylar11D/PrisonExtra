@@ -12,12 +12,8 @@ public class Miner extends Minion {
 
     // This is the actual personal miner for each player (experimental)
 
-    private final Prisoner prisoner;
-
-    public Miner(Location location, User player) {
+    public Miner(Location location) {
         super(location.getWorld());
-
-        this.prisoner = player;
 
         setState(new Locked()); //default state
 
@@ -25,9 +21,11 @@ public class Miner extends Minion {
         miner.setMaxHealth(999);
         this.setHealth(500);
         this.getWorld().addEntity(this);
+        this.setCustomNameVisible(true);
+        this.setCustomName("Miner");
+        this.setInvisible(false);
 
         this.setPosition(location.getX(), location.getY(), location.getZ());
-        this.setSneaking(true);
         this.persistent = true;
 
         this.goalSelector.a(0, new PathfinderGoalMoveToStone(this, 1.0));
@@ -37,7 +35,7 @@ public class Miner extends Minion {
 
     @Override
     public void command() {
-        getState().perform(prisoner, this);
+        //getState().perform(prisoner, this);
     }
 
     @Override

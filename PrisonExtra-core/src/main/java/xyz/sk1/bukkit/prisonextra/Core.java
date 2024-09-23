@@ -4,6 +4,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import lombok.AccessLevel;
 import lombok.Getter;
+import xyz.sk1.bukkit.prisonextra.enchantments.manager.EnchantmentManager;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.NpcManager;
 import xyz.sk1.bukkit.prisonextra.events.listeners.PlayerInteractListener;
@@ -41,7 +42,7 @@ public class Core extends Base {
 
     private PluginManager pluginManager;
     @Getter(AccessLevel.PRIVATE)
-    private Manager userManager;
+    private Manager userManager, enchantmentManager;
     @Getter(AccessLevel.PRIVATE)
     private NpcManager<?> fakeplayerManager;
     @Getter(AccessLevel.PRIVATE)
@@ -89,6 +90,8 @@ public class Core extends Base {
 
         this.userManager = new UserManager((FakePlayerManager) fakeplayerManager);
         this.regionManager = new HouseManager();
+
+        this.enchantmentManager = new EnchantmentManager(pluginManager);
 
         this.managerRegistry.register(userManager);
         this.managerRegistry.register(regionManager);

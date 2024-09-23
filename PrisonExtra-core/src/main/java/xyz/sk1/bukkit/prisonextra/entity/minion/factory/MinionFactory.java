@@ -12,10 +12,10 @@ import java.util.Optional;
 
 public class MinionFactory {
 
-    public Optional<Minion> createMinion(MinionType type, Location location, Prisoner prisoner) {
+    public Optional<Minion> createMinion(MinionType type, Location location) {
 
         if (Objects.requireNonNull(type) == MinionType.MINER) {
-            return Optional.of(new Miner(location, (User) prisoner));
+            return Optional.of(new Miner(location));
         }
 
         return Optional.empty();

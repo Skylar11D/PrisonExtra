@@ -14,6 +14,12 @@ tasks.compileJava {
 group = "xyz.sk1.bukkit.prisonextra"
 version = "1.0-SNAPSHOT"
 
+apply {
+    plugin("java")
+    plugin("com.github.johnrengelman.shadow")
+}
+
+
 subprojects {
 
     apply {
