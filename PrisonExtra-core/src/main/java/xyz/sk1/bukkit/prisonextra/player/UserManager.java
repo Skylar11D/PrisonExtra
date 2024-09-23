@@ -40,7 +40,7 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     @Override
     public User get(Player player) {
         return (User) getPrisoners().keySet().stream().filter(
-                p -> p.getPlayer() == player).findFirst().orElse(null);
+                p -> p.getHandle() == player).findFirst().orElse(null);
     }
 
     public NpcObserver[] toObservers(){
@@ -57,14 +57,14 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     public void imprison(Player player) {
         getPrisoners().put(new User() {
             @Override
-            public Player getPlayer() {
+            public Player getHandle() {
                 return player;
             }
         }, Collections.emptyList());
 
         this.fakePlayerManager.registerObserver(new User() {
             @Override
-            public Player getPlayer() {
+            public Player getHandle() {
                 return player;
             }
         });

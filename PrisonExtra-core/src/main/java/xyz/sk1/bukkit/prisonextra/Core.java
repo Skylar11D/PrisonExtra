@@ -7,7 +7,7 @@ import lombok.Getter;
 import xyz.sk1.bukkit.prisonextra.enchantments.manager.EnchantmentManager;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.NpcManager;
-import xyz.sk1.bukkit.prisonextra.events.listeners.PlayerInteractListener;
+import xyz.sk1.bukkit.prisonextra.events.listeners.packets.PlayerInteractPacketListener;
 import xyz.sk1.bukkit.prisonextra.internal.PluginManager;
 import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
@@ -107,7 +107,7 @@ public class Core extends Base {
 
         loadCaches();
 
-        protocolManager.addPacketListener(new PlayerInteractListener());
+        protocolManager.addPacketListener(new PlayerInteractPacketListener());
         this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.events.listeners");
         this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");
 
@@ -120,6 +120,7 @@ public class Core extends Base {
                 this.userManager.start();
                 this.regionManager.start();
                 this.fakeplayerManager.start();
+                this.enchantmentManager.start();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -130,6 +131,7 @@ public class Core extends Base {
     public void fini() {
 
         this.fakeplayerManager.finish();
+        this.enchantmentManager.finish();
 
         try {
             Utils.LOG.info("Closing any connection to the database..");
@@ -140,19 +142,18 @@ public class Core extends Base {
 
     }
 
-    public static Core getInstance(){
+    public static Core getInstance() {
 
-        if(instance != null){
+        if (instance != null) {
             return instance;
         }
 
         synchronized (Core.class) {
-            if(instance == null){
+            if (instance == null) {
                 instance = new Core();
             }
         }
 
-        return instance;
+        return null;
     }
-
 }

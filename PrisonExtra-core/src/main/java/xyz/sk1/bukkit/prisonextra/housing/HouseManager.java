@@ -2,6 +2,7 @@ package xyz.sk1.bukkit.prisonextra.housing;
 
 import org.bukkit.Location;
 import xyz.sk1.bukkit.prisonextra.Core;
+import xyz.sk1.bukkit.prisonextra.housing.factory.RegionFactory;
 import xyz.sk1.bukkit.prisonextra.internal.cache.Cache;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.region.Region;
@@ -27,11 +28,14 @@ public final class HouseManager implements RegionManager<House> {
     private String tempName;
     private String wordName;
 
-    Cache<String, Region> cachedRegions;
+    private Cache<String, Region> cachedRegions;
+    private RegionFactory regionFactory;
+
 
     @SuppressWarnings("unchecked")
     public HouseManager(){
         this.cachedRegions = Core.getInstance().getLruCacheRegistry().getCache("regions");
+        this.regionFactory = new RegionFactory();
     }
 
     @Override
@@ -52,6 +56,11 @@ public final class HouseManager implements RegionManager<House> {
         }
 
         return Optional.empty();
+    }
+
+    @Override
+    public House createHouse(Location corner1, Location corner2, String ownerName) {
+        return regionFactory.createRegion(corner1, corner2, ownerName);
     }
 
     @Override

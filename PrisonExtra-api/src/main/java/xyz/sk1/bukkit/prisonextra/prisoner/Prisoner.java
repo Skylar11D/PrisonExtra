@@ -6,7 +6,7 @@ import xyz.sk1.bukkit.prisonextra.inventory.MenuType;
 
 public interface Prisoner {
 
-    Player getPlayer();
+    Player getHandle();
 
     default Minion getMiner(Minion miner){return null;}
 

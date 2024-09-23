@@ -22,4 +22,6 @@ public interface RegionManager<R extends Region> extends Manager {
      */
     Optional<R> getRegionByLocation(Location location);
 
+    R createHouse(Location corner1, Location corner2, String ownerName);
+
 }
