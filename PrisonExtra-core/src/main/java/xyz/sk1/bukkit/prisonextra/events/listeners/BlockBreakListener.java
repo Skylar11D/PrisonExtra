@@ -1,5 +1,6 @@
 package xyz.sk1.bukkit.prisonextra.events.listeners;
 
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import xyz.sk1.bukkit.prisonextra.events.handler.block.KeyFindingHandler;
 import xyz.sk1.bukkit.prisonextra.listeners.BaseListener;
@@ -12,4 +13,10 @@ public class BlockBreakListener extends BaseListener {
     public BlockBreakListener() {
         this.keyfindingHandler = new KeyFindingHandler();
     }
+
+    @EventHandler
+    public void onBreak(BlockBreakEvent event){
+
+    }
+
 }
