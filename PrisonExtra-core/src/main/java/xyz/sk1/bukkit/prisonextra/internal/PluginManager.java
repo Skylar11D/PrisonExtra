@@ -52,7 +52,7 @@ public class PluginManager {
                 Core.getInstance().getCommand(executor.getAttributes().name())
                         .setExecutor(executor);
             } finally {
-                Utils.LOG.info(command.getDeclaredAnnotation(Attributes.class).name()+" executor was registered");
+                Utils.LOG.info( "/"+ command.getDeclaredAnnotation(Attributes.class).name()+" executor was registered");
             }
         }
     }
@@ -76,7 +76,7 @@ public class PluginManager {
                      NoSuchMethodException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             } finally {
-                Utils.LOG.info(enchantment.getName() + " enchantment was registered");
+                Utils.LOG.info(enchantment.getSimpleName() + " enchantment was registered");
             }
         }
     }

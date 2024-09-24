@@ -8,3 +8,5 @@ softdepend: [ProtocolLib]
 commands:
   npc:
   pdebug:
+  house:
+  keyfinder:

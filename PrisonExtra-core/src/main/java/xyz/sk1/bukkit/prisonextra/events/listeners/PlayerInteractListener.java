@@ -11,7 +11,7 @@ public class PlayerInteractListener extends BaseListener {
     private final PrisonEventHandler<PlayerInteractEvent> wandselection;
 
 
-    public PlayerInteractListener(PrisonEventHandler<?> wandselection) {
+    public PlayerInteractListener() {
         this.wandselection = new WandSelectionHandler();
     }
 

@@ -90,6 +90,8 @@ public class ItemStackBuilder {
 
         craftItemStack.setTag(nbtTag);
 
+        this.itemStack = CraftItemStack.asBukkitCopy(craftItemStack);
+
         return this;
     }
 

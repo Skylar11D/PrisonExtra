@@ -28,7 +28,7 @@ public class InventoryClickListener extends BaseListener {
         if(event.getClickedInventory().getName() == "               §c§lPrison")
             event.setCancelled(true);
 
-        if (itemStack.getItemMeta().getDisplayName() == " " && itemStack.getType() == Material.STAINED_GLASS_PANE)
+        if (Utils.getTag(itemStack, "menu") == "background")
             event.setCancelled(true);
 
         if (itemStack.getItemMeta().getDisplayName() == "§a§lHousing" && itemStack.getType() == Material.WOOD_DOOR){

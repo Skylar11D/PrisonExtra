@@ -42,11 +42,10 @@ subprojects {
 
         implementation("org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT")
         implementation("org.spigotmc:minecraft-server:1.8.8-SNAPSHOT")
-        implementation("org.slf4j:slf4j-api:1.7.25")
+        implementation("org.slf4j:slf4j-simple:1.7.5")
 
         implementation("mysql:mysql-connector-java:8.0.33")
         implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
-        implementation("dev.triumphteam:triumph-gui:3.1.10")
         implementation("com.github.patheloper.pathetic:pathetic-mapping:3.1")
 
         annotationProcessor("org.projectlombok:lombok:1.18.32")
@@ -60,7 +59,7 @@ subprojects {
         archiveVersion.set(this.project.version.toString())
 
         var classifier: String
-        if(this.project.name == "PrisonExtra-api"){
+        if(project.name == "PrisonExtra-api"){
             classifier = "api"
         } else {
             classifier = "core"

@@ -33,7 +33,7 @@ tasks.withType<ProcessResources> {
     }
 }
 
-tasks.withType<ShadowJar>{
+/*tasks.withType<ShadowJar>{
     minimize()
 
     archiveBaseName.set(rootProject.name)
@@ -47,7 +47,7 @@ tasks.withType<ShadowJar>{
     }
 
     archiveClassifier.set(classifier)
-}
+}*/
 
 tasks.named("assemble"){
     dependsOn("ShadowJar")

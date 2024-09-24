@@ -66,6 +66,8 @@ public class Core extends Base {
     public void init() {
         instance = this;
 
+        long time = System.currentTimeMillis();
+
         Utils.LOG.warning("This plugin only supports MySQL 5.7 service and above");
 
         Utils.LOG.info("Creating necessary caches..");
@@ -111,6 +113,7 @@ public class Core extends Base {
         this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.events.listeners");
         this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");
 
+        Utils.LOG.info("plugin loaded in "+(System.currentTimeMillis()-time)+"ms ");
 
     }
 
