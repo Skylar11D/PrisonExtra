@@ -20,6 +20,8 @@ public abstract class Minion extends EntitySkeleton {
 
     public abstract void command();
 
+    public abstract void follow();
+
     public abstract MinionType getType();
 
 }

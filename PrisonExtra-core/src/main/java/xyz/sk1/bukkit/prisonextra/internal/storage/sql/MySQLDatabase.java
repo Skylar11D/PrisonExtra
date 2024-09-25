@@ -1,6 +1,8 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage.sql;
 
 import com.google.gson.JsonObject;
+import org.bukkit.Bukkit;
+import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.JsonConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandler;
@@ -39,30 +41,19 @@ public class MySQLDatabase extends DatabaseConnector {
 
             String connectionUrl = "jdbc:mysql://"+hostname+":"+port+"/"+database+"?autoReconnect="+autoconnect;
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(connectionUrl, username, passphrase);
 
-            Utils.LOG.info("Checking tables specified in file: database.json");
+            JsonObject table = databaseObj.get("table").getAsJsonObject();
+            String regions = table.get("regions").getAsString();
+            String minions = table.get("minions").getAsString();
+            String prisoners = table.get("prisoners").getAsString();
 
-            JsonObject db = service.getAsJsonObject("database");
-            JsonObject table = db.getAsJsonObject("table");
-            JsonObject region = table.getAsJsonObject("regions");
-            JsonObject minions = table.getAsJsonObject("minions");
-            JsonObject prisoners = table.getAsJsonObject("prisoners");
+            validateRegionTable(regions);
+            validateMinionTable(minions);
+            validatePrisonersTable(prisoners);
 
-            String rName = region.getAsString();
-
-            String mName = minions.getAsString();
-
-            String pName = prisoners.getAsString();
-
-            Utils.LOG.info("[DEBUG] region table: " + rName);
-            Utils.LOG.info("[DEBUG] minions table: " + mName);
-            Utils.LOG.info("[DEBUG] player table: " + pName);
-
-            validateRegionTable(rName);
-            validateMinionTable(mName);
-            validatePrisonersTable(pName);
+            Bukkit.getServer().getConsoleSender().sendMessage(Utils.colorize("&a&lCONNECTED TO " + database + " DATABASE"));
 
         } catch (ClassNotFoundException | RuntimeException | SQLException e) {
             e.printStackTrace();
@@ -88,8 +79,7 @@ public class MySQLDatabase extends DatabaseConnector {
     private void validateRegionTable(String regionTable){
         try {
             String query = "CREATE TABLE IF NOT EXISTS " + regionTable +
-                    " (owner VARCHAR(32), world VARCHAR(32), denyAll BOOLEAN ,deniedPlayers JSON, " +
-                    "x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+                    " (Owner varchar(32), World varchar(32), DenyAll tinyint(1), DeniedPlayers json, x1 double(8, 3), y1 double(8, 3), z1 double(8, 3), x2 double(8, 3), y2 double(8, 3), z2 double(8, 3))";
 
             Statement statement = getConnection().createStatement();
 
@@ -121,7 +111,7 @@ public class MySQLDatabase extends DatabaseConnector {
     private void validatePrisonersTable(String pName) {
         try {
             String query = "CREATE TABLE IF NOT EXISTS " + pName +
-                    "(prisoner VARCHAR(32), x1 DOUBLE, y1 DOUBLE, z1 DOUBLE, x2, DOUBLE, y2 DOUBLE, z2 DOUBLE)";
+                    "(prisoner VARCHAR(32), x1 double(8, 3), y1 double(8, 3), z1 double(8, 3), x2 double(8, 3), y2 double(8, 3), z2 double(8, 3))";
 
             Statement statement = getConnection().createStatement();
 

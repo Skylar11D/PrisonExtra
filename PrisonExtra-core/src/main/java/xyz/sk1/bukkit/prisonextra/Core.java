@@ -113,6 +113,7 @@ public class Core extends Base {
         loadCaches();
 
         protocolManager.addPacketListener(new PlayerInteractPacketListener());
+
         this.pluginManager.registerListeners("xyz.sk1.bukkit.prisonextra.events.listeners");
         this.pluginManager.registerExecutors("xyz.sk1.bukkit.prisonextra.executors");
 
