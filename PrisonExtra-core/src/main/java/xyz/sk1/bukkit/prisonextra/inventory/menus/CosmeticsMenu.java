@@ -8,4 +8,6 @@ public class CosmeticsMenu extends Menu {
         super(size, title);
     }
 
+
+
 }

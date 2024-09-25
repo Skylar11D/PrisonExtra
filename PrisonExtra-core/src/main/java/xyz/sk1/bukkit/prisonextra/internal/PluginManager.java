@@ -24,9 +24,12 @@ public class PluginManager {
         Reflections reflections = new Reflections(packageName);
         Set<Class<? extends BaseListener>> listeners = reflections.getSubTypesOf(BaseListener.class);
 
+        Utils.LOG.info("\nRegistering events listeners..\n");
+
         for (Class<? extends BaseListener> listener : listeners){
 
             try {
+
                 Bukkit.getPluginManager().registerEvents(
                         listener.getDeclaredConstructor().newInstance(), Core.getInstance()
                 );
@@ -41,14 +44,19 @@ public class PluginManager {
 
     @SneakyThrows
     public void registerExecutors(String packageName){
+
         Reflections reflections = new Reflections(packageName);
         Set<Class<? extends Executor>> subTypes = reflections.getSubTypesOf(Executor.class);
+
+        Utils.LOG.info("\nRegistering commands executors..\n");
 
         for (Class<? extends Executor> command : subTypes){
 
             Executor executor = command.newInstance();
 
             try {
+
+
                 Core.getInstance().getCommand(executor.getAttributes().name())
                         .setExecutor(executor);
             } finally {
@@ -58,13 +66,17 @@ public class PluginManager {
     }
 
     public void registerEnchantments(String packageName, EnchantmentManager enchantmentManager){
+
         Reflections reflections = new Reflections(packageName);
         Set<Class<? extends Enchantment>> subTypes = reflections.getSubTypesOf(Enchantment.class);
+
+        Utils.LOG.info("\nRegistering enchantments..\n");
 
         int trackedIds = 0;
 
         for (Class<? extends Enchantment> enchantment : subTypes){
             try {
+
 
                 Enchantment enchant = enchantment
                         .getDeclaredConstructor(int.class)

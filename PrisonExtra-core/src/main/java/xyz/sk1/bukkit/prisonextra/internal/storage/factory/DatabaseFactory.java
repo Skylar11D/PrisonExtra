@@ -1,8 +1,10 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage.factory;
 
-import xyz.sk1.bukkit.prisonextra.internal.storage.PDatabase;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
+import xyz.sk1.bukkit.prisonextra.internal.configuration.YamlConfigurationHandler;
+import xyz.sk1.bukkit.prisonextra.internal.storage.DatabaseConnector;
 import xyz.sk1.bukkit.prisonextra.internal.storage.sql.MySQLDatabase;
-import xyz.sk1.bukkit.prisonextra.internal.storage.mongo.MongoPDatabase;
+import xyz.sk1.bukkit.prisonextra.internal.storage.mongo.MongoDatabase;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 
@@ -13,15 +15,15 @@ import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 public class DatabaseFactory extends AbstractDatabaseFactory {
 
     @Override
-    public PDatabase createDatabase(DatabaseType type) {
+    public DatabaseConnector createDatabase(DatabaseType type, ConfigurationHandler configurationHandler) {
 
         switch (type) {
             case MYSQL: {
-                return new MongoPDatabase();
+                return new MySQLDatabase(configurationHandler);
             }
 
             case MONGODB: {
-                return new MySQLDatabase();
+                return new MongoDatabase();
             }
         }
 

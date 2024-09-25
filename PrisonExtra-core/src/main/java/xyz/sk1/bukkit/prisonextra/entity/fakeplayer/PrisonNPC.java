@@ -37,8 +37,6 @@ public class PrisonNPC extends NPC {
         if(super.getSignature() != null && super.getTexture() != null)
             gameProfile.getProperties().put("textures", new Property("textures", super.getTexture(), super.getSignature()));
 
-        Utils.LOG.info("{DEBUG] profile: "+gameProfile.getProperties().toString()+" (the new)");
-
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
         super.setNpc(new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager));

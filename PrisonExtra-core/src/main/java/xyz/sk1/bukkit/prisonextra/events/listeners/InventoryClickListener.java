@@ -31,17 +31,17 @@ public class InventoryClickListener extends BaseListener {
         if (Utils.getTag(itemStack, "menu") == "background")
             event.setCancelled(true);
 
-        if (itemStack.getItemMeta().getDisplayName() == "§a§lHousing" && itemStack.getType() == Material.WOOD_DOOR){
+        if (Utils.getTag(itemStack, "menu") == "housing"){
             event.setCancelled(true);
             user.openMenu(MenuType.HOUSING);
         }
 
-        if (itemStack.getItemMeta().getDisplayName() == "§e§lMinion" && itemStack.getType() == Material.STONE_PICKAXE){
+        if (Utils.getTag(itemStack, "menu") == "minion"){
             event.setCancelled(true);
             user.openMenu(MenuType.MINIONS);
         }
 
-        if (itemStack.getItemMeta().getDisplayName() == "§d§lCosmetics" && itemStack.getType() == Material.BLAZE_POWDER){
+        if (Utils.getTag(itemStack, "menu") == "cosmetics"){
             event.setCancelled(true);
             user.openMenu(MenuType.COSMETICS);
         }

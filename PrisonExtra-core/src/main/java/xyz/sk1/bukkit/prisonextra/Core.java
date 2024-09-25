@@ -13,7 +13,7 @@ import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationHandlerFactory;
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
-import xyz.sk1.bukkit.prisonextra.internal.storage.PDatabase;
+import xyz.sk1.bukkit.prisonextra.internal.storage.DatabaseConnector;
 import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
@@ -52,7 +52,7 @@ public class Core extends Base {
     private ManagerRegistry managerRegistry;
     private LRUCacheRegistry lruCacheRegistry;
 
-    private PDatabase PDatabase;
+    private DatabaseConnector databaseConnector;
 
     private AbstractDatabaseFactory abstractDatabaseFactory;
     @Getter(AccessLevel.PRIVATE)
@@ -76,8 +76,11 @@ public class Core extends Base {
         lruCacheRegistry.createCache("fakeplayers", 4);
 
 
-        this.saveResource("settings.yml", false);
-        this.saveResource("database.json", false);
+        if(!(new File(getDataFolder(), "settings.yml").exists()))
+            this.saveResource("settings.yml", false);
+
+        if(!(new File(getDataFolder(), "database.json").exists()))
+            this.saveResource("database.json", false);
 
         configurationFactory = new ConfigurationHandlerFactory();
         settings = configurationFactory.createConfigHandler(new File(getDataFolder(), "settings.yml")).orElse(null);
@@ -103,9 +106,9 @@ public class Core extends Base {
         this.menuFactory = new MenuFactory();
 
         abstractDatabaseFactory = new DatabaseFactory();
-        PDatabase = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL);
+        databaseConnector = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL, databasecfg);
 
-        PDatabase.connect();
+        databaseConnector.connect();
 
         loadCaches();
 
@@ -138,7 +141,7 @@ public class Core extends Base {
 
         try {
             Utils.LOG.info("Closing any connection to the database..");
-            PDatabase.close();
+            databaseConnector.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

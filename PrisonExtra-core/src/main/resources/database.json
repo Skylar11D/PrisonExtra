@@ -1,13 +1,14 @@
 {
   "service": {
-    "hostname": "example.com",
+    "hostname": "localhost",
     "port": 3306,
-    "username": "Fahad",
-    "passphrase": "123Abc321",
+    "username": "skylar",
+    "passphrase": "211666",
 
     "database": {
 
-      "name": "MarsDB",
+      "name": "cosmic",
+
       "table": {
         "regions": "regions",
         "minions": "minions",
