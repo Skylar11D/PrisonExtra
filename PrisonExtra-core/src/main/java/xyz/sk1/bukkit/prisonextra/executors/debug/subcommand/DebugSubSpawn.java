@@ -9,6 +9,7 @@ import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
 import xyz.sk1.bukkit.prisonextra.entity.minion.factory.MinionFactory;
 import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
 import xyz.sk1.bukkit.prisonextra.executors.Subcommand;
+import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 import xyz.sk1.bukkit.prisonextra.utils.CustomEntityRegistry;
 
@@ -25,33 +26,7 @@ public class DebugSubSpawn implements Subcommand {
         }
 
         MinionFactory minionFactory = new MinionFactory();
-        Minion minion = minionFactory.createMinion(MinionType.MINER, sender.getLocation()).get();
-
-        try {
-            // Get the 'c' and 'd' maps from the EntityTypes class (these store the entity mappings)
-            Field c = EntityTypes.class.getDeclaredField("c");
-            Field d = EntityTypes.class.getDeclaredField("d");
-            c.setAccessible(true);
-            d.setAccessible(true);
-
-            Map<String, Class<? extends Entity>> cMap = (Map<String, Class<? extends Entity>>) c.get(null);
-            Map<Class<? extends Entity>, String> dMap = (Map<Class<? extends Entity>, String>) d.get(null);
-
-            // Unregister the default zombie class
-            cMap.remove("Skeleton");
-            dMap.remove(EntitySkeleton.class);
-
-            // Register the custom entity with the same name
-            cMap.put("Skeleton", EntitySkeleton.class);
-            dMap.put(Miner.class, "Skeleton");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        sender.sendMessage(Utils.colorize("&6entity spawned"));
-        WorldServer worldServer = ((CraftWorld)sender.getWorld()).getHandle();
-        worldServer.addEntity(minion);
+        Minion minion = minionFactory.createMinion(MinionType.MINER, sender.getLocation(), (Prisoner) sender).get();
 
         Utils.LOG.info("entity type: " + EntityTypes.b("Skeleton"));
 

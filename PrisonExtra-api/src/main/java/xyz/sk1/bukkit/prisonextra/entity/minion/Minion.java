@@ -13,6 +13,10 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 public abstract class Minion extends EntitySkeleton implements EntityOwnable {
 
     @Getter

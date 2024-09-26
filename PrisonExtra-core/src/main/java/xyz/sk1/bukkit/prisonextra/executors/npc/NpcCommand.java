@@ -1,12 +1,15 @@
 package xyz.sk1.bukkit.prisonextra.executors.npc;
 
 import org.bukkit.entity.Player;
+import xyz.sk1.bukkit.prisonextra.Core;
+import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.executors.Attributes;
 import xyz.sk1.bukkit.prisonextra.executors.Executor;
 import xyz.sk1.bukkit.prisonextra.executors.Subcommand;
 import xyz.sk1.bukkit.prisonextra.executors.npc.subcommands.SubNpcCreate;
 import xyz.sk1.bukkit.prisonextra.executors.npc.subcommands.SubNpcRemove;
 import xyz.sk1.bukkit.prisonextra.executors.npc.subcommands.SubNpcStareMode;
+import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 @Attributes(name = "npc", requiresPlayer = true, permission = "marsmc.admin")

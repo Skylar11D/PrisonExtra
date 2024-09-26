@@ -3,6 +3,10 @@ package xyz.sk1.bukkit.prisonextra.entity.minion.pathfinder;
 import net.minecraft.server.v1_8_R3.*;
 import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
 
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
+
 public class PathfinderGoalFollowOwner extends PathfinderGoal {
 
     private Minion d /*obvious*/;
@@ -105,7 +109,7 @@ public class PathfinderGoalFollowOwner extends PathfinderGoal {
         for(int var4 = 0; var4 <= 4; ++var4) {
             for(int var5 = 0; var5 <= 4; ++var5) {
                 if ((var4 < 1 || var5 < 1 || var4 > 3 || var5 > 3) && World.a(this.a, new BlockPosition(var1 + var4, var3 - 1, var2 + var5)) && this.a(new BlockPosition(var1 + var4, var3, var2 + var5)) && this.a(new BlockPosition(var1 + var4, var3 + 1, var2 + var5))) {
-                    this.d.setPositionRotation((double)((float)(var1 + var4) + 0.5F), (double)var3, (double)((float)(var2 + var5) + 0.5F), this.d.yaw, this.d.pitch);
+                    this.d.setPositionRotation((float)(var1 + var4) + 0.5F, var3, (float)(var2 + var5) + 0.5F, this.d.yaw, this.d.pitch);
                     this.g.n();
                     return;
                 }

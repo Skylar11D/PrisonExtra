@@ -1,11 +1,15 @@
 package xyz.sk1.bukkit.prisonextra.entity.minion;
 
+import net.minecraft.server.v1_8_R3.PathfinderGoalRandomLookaround;
 import org.bukkit.Location;
 import org.bukkit.entity.Skeleton;
-import xyz.sk1.bukkit.prisonextra.entity.minion.pathfinder.PathfinderGoalFollowOwner;
 import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 import xyz.sk1.bukkit.prisonextra.entity.minion.states.Locked;
+
+/**
+ * @author <a href="https://github.com/skylar11d">skylar</a>
+ */
 
 public class Miner extends Minion {
 
@@ -37,8 +41,7 @@ public class Miner extends Minion {
         this.persistent = true;
 
         //experimental
-        //this.goalSelector.a(0, new PathfinderGoalMoveToStone(this, 1.0));
-        //this.goalSelector.a(1, new PathfinderGoalFollowOwner(this, 2, 2, 5));
+        //this.setDefaultMinerPathfinders();
 
     }
 
@@ -50,6 +53,12 @@ public class Miner extends Minion {
     @Override
     public void follow() {
 
+    }
+
+    private void setDefaultMinerPathfinders(){
+        //this.goalSelector.a(0, new PathfinderGoalMoveToStone(this, 1.0));
+        //this.goalSelector.a(1, new PathfinderGoalFollowOwner(this, 2, 2, 5));
+        //this.goalSelector.a(2, new PathfinderGoalRandomLookaround(this));
     }
 
     @Override

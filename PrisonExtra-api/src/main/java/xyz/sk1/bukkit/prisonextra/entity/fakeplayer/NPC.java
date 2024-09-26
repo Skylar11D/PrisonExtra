@@ -1,36 +1,26 @@
 package xyz.sk1.bukkit.prisonextra.entity.fakeplayer;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.type.NonPlayerType;
 
+@Getter
 public abstract class NPC {
 
-    @Getter
-    @Setter
-    private EntityPlayer npc;
-    @Getter
+    @Setter()
+    private EntityPlayer handle;
     private String name;
 
-    @Getter
     private String texture;
-    @Getter
     private String signature;
 
-    @Getter
     private Location position;
 
-    @Getter
     protected PacketPlayOutPlayerInfo infoPacket;
-    @Getter
     protected PacketPlayOutNamedEntitySpawn spawnPacket;
-    @Getter
     protected PacketPlayOutEntityMetadata metadata;
-    @Getter
     protected PacketPlayOutEntityDestroy destroy;
 
     @Getter @Setter

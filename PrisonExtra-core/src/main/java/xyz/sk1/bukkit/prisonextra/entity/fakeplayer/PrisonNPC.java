@@ -39,8 +39,8 @@ public class PrisonNPC extends NPC {
 
         PlayerInteractManager interactManager = new PlayerInteractManager(serverWorld);
 
-        super.setNpc(new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager));
-        super.setId(getNpc().getId());
+        super.setHandle(new EntityPlayer(minecraftServer, serverWorld, gameProfile, interactManager));
+        super.setId(getHandle().getId());
 
         //DataWatcher watcher = getNpc().getDataWatcher();
         //watcher.register(new DataWatcherObject<>(10, DataWatcherRegistry.a), (byte) (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x40));
@@ -48,14 +48,19 @@ public class PrisonNPC extends NPC {
 
         DataWatcher dw = new DataWatcher(null);
         dw.a(10, (byte) (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x40));
-        PacketPlayOutEntityMetadata metaPacket = new PacketPlayOutEntityMetadata(getNpc().getId(), dw, true);
+        PacketPlayOutEntityMetadata metaPacket = new PacketPlayOutEntityMetadata(getHandle().getId(), dw, true);
 
-        super.getNpc().setPosition(getPosition().getX(), getPosition().getY(), getPosition().getZ());
+        super.getHandle().setPosition(getPosition().getX(), getPosition().getY(), getPosition().getZ());
+
+
+        super.getHandle().setCustomName(Utils.colorize("&c&lPrison \n&7(Right-Click)"));
+        super.getHandle().setCustomNameVisible(true);
+
 
         PacketPlayOutPlayerInfo info = new PacketPlayOutPlayerInfo(
-                PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, super.getNpc());
+                PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, getHandle());
 
-        PacketPlayOutNamedEntitySpawn spawnEntity = new PacketPlayOutNamedEntitySpawn(getNpc());
+        PacketPlayOutNamedEntitySpawn spawnEntity = new PacketPlayOutNamedEntitySpawn(getHandle());
 
         PacketPlayOutEntityDestroy entityRemoval = new PacketPlayOutEntityDestroy(getId());
 
