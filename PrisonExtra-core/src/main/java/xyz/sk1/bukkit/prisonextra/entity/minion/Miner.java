@@ -2,10 +2,9 @@ package xyz.sk1.bukkit.prisonextra.entity.minion;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Skeleton;
+import xyz.sk1.bukkit.prisonextra.entity.minion.pathfinder.PathfinderGoalFollowOwner;
 import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
-import xyz.sk1.bukkit.prisonextra.player.User;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
-import xyz.sk1.bukkit.prisonextra.entity.minion.pathfinder.PathfinderGoalMoveToStone;
 import xyz.sk1.bukkit.prisonextra.entity.minion.states.Locked;
 
 public class Miner extends Minion {
@@ -37,7 +36,9 @@ public class Miner extends Minion {
         this.setPosition(location.getX(), location.getY(), location.getZ());
         this.persistent = true;
 
-        this.goalSelector.a(0, new PathfinderGoalMoveToStone(this, 1.0));
+        //experimental
+        //this.goalSelector.a(0, new PathfinderGoalMoveToStone(this, 1.0));
+        //this.goalSelector.a(1, new PathfinderGoalFollowOwner(this, 2, 2, 5));
 
     }
 

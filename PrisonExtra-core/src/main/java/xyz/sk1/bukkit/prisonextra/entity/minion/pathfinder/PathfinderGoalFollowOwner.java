@@ -5,31 +5,25 @@ import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
 
 public class PathfinderGoalFollowOwner extends PathfinderGoal {
 
-    //Entity
-    private Minion d;
-    //Owner or Summoner
-    private EntityLiving e;
-    World a;
-    private double f;
-    private NavigationAbstract g;
-    private int h;
-    float b;
-    float c;
-    private boolean i;
+    private Minion d /*obvious*/;
+    private EntityLiving e /*Owner or Summoner*/;
+    World a /*also obvious*/;
+    private double f /*speed*/;
+    private NavigationAbstract g /*navigation*/;
+    private int h /*timeToRecalculatePath*/;
+    float b /*maximum distance*/;
+    float c /*minimum distance*/;
+    private boolean i /*teleportToOwner*/;
 
-    /*
-    * Navig
-    * */
-
-    public PathfinderGoalFollowOwner(Minion var1, double var2, float var4, float var5) {
-        this.d = var1;
-        this.a = var1.world;
-        this.f = var2;
-        this.g = var1.getNavigation();
-        this.c = var4;
-        this.b = var5;
+    public PathfinderGoalFollowOwner(Minion minion, double speed, float minimumDistance, float maximumDistance) {
+        this.d = minion;
+        this.a = minion.world;
+        this.f = speed;
+        this.g = minion.getNavigation();
+        this.c = minimumDistance;
+        this.b = maximumDistance;
         this.a(3);
-        if (!(var1.getNavigation() instanceof Navigation)) {
+        if (!(minion.getNavigation() instanceof Navigation)) {
             throw new IllegalArgumentException("Unsupported mob type for FollowOwnerGoal");
         }
     }
