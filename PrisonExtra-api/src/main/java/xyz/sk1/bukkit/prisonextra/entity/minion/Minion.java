@@ -1,20 +1,29 @@
 package xyz.sk1.bukkit.prisonextra.entity.minion;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.server.v1_8_R3.EntityLiving;
+import net.minecraft.server.v1_8_R3.EntityOwnable;
 import net.minecraft.server.v1_8_R3.EntitySkeleton;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
+import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 
-public abstract class Minion extends EntitySkeleton {
+public abstract class Minion extends EntitySkeleton implements EntityOwnable {
 
     @Getter
     @Setter
     private MinionState state;
+    @Getter(AccessLevel.PRIVATE)
+    private EntityLiving owner;
 
-    public Minion(World world) {
+    public Minion(World world, Prisoner prisoner) {
         super(((CraftWorld)world).getHandle());
+        this.owner = ((CraftPlayer)prisoner.getHandle()).getHandle();
 
     }
 
@@ -22,6 +31,17 @@ public abstract class Minion extends EntitySkeleton {
 
     public abstract void follow();
 
+    protected abstract void init(Location location);
+
     public abstract MinionType getType();
 
+    @Override
+    public String getOwnerUUID() {
+        return this.owner.getUniqueID().toString();
+    }
+
+    @Override
+    public EntityLiving getOwner() {
+        return this.owner;
+    }
 }

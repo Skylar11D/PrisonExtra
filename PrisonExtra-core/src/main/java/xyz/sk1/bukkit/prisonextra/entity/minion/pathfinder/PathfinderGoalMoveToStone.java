@@ -29,31 +29,27 @@ public class PathfinderGoalMoveToStone extends PathfinderGoal {
 
     @Override
     public boolean a() {
-        // Find the nearest stone block if no target is set
         if (targetBlock == null) {
             findNearestStoneBlock();
         }
-        // Continue if the target block is valid and within a reasonable distance
         return targetBlock != null && getDistanceSquared(targetBlock) > 1;
     }
 
     @Override
     public void c() {
-        // Start moving to the target block
         if (targetBlock != null) {
+            //Navigation#walkTo(x, y, z);
             navigation.a(targetBlock.getX(), targetBlock.getY(), targetBlock.getZ(), speed);
         }
     }
 
     @Override
     public boolean b() {
-        // Continue moving while the target block is not reached
         return targetBlock != null && navigation.m() && !hasReachedTarget();
     }
 
     @Override
     public void d() {
-        // Stop moving when reached or task is stopped
         stopNavigation();
     }
 

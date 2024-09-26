@@ -22,6 +22,11 @@ public abstract class Menu extends CraftInventoryCustom {
     }
 
 
+    /**
+     * This method populates the entire menu with <code>item</code> Itemstack object
+     * it also overrides any already existing item in the targeted inventory
+     * @param item the item to be populated commonly in the menu
+     */
     public void fill(ItemStack item){
 
         for (int i = 0; i < getSize(); i++) {
@@ -30,6 +35,12 @@ public abstract class Menu extends CraftInventoryCustom {
 
     }
 
+
+    /**
+     * This method populates the menu with <code>item</code> Itemstack object
+     * but leaves the slots defined in <code>intact</code>
+     * @param item the item to be populated commonly in the menu
+     */
     public void fillExcept(ItemStack item, int... exceptionSlot){
 
         exceptionSlots.addAll(exceptionSlots);
@@ -44,6 +55,13 @@ public abstract class Menu extends CraftInventoryCustom {
 
     }
 
+    /**
+     * This method populates the menu with <code>item</code> Itemstack object
+     * and put the <code>items</code> ItemStack objects in their slots
+     * corresponding to their key value in the Map
+     * @param item the item to be populated commonly in the menu
+     * @param items the exceptioned items
+     */
     public void fillStrict(ItemStack item, Map<Integer, ItemStack> items){
 
         for (int i = 0; i < getSize(); i++) {

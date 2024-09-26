@@ -12,17 +12,26 @@ public class Miner extends Minion {
 
     // This is the actual personal miner for each player (experimental)
 
-    public Miner(Location location) {
-        super(location.getWorld());
+    public Miner(Location location, Prisoner prisoner) {
+        super(location.getWorld(), prisoner);
 
-        setState(new Locked()); //default state
+        this.init(location);
+
+    }
+
+    @Override
+    protected void init(Location location){
+
+
+        super.setState(new Locked()); //default state
 
         Skeleton miner = (Skeleton) this.getBukkitEntity();
         miner.setMaxHealth(999);
         this.setHealth(500);
         this.getWorld().addEntity(this);
-        this.setCustomNameVisible(true);
+
         this.setCustomName("Miner");
+        this.setCustomNameVisible(true);
         this.setInvisible(false);
 
         this.setPosition(location.getX(), location.getY(), location.getZ());
@@ -30,12 +39,16 @@ public class Miner extends Minion {
 
         this.goalSelector.a(0, new PathfinderGoalMoveToStone(this, 1.0));
 
-
     }
 
     @Override
     public void command() {
-        //getState().perform(prisoner, this);
+        getState().perform((Prisoner) getOwner(), this);
+    }
+
+    @Override
+    public void follow() {
+
     }
 
     @Override

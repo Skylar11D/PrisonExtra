@@ -12,8 +12,6 @@ public class CosmeticsMenu extends Menu {
     public CosmeticsMenu(int size, String title) {
         super(size, title);
 
-        
-
     }
 
     private Map<Integer, ItemStack> content(){

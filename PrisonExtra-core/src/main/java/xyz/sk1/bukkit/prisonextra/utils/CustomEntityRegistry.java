@@ -96,4 +96,28 @@ public class CustomEntityRegistry {
         return null;
     }
 
+    public static void registerCustomEntity(String name, int id, Class<? extends Entity> customClass) {
+        try {
+
+            Field entityTypeField = EntityTypes.class.getDeclaredField("c");
+            Field entityClassField = EntityTypes.class.getDeclaredField("d");
+            Field entityIdField = EntityTypes.class.getDeclaredField("f");
+
+            entityTypeField.setAccessible(true);
+            entityClassField.setAccessible(true);
+            entityIdField.setAccessible(true);
+
+            Map<String, Class<? extends Entity>> nameToClassMap = (Map<String, Class<? extends Entity>>) entityTypeField.get(null);
+            Map<Class<? extends Entity>, String> classToNameMap = (Map<Class<? extends Entity>, String>) entityClassField.get(null);
+            Map<Integer, Class<? extends Entity>> idToClassMap = (Map<Integer, Class<? extends Entity>>) entityIdField.get(null);
+
+            nameToClassMap.put(name, customClass);
+            classToNameMap.put(customClass, name);
+            idToClassMap.put(id, customClass);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
