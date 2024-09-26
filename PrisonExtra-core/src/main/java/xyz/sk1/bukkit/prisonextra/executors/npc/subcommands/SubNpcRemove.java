@@ -1,10 +1,8 @@
 package xyz.sk1.bukkit.prisonextra.executors.npc.subcommands;
 
-import com.sun.deploy.ui.UITextArea;
 import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
-import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.PrisonNPC;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.executors.Subcommand;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
@@ -31,9 +29,6 @@ public class SubNpcRemove implements Subcommand {
             * TODO remove the entity from observers and config
             * */
 
-            /*
-             * TODO remove the entity from the local cache
-             * */
             fakePlayerManager.getCache().remove(npc.getId(), npc);
             sender.sendMessage(Utils.colorize("&fEntity with id #"+npc.getId()));
 

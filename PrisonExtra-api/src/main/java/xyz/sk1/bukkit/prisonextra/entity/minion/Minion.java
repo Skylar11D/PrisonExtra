@@ -25,9 +25,11 @@ public abstract class Minion extends EntitySkeleton implements EntityOwnable {
     @Getter(AccessLevel.PRIVATE)
     private EntityLiving owner;
 
-    public Minion(World world, Prisoner prisoner) {
-        super(((CraftWorld)world).getHandle());
+    public Minion(Location location, Prisoner prisoner) {
+        super(((CraftWorld)location.getWorld()).getHandle());
         this.owner = ((CraftPlayer)prisoner.getHandle()).getHandle();
+
+        init(location);
 
     }
 

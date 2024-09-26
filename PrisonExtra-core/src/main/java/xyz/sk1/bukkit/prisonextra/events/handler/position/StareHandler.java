@@ -36,8 +36,8 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
         Location pLoc = player.getLocation();
 
         fakePlayerManager.getCache().values().forEach(npc -> {
-            Location location = npc.getNpc().getBukkitEntity().getLocation();
-            double df = pLoc.distanceSquared(location);
+            Location location = npc.getHandle().getBukkitEntity().getLocation();
+            double df = pLoc.distanceSquared(location); //how is the obfuscation? lol
             Utils.LOG.info("[DEBUG] distance = " + df);
 
             if(df > 55.0)
@@ -48,7 +48,7 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
             float PITCH = location.getPitch();
 
             PacketContainer container = networkManager.createPacket(PacketType.Play.Server.ENTITY_HEAD_ROTATION);
-            PacketContainer container1 = networkManager.createPacket(PacketType.Play.Server.ENTITY_LOOK);
+            //PacketContainer container1 = networkManager.createPacket(PacketType.Play.Server.ENTITY_LOOK);
 
             container.getIntegers().write(0, npc.getId());
             container.getBytes().write(0, (byte)(yaw*270.0f/360.0f));

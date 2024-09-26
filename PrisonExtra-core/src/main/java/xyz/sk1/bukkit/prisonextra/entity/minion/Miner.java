@@ -16,9 +16,7 @@ public class Miner extends Minion {
     // This is the actual personal miner for each player (experimental)
 
     public Miner(Location location, Prisoner prisoner) {
-        super(location.getWorld(), prisoner);
-
-        this.init(location);
+        super(location, prisoner);
 
     }
 
