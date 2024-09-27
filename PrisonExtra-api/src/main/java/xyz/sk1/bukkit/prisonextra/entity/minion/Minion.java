@@ -22,7 +22,6 @@ public abstract class Minion extends EntitySkeleton implements EntityOwnable {
     @Getter
     @Setter
     private MinionState state;
-    @Getter(AccessLevel.PRIVATE)
     private EntityLiving owner;
 
     public Minion(Location location, Prisoner prisoner) {
