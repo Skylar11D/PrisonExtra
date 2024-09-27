@@ -1,17 +1,18 @@
-package xyz.sk1.bukkit.prisonextra.internal.storage;
+package xyz.sk1.bukkit.prisonextra.internal.storage.repository;
 
 import lombok.Getter;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author <a href="https://github.com/skylar11d">skylar</a>
  */
 
+@Getter
 public abstract class Repository<T> {
 
-    @Getter
     private Connection connection;
     private String tableName;
 
@@ -22,9 +23,10 @@ public abstract class Repository<T> {
 
     /**
      * fetch the object from the database
+     *
      * @param <K> the key to access the object
      */
-    public abstract <K> T fetch(K identifier);
+    public abstract <K> Optional<T> fetch(K identifier);
 
     /**
      * fetch all objects from the database as a list

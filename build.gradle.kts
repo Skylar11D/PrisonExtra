@@ -48,7 +48,8 @@ subprojects {
         implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
         implementation("com.github.patheloper.pathetic:pathetic-mapping:3.1")
 
-        annotationProcessor("org.projectlombok:lombok:1.18.32")
+        compileOnly("org.projectlombok:lombok:1.18.34")
+        annotationProcessor("org.projectlombok:lombok:1.18.34")
 
     }
 

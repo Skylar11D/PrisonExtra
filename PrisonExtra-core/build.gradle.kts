@@ -19,7 +19,6 @@ repositories {
 dependencies {
     implementation(project(":PrisonExtra-api"))
     implementation("org.reflections:reflections:0.10.2")
-    implementation("com.zaxxer:HikariCP:5.0.1")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.8.0")
     implementation(kotlin("stdlib-jdk8"))
 }

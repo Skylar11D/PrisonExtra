@@ -5,12 +5,9 @@ import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NpcObserver;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
-import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
-import xyz.sk1.bukkit.prisonextra.entity.minion.type.MinionType;
 import xyz.sk1.bukkit.prisonextra.prisoner.PrisonManager;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
-import xyz.sk1.bukkit.prisonextra.utilities.tasks.PrisonTask;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -19,48 +16,46 @@ import java.util.concurrent.CompletableFuture;
  * @author <a href="https://github.com/skylar11d">skylar</a>
  */
 
-public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
+public class UserManager implements PrisonManager<Player, Prisoner> {
 
-    private final Map<Prisoner, List<Minion>> prisoners;
-    @SuppressWarnings("all")
-    private final List<PrisonTask> prisonTasks;
-    private FakePlayerManager fakePlayerManager;
+    private final List<Prisoner> prisoners;
+    private final FakePlayerManager fakePlayerManager;
 
     public UserManager(FakePlayerManager npcmgr){
-        this.prisoners = new HashMap<>();
-        this.prisonTasks = new ArrayList<>();
+        this.prisoners = new ArrayList<>();
         this.fakePlayerManager = npcmgr;
     }
 
     @Override
-    public Map<Prisoner, List<Minion>> getPrisoners() {
+    public List<Prisoner> getPrisoners() {
         return this.prisoners;
     }
 
     @Override
     public User get(Player player) {
-        return (User) getPrisoners().keySet().stream().filter(
+        return (User) prisoners.stream().filter(
                 p -> p.getHandle() == player).findFirst().orElse(null);
     }
 
+    @SuppressWarnings("all")
     public NpcObserver[] toObservers(){
-        return (NpcObserver[])getPrisoners().keySet().stream().toArray();
+        return (NpcObserver[]) prisoners.toArray();
     }
 
     @SuppressWarnings("all")
     @Override
-    public boolean checkPrisoner(Player player) {
-        return getPrisoners().containsKey(player);
+    public boolean validate(Player player) {
+        return prisoners.contains(player);
     }
 
     @Override
     public void imprison(Player player) {
-        getPrisoners().put(new User() {
+        getPrisoners().add(new User() {
             @Override
             public Player getHandle() {
                 return player;
             }
-        }, Collections.emptyList());
+        });
 
         this.fakePlayerManager.registerObserver(new User() {
             @Override
@@ -74,10 +69,10 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     @Override
     public void release(Player player) {
         this.fakePlayerManager.removeObserver(get(player));
-        getPrisoners().remove(player);
+        prisoners.remove(player);
     }
 
-    @Override
+/*    @Override
     public List<Minion> getMinions(Player player) {
         return prisoners.get(player);
     }
@@ -93,7 +88,7 @@ public class UserManager implements PrisonManager<Player, Prisoner, Minion> {
     @Override
     public void registerMinion(Minion minion, Player player) {
         prisoners.get(player).add(minion);
-    }
+    }*/
 
     @Override
     public void load() {

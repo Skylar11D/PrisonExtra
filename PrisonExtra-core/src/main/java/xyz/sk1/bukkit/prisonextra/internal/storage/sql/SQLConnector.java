@@ -1,12 +1,10 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage.sql;
 
 import com.google.gson.JsonObject;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.jetbrains.annotations.NotNull;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.storage.DatabaseConnector;
-import xyz.sk1.bukkit.prisonextra.internal.storage.Repository;
+import xyz.sk1.bukkit.prisonextra.internal.storage.repository.Repository;
 import xyz.sk1.bukkit.prisonextra.internal.storage.sql.repositories.MinionsRepository;
 import xyz.sk1.bukkit.prisonextra.internal.storage.sql.repositories.RegionsRepository;
 import xyz.sk1.bukkit.prisonextra.internal.storage.sql.repositories.UsersRepository;
@@ -16,35 +14,48 @@ import java.sql.*;
 
 public class SQLConnector implements DatabaseConnector {
 
-    private ConfigurationHandler configurationHandler;
-    private HikariDataSource dataSource;
+    private final ConfigurationHandler<?> configurationHandler;
+    private Connection connection;
+    private Credentials result;
+    private Repository<?> regionsRepository, usersRepository, minionsRepository;
 
-    public SQLConnector(ConfigurationHandler jsonConfigHandler){
+    public SQLConnector(ConfigurationHandler<?> jsonConfigHandler){
         this.configurationHandler = jsonConfigHandler;
+        this.result = this.getResult();
     }
 
     @Override
     public void connect() {
         Utils.LOG.info("\nConnecting to the database..\n");
 
-        Credentials result = this.getResult();
+        try {
 
+            Class.forName("com.mysql.jdbc.Driver");
 
-        this.init(result.hostname, result.port, result.database, result.autoconnect, result.username, result.passphrase);
+            this.connection = DriverManager.getConnection(
+                    "jdbc:mysql://"+result.HOST+":"+result.PORT+"/"+result.DATABASE+"?autoReconnect="+result.AUTO
+            );
 
-        String regions = result.tables.get("regions").getAsString();
-        String minions = result.tables.get("minions").getAsString();
-        String prisoners = result.tables.get("prisoners").getAsString();
+            Utils.LOG.fine("Connected to the database "+ result.DATABASE);
 
-        Repository<?> regionRepository = new RegionsRepository(this.getConnection(), regions);
-        Repository<?> usersRepository = new UsersRepository(this.getConnection(), minions);
-        Repository<?> minionsRepository = new MinionsRepository(this.getConnection(), prisoners);
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+            Utils.LOG.info("failed to connect to the database");
+        }
 
-        regionRepository.validate();
+        String regions = result.TABLES.get("regions").getAsString();
+        String minions = result.TABLES.get("minions").getAsString();
+        String prisoners = result.TABLES.get("prisoners").getAsString();
 
-        usersRepository.validate();
+        this.regionsRepository = new RegionsRepository(this.getConnection(), regions);
+        this.usersRepository = new UsersRepository(this.getConnection(), minions);
+        this.minionsRepository = new MinionsRepository(this.getConnection(), prisoners);
 
-        minionsRepository.validate();
+        this.regionsRepository.validate();
+
+        this.usersRepository.validate();
+
+        this.minionsRepository.validate();
 
     }
 
@@ -68,55 +79,40 @@ public class SQLConnector implements DatabaseConnector {
     }
 
     private static class Credentials {
-        public final boolean autoconnect;
-        public final String hostname;
-        public final int port;
-        public final String username;
-        public final String passphrase;
-        public final String database;
-        public final JsonObject tables;
+        public final boolean AUTO;
+        public final String HOST;
+        public final int PORT;
+        public final String USERNAME;
+        public final String PASSPHRASE;
+        public final String DATABASE;
+        public final JsonObject TABLES;
 
-        public Credentials(boolean autoconnect, String hostname, int port, String username,
+        public Credentials(boolean autoConnect, String hostname, int port, String username,
                            String passphrase, String database, JsonObject config) {
-            this.autoconnect = autoconnect;
-            this.hostname = hostname;
-            this.port = port;
-            this.username = username;
-            this.passphrase = passphrase;
-            this.database = database;
-            this.tables = config;
+            this.AUTO = autoConnect;
+            this.HOST = hostname;
+            this.PORT = port;
+            this.USERNAME = username;
+            this.PASSPHRASE = passphrase;
+            this.DATABASE = database;
+            this.TABLES = config;
         }
     }
 
     @Override
     public Connection getConnection() {
-        try {
-            return dataSource.getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return this.connection;
     }
 
     @Override
     public void close() {
-        if(dataSource != null)
-            dataSource.close();
-    }
-
-    private void init(String hostname, int port, String database, boolean autoconnect, String username, String passphrase) {
-        HikariConfig config = new HikariConfig();
-
-        config.setJdbcUrl("jdbc:mysql://"+ hostname +":"+ port +"/"+ database +"?autoReconnect="+ autoconnect);
-        config.setUsername(username);
-        config.setPassword(passphrase);
-
-        config.setLeakDetectionThreshold(5000);
-        config.setMaximumPoolSize(10);
-        config.setConnectionTimeout(30*1000); // 30 seconds
-        config.setIdleTimeout(1000*60*10); // 10 minutes
-        config.setMaxLifetime(1000*60*30); // 30 minutes
-
-        this.dataSource = new HikariDataSource(config);
+        if(this.connection != null) {
+            try {
+                this.connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 }

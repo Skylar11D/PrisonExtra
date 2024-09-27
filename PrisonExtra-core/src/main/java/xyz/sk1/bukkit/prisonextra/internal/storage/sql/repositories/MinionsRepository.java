@@ -1,11 +1,12 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage.sql.repositories;
 
 import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
-import xyz.sk1.bukkit.prisonextra.internal.storage.Repository;
+import xyz.sk1.bukkit.prisonextra.internal.storage.repository.Repository;
 
 import java.sql.Connection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class MinionsRepository extends Repository<Minion> {
 
@@ -14,7 +15,7 @@ public class MinionsRepository extends Repository<Minion> {
     }
 
     @Override
-    public <K> Minion fetch(K identifier) {
+    public <K> Optional<Minion> fetch(K identifier) {
         return null;
     }
 

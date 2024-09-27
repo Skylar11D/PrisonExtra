@@ -15,11 +15,15 @@ import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationHa
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.storage.DatabaseConnector;
 import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
+import xyz.sk1.bukkit.prisonextra.internal.storage.repository.Repository;
+import xyz.sk1.bukkit.prisonextra.internal.storage.repository.RepositoryType;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.inventory.MenuFactory;
+import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.region.RegionManager;
+import xyz.sk1.bukkit.prisonextra.registrar.Registry;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 import xyz.sk1.bukkit.prisonextra.housing.House;
 import xyz.sk1.bukkit.prisonextra.housing.HouseManager;
@@ -49,8 +53,9 @@ public class Core extends Base {
     private RegionManager<House> regionManager;
     private ProtocolManager protocolManager;
 
-    private ManagerRegistry managerRegistry;
-    private LRUCacheRegistry lruCacheRegistry;
+    private Registry<ManagerType, Manager> managerRegistry;
+    private Registry<RepositoryType, Repository<?>> repositoryRegistry;
+    private LRUCacheRegistry<?, ?> lruCacheRegistry;
 
     private DatabaseConnector databaseConnector;
 
@@ -59,8 +64,8 @@ public class Core extends Base {
     private ConfigurationHandlerFactory configurationFactory;
     private MenuFactory menuFactory;
 
-    private ConfigurationHandler settings;
-    private ConfigurationHandler databasecfg;
+    private ConfigurationHandler<?> settings;
+    private ConfigurationHandler<?> databasecfg;
 
     @Override
     public void init() {
@@ -98,9 +103,9 @@ public class Core extends Base {
 
         this.enchantmentManager = new EnchantmentManager(pluginManager);
 
-        this.managerRegistry.register(userManager);
-        this.managerRegistry.register(regionManager);
-        this.managerRegistry.register(fakeplayerManager);
+        this.managerRegistry.register(ManagerType.PRISON, userManager);
+        this.managerRegistry.register(ManagerType.REGION, regionManager);
+        this.managerRegistry.register(ManagerType.NPC, fakeplayerManager);
 
 
         this.menuFactory = new MenuFactory();
