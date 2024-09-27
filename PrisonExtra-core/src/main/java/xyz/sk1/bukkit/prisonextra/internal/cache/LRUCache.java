@@ -48,6 +48,7 @@ public class LRUCache<K, V> implements Cache<K, V> {
             node.value = value;
             removeNode(node); //removes it from its position
             addNode(node); //place it in the head
+            return;
         }
 
         if(size() >= capacity){
@@ -78,15 +79,17 @@ public class LRUCache<K, V> implements Cache<K, V> {
         addNode(node); //add to the head
     }
 
+    //linking neighbors and removing the node
     private void removeNode(Node<?,?> node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
     }
 
+    //i got mental issues understanding this
     private void addNode(Node<?,?> node) {
-        node.prev = head; //i got mental issues understanding this
+        node.prev = head;
         node.next = head.next;
-        head.next.prev = node;
+        head.next.prev = node; //making the tail point to the new head
         head.next = node;
     }
 

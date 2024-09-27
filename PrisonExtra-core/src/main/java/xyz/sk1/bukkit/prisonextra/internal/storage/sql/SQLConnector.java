@@ -2,9 +2,11 @@ package xyz.sk1.bukkit.prisonextra.internal.storage.sql;
 
 import com.google.gson.JsonObject;
 import org.jetbrains.annotations.NotNull;
+import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.storage.DatabaseConnector;
 import xyz.sk1.bukkit.prisonextra.internal.storage.repository.Repository;
+import xyz.sk1.bukkit.prisonextra.internal.storage.repository.RepositoryType;
 import xyz.sk1.bukkit.prisonextra.internal.storage.sql.repositories.MinionsRepository;
 import xyz.sk1.bukkit.prisonextra.internal.storage.sql.repositories.RegionsRepository;
 import xyz.sk1.bukkit.prisonextra.internal.storage.sql.repositories.UsersRepository;
@@ -56,6 +58,12 @@ public class SQLConnector implements DatabaseConnector {
         this.usersRepository.validate();
 
         this.minionsRepository.validate();
+
+        Core.getInstance().getRepositoryRegistry().register(RepositoryType.REGIONS, regionsRepository);
+
+        Core.getInstance().getRepositoryRegistry().register(RepositoryType.USERS, usersRepository);
+
+        Core.getInstance().getRepositoryRegistry().register(RepositoryType.MINIONS, minionsRepository);
 
     }
 

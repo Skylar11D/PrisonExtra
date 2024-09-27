@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.region.features;
+package xyz.sk1.bukkit.prisonextra.internal.features;
 
 import org.bukkit.entity.Player;
 

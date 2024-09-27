@@ -13,6 +13,7 @@ import xyz.sk1.bukkit.prisonextra.internal.cache.LRUCacheRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.ConfigurationHandler;
 import xyz.sk1.bukkit.prisonextra.internal.configuration.factory.ConfigurationHandlerFactory;
 import xyz.sk1.bukkit.prisonextra.internal.registrar.ManagerRegistry;
+import xyz.sk1.bukkit.prisonextra.internal.registrar.RepositoryRegistry;
 import xyz.sk1.bukkit.prisonextra.internal.storage.DatabaseConnector;
 import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.internal.storage.repository.Repository;
@@ -94,6 +95,7 @@ public class Core extends Base {
 
         this.pluginManager = new PluginManager();
         this.managerRegistry = new ManagerRegistry();
+        this.repositoryRegistry = new RepositoryRegistry();
 
         this.protocolManager = ProtocolLibrary.getProtocolManager();
         this.fakeplayerManager = new FakePlayerManager();

@@ -1,5 +1,6 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage.repository;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 
 import java.sql.Connection;
@@ -10,11 +11,12 @@ import java.util.Optional;
  * @author <a href="https://github.com/skylar11d">skylar</a>
  */
 
-@Getter
 public abstract class Repository<T> {
 
-    private Connection connection;
-    private String tableName;
+    @Getter(AccessLevel.PACKAGE)
+    private final Connection connection;
+    @Getter
+    private final String tableName;
 
     protected Repository(Connection connection, String tableName) {
         this.connection = connection;
