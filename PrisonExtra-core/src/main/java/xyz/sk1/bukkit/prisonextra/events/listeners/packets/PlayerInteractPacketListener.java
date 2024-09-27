@@ -23,7 +23,7 @@ public class PlayerInteractPacketListener extends PacketAdapter {
     @Override
     public void onPacketReceiving(PacketEvent event) {
         FakePlayerManager fakePlayerManager = (FakePlayerManager) Core.getInstance().
-                getManagerRegistry().getManager(ManagerType.NPC);
+                getManagerRegistry().getType(ManagerType.NPC);
 
 
         int targetId = event.getPacket().getIntegers().read(0);

@@ -19,7 +19,7 @@ public class SubNpcRemove implements Subcommand {
         }
 
         FakePlayerManager fakePlayerManager = (FakePlayerManager) Core.getInstance().
-                getManagerRegistry().getManager(ManagerType.NPC);
+                getManagerRegistry().getType(ManagerType.NPC);
 
         for (NPC npc : fakePlayerManager.getCache().values()){
             if(!npc.getHandle().getCustomName().equals(args[1]))

@@ -21,7 +21,7 @@ public class InventoryClickListener extends BaseListener {
         ItemStack itemStack = event.getCurrentItem();
         Player player = (Player) event.getWhoClicked();
         UserManager userManager = (UserManager)Core.getInstance().
-                getManagerRegistry().getManager(ManagerType.PRISON);
+                getManagerRegistry().getType(ManagerType.PRISON);
 
         User user = userManager.get(player);
 

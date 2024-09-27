@@ -13,7 +13,7 @@ public class UserManagementHandler implements PrisonEventHandler<PlayerJoinEvent
     @EventHandler
     public void handle(PlayerJoinEvent e){
         Player player = e.getPlayer();
-        UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
+        UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getType(ManagerType.PRISON);
 
         userManager.imprison(player);
     }

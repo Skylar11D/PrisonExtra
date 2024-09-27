@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public abstract class Repository<T> {
 
-    @Getter(AccessLevel.PACKAGE)
+    @Getter(AccessLevel.PROTECTED)
     private final Connection connection;
     @Getter
     private final String tableName;

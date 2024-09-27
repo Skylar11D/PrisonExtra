@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
 public class NpcInteractHandler {
 
     public void handle(PacketEvent event) {
-        UserManager userManager = (UserManager)Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
+        UserManager userManager = (UserManager)Core.getInstance().getManagerRegistry().getType(ManagerType.PRISON);
         User user = userManager.get(event.getPlayer());
 
 

@@ -13,7 +13,7 @@ public class WandSelectionHandler implements PrisonEventHandler<PlayerInteractEv
 
     @Override
     public void handle(PlayerInteractEvent event) {
-        UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
+        UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getType(ManagerType.PRISON);
         User user = userManager.get(event.getPlayer());
 
         if(event.getAction() == Action.LEFT_CLICK_BLOCK) {

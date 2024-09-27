@@ -24,7 +24,7 @@ public class StareHandler implements PrisonEventHandler<PlayerMoveEvent> {
     @Override
     public void handle(PlayerMoveEvent event) {
         Core core = Core.getInstance();
-        FakePlayerManager fakePlayerManager = (FakePlayerManager) core.getManagerRegistry().getManager(ManagerType.NPC);
+        FakePlayerManager fakePlayerManager = (FakePlayerManager) core.getManagerRegistry().getType(ManagerType.NPC);
         FileConfiguration configuration = ((YamlConfigurationHandler)core.getSettings()).get();
         boolean should = configuration.getBoolean("entities.npcs.global.stare");
 

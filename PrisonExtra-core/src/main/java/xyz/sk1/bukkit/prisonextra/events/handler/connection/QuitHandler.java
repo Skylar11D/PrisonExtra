@@ -13,7 +13,7 @@ public class QuitHandler implements PrisonEventHandler<PlayerQuitEvent> {
     @EventHandler
     public void handle(PlayerQuitEvent e){
         Player player = e.getPlayer();
-        UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
+        UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getType(ManagerType.PRISON);
 
         userManager.release(player);
 

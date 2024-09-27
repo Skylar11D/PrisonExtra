@@ -1,10 +1,8 @@
 package xyz.sk1.bukkit.prisonextra.housing;
 
 import org.bukkit.Location;
-import sun.awt.image.ImageWatched;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.housing.factory.RegionFactory;
-import xyz.sk1.bukkit.prisonextra.internal.cache.Cache;
 import xyz.sk1.bukkit.prisonextra.internal.storage.repository.Repository;
 import xyz.sk1.bukkit.prisonextra.internal.storage.repository.RepositoryType;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;

@@ -24,7 +24,7 @@ public abstract class User implements Prisoner, NpcObserver {
     public void displayNPC(NPC npc) {
 
         FakePlayerManager npcManager = (FakePlayerManager) Core.getInstance().
-                getManagerRegistry().getManager(ManagerType.NPC);
+                getManagerRegistry().getType(ManagerType.NPC);
 
         npcManager.showNpcTo(getHandle(), npc);
 

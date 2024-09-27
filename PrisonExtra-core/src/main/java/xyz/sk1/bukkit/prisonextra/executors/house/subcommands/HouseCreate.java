@@ -17,8 +17,8 @@ public class HouseCreate implements Subcommand {
 
     @Override
     public void dispatch(Player sender, String[] args) {
-        UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.PRISON);
-        HouseManager houseManager = (HouseManager) Core.getInstance().getManagerRegistry().getManager(ManagerType.REGION);
+        UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getType(ManagerType.PRISON);
+        HouseManager houseManager = (HouseManager) Core.getInstance().getManagerRegistry().getType(ManagerType.REGION);
         User user = userManager.get(sender);
         Location corner1 = user.getCorner1();
         Location corner2 = user.getCorner2();
