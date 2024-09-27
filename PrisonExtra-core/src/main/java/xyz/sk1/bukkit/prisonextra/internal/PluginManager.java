@@ -1,6 +1,5 @@
 package xyz.sk1.bukkit.prisonextra.internal;
 
-import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.reflections.Reflections;
@@ -11,10 +10,7 @@ import xyz.sk1.bukkit.prisonextra.executors.Executor;
 import xyz.sk1.bukkit.prisonextra.listeners.BaseListener;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 import java.util.Set;
 
 public class PluginManager {
@@ -42,7 +38,6 @@ public class PluginManager {
 
     }
 
-    @SneakyThrows
     public void registerExecutors(String packageName){
 
         Reflections reflections = new Reflections(packageName);
@@ -52,13 +47,14 @@ public class PluginManager {
 
         for (Class<? extends Executor> command : subTypes){
 
-            Executor executor = command.newInstance();
-
             try {
 
+                Executor executor = command.newInstance();
 
                 Core.getInstance().getCommand(executor.getAttributes().name())
                         .setExecutor(executor);
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException(e);
             } finally {
                 Utils.LOG.info( "/"+ command.getDeclaredAnnotation(Attributes.class).name()+" executor was registered");
             }
