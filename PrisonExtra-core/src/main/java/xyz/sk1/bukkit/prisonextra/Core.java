@@ -117,6 +117,12 @@ public class Core extends Base {
 
         databaseConnector.connect();
 
+        try {
+            Thread.sleep(1000*3); //give the database some chance to set up, i remembered it's synchronized but meh why not
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         loadCaches();
 
         protocolManager.addPacketListener(new PlayerInteractPacketListener());

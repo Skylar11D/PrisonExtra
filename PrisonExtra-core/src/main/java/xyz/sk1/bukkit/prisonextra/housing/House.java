@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.internal.features.Accessable;
+import xyz.sk1.bukkit.prisonextra.region.RegionState;
 import xyz.sk1.bukkit.prisonextra.region.strategies.AccessStrategy;
 import xyz.sk1.bukkit.prisonextra.region.Region;
 import xyz.sk1.bukkit.prisonextra.housing.strategy.WhitelistAccessStrategy;
@@ -18,14 +19,16 @@ public final class House extends Region implements Accessable {
 
     @Getter
     private List<String> deniedPlayers;
+    private String Owner;
     private
     @Getter
-    boolean isDenyingAll;
+    boolean whitelist;
     private final AccessStrategy accessStrategy;
 
     public House(Location position1, Location position2, String owner) {
-        super(position1, position2, owner);
+        super(position1, position2, owner, RegionState.BOUGHT);
         this.accessStrategy = new WhitelistAccessStrategy();
+        //TODO you also need to make it compatible with more than one strategy, like wtf
     }
 
     @Override

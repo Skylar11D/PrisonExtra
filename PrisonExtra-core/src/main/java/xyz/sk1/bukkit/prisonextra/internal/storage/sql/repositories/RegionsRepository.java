@@ -101,7 +101,7 @@ public class RegionsRepository extends Repository<Region> {
         String query = ("INSERT INTO "+getTableName()+" VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         try(PreparedStatement statement = getConnection().prepareStatement(query)) {
-            statement.setString(1, data.getOwner());
+            statement.setString(1, data.getName());
 
             statement.setDouble(2, data.getMinX());
             statement.setDouble(3, data.getMinY());

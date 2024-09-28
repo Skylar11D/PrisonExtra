@@ -5,7 +5,7 @@ import xyz.sk1.bukkit.prisonextra.internal.features.perks.Perk;
 
 import java.util.function.Supplier;
 
-public class LavaPop implements Perk {
+public class LavaRing implements Perk {
 
     @Override
     public void activate(Supplier<Player> supplier) {
@@ -19,4 +19,8 @@ public class LavaPop implements Perk {
 
     }
 
+    @Override
+    public void deactivate() {
+
+    }
 }
