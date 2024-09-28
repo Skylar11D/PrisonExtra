@@ -35,6 +35,8 @@ public final class HouseManager implements RegionManager<House> {
 
     @Override
     public void insertRegion(House region) {
+        if(cachedRegions.contains(region))
+            return;
 
         cachedRegions.add(region);
     }
@@ -62,7 +64,7 @@ public final class HouseManager implements RegionManager<House> {
     public void load() {
         Utils.LOG.info("Loading regions into the cache...");
 
-        List<String> list = new ArrayList<>();
+        this.repository.fetchAll().forEach(region -> cachedRegions.add((House) region));
 
     }
 
