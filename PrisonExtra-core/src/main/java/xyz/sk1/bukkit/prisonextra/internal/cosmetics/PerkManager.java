@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.internal.perks;
+package xyz.sk1.bukkit.prisonextra.internal.cosmetics;
 
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;

@@ -2,9 +2,8 @@ package xyz.sk1.bukkit.prisonextra.prisoner;
 
 import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
-import xyz.sk1.bukkit.prisonextra.internal.features.perks.Perk;
-import xyz.sk1.bukkit.prisonextra.internal.features.perks.PerkType;
 import xyz.sk1.bukkit.prisonextra.inventory.MenuType;
+import xyz.sk1.bukkit.prisonextra.internal.perks.Perk;
 
 public interface Prisoner {
 
@@ -14,6 +13,8 @@ public interface Prisoner {
 
     default void openMenu(MenuType type){}
 
-    Perk getPerk(PerkType type);
+    void summonPerk(Perk perk);
+
+    void removePerk();
 
 }

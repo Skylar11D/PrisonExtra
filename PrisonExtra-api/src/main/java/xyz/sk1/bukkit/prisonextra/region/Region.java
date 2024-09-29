@@ -17,7 +17,7 @@ public abstract class Region {
     private final String name;
 
     @Setter
-    private final RegionState state;
+    private RegionState state;
 
     protected Region(Location position1, Location position2, String name, RegionState state) {
         this.name = name;

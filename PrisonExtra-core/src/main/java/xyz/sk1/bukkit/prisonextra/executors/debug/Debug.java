@@ -20,7 +20,7 @@ public class Debug extends Executor {
     protected void execute(Player sender, String[] args) {
 
         if(args.length < 2){
-            sender.sendMessage(Utils.colorize("invalid syntax: /debug spawn miner"));
+            sender.sendMessage(Utils.colorize("invalid syntax: /debug spawn HaloAura"));
             return;
         }
 
