@@ -35,8 +35,8 @@ public class SQLConnector implements DatabaseConnector {
             Class.forName("com.mysql.jdbc.Driver");
 
             this.connection = DriverManager.getConnection(
-                    "jdbc:mysql://"+result.HOST+":"+result.PORT+"/"+result.DATABASE+"?autoReconnect="+result.AUTO
-            );
+                    "jdbc:mysql://"+result.HOST+":"+result.PORT+"/"+result.DATABASE +"?autoReconnect="+result.AUTO
+            , result.USERNAME, result.PASSPHRASE);
 
             Utils.LOG.fine("Connected to the database "+ result.DATABASE);
 

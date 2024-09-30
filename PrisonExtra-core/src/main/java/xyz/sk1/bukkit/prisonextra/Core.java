@@ -19,6 +19,7 @@ import xyz.sk1.bukkit.prisonextra.internal.storage.factory.DatabaseFactory;
 import xyz.sk1.bukkit.prisonextra.internal.storage.repository.Repository;
 import xyz.sk1.bukkit.prisonextra.internal.storage.repository.RepositoryType;
 import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
+import xyz.sk1.bukkit.prisonextra.json.JsonProcessorFactory;
 import xyz.sk1.bukkit.prisonextra.manager.Manager;
 import xyz.sk1.bukkit.prisonextra.inventory.MenuFactory;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;

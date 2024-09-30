@@ -138,7 +138,7 @@ public class RegionsRepository extends Repository<Region> {
 
     @Override
     public void validate() {
-        String query = "CREATE TABLE IF NOT EXISTS "+getTableName()+" (Owner varchar(32), World varchar(32)" +
+        String query = "CREATE TABLE IF NOT EXISTS "+getTableName()+" (Owner varchar(32), World varchar(32), " +
                 "MinX double(8, 2), MinY double(8, 2), MinZ double(8, 2), " +
                 "MaxX double(8, 2), MaxY double(8, 2), MaxZ double(8, 2))";
 

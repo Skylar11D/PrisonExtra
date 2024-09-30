@@ -1,21 +1,22 @@
-package xyz.sk1.bukkit.prisonextra.internal.cosmetics.particles;
+package xyz.sk1.bukkit.prisonextra.cosmetics.particles;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.internal.perks.Perk;
 
 public class HaloAura implements Perk {
 
-    private BukkitRunnable runnable;
+    private BukkitTask runnable;
 
     @Override
     public void activate(Player player) {
 
-        this.runnable = (BukkitRunnable) new BukkitRunnable() {
+        this.runnable = new BukkitRunnable() {
             @Override
             public void run() {
                 Location location = player.getLocation().add(0, 1, 0); // Adjust the height as needed
