@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import xyz.sk1.bukkit.prisonextra.Core;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.io.*;
 
@@ -21,8 +22,10 @@ public class JsonConfigurationHandler implements ConfigurationHandler<JsonObject
     @Override
     public void load() {
 
-        if(!file.exists())
-            Core.getInstance().saveResource(file.getName()+".json", false);
+        if(!file.exists()) {
+            Utils.LOG.warning(file.getName() + " isn't found in the plugin data directory!, generating one..");
+            Core.getInstance().saveResource(file.getName(), false);
+        }
 
         JsonParser parser = new JsonParser();
 

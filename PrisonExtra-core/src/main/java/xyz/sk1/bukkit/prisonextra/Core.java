@@ -75,19 +75,18 @@ public class Core extends Base {
 
         long time = System.currentTimeMillis();
 
+        Utils.printLogo();
+
         Utils.LOG.warning("This plugin only supports MySQL 5.7 service and above");
 
         Utils.LOG.info("Creating necessary caches..");
+
         lruCacheRegistry = new LRUCacheRegistry<>();
         lruCacheRegistry.createCache("regions", 500);
         lruCacheRegistry.createCache("fakeplayers", 4);
 
 
-        if(!(new File(getDataFolder(), "settings.yml").exists()))
-            this.saveResource("settings.yml", false);
-
-        if(!(new File(getDataFolder(), "database.json").exists()))
-            this.saveResource("database.json", false);
+        Utils.LOG.info("Loading configuration files..");
 
         configurationFactory = new ConfigurationHandlerFactory();
         settings = configurationFactory.createConfigHandler(new File(getDataFolder(), "settings.yml")).orElse(null);
@@ -117,12 +116,6 @@ public class Core extends Base {
         databaseConnector = abstractDatabaseFactory.createDatabase(DatabaseType.MYSQL, databasecfg);
 
         databaseConnector.connect();
-
-        try {
-            Thread.sleep(1000*3); //give the database some chance to set up, i remembered it's synchronized but meh why not
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
         loadCaches();
 

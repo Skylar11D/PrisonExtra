@@ -7,6 +7,7 @@ import xyz.sk1.bukkit.prisonextra.internal.storage.repository.Repository;
 import xyz.sk1.bukkit.prisonextra.region.Region;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
+import java.math.BigInteger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,13 +139,23 @@ public class RegionsRepository extends Repository<Region> {
 
     @Override
     public void validate() {
-        String query = "CREATE TABLE IF NOT EXISTS "+getTableName()+" (Owner varchar(32), World varchar(32), " +
-                "MinX double(8, 2), MinY double(8, 2), MinZ double(8, 2), " +
-                "MaxX double(8, 2), MaxY double(8, 2), MaxZ double(8, 2))";
+        Utils.LOG.warning("table name: "+getTableName());
+
+        String query = "CREATE TABLE IF NOT EXISTS "+getTableName()+" (" +
+                "Owner varchar(32), " +
+                "World varchar(32), " +
+                "MinX DECIMAL(8, 2), " +
+                "MinY DECIMAL(8, 2), " +
+                "MinZ DECIMAL(8, 2), " +
+                "MaxX DECIMAL(8, 2), " +
+                "MaxY DECIMAL(8, 2), " +
+                "MaxZ DECIMAL(8, 2));";
+
+        Utils.LOG.warning(getConnection().toString());
 
         try(Statement statement = getConnection().createStatement()) {
 
-            statement.executeQuery(query);
+            statement.execute(query);
 
         } catch (SQLException e){
             e.printStackTrace();

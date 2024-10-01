@@ -15,6 +15,10 @@ import java.util.Set;
 
 public class PluginManager {
 
+    public PluginManager(){
+        System.setProperty("org.slf4j.simpleLogger.log.org.reflections", "off");
+    }
+
     public void registerListeners(String packageName){
 
         Reflections reflections = new Reflections(packageName);

@@ -3,6 +3,7 @@ package xyz.sk1.bukkit.prisonextra.internal.configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import xyz.sk1.bukkit.prisonextra.Core;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,16 +14,20 @@ public class YamlConfigurationHandler implements ConfigurationHandler<FileConfig
     private FileConfiguration fileConfiguration;
 
     public YamlConfigurationHandler(File file) {
+
         this.file = file;
+
         load();
     }
 
     @Override
     public void load() {
         if(!file.exists()){
-            Core.getInstance().saveResource(file.getName()+".yml", false);
-            this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
+            Utils.LOG.warning(file.getName() + " isn't found in the plugin data directory!, generating one..");
 
+            Core.getInstance().saveResource(file.getName(), false);
+
+            this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
         }
         this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
     }
