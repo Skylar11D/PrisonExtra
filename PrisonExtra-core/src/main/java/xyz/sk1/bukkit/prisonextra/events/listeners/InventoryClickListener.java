@@ -9,9 +9,6 @@ import xyz.sk1.bukkit.prisonextra.events.handler.interact.PrisonMenuHandler;
 import xyz.sk1.bukkit.prisonextra.inventory.MenuType;
 import xyz.sk1.bukkit.prisonextra.listeners.BaseListener;
 import xyz.sk1.bukkit.prisonextra.listeners.PrisonEventHandler;
-import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
-import xyz.sk1.bukkit.prisonextra.player.User;
-import xyz.sk1.bukkit.prisonextra.player.UserManager;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 public class InventoryClickListener extends BaseListener {

@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import xyz.sk1.bukkit.prisonextra.Core;
 import xyz.sk1.bukkit.prisonextra.internal.perks.Perk;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 public class HaloAura implements Perk {
 
@@ -15,10 +16,12 @@ public class HaloAura implements Perk {
 
     @Override
     public void activate(Player player) {
+        Utils.LOG.info("Outer activated");
 
         this.runnable = new BukkitRunnable() {
             @Override
             public void run() {
+                Utils.LOG.info("Inner activated");
                 Location location = player.getLocation().add(0, 1, 0); // Adjust the height as needed
                 int numParticles = 36;
                 double radius = 0.5;
