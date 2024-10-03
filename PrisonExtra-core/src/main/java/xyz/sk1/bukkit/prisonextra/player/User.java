@@ -14,6 +14,7 @@ import xyz.sk1.bukkit.prisonextra.internal.perks.Perk;
 import xyz.sk1.bukkit.prisonextra.inventory.MenuType;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
+import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 @Getter
 @Setter
@@ -21,6 +22,7 @@ public abstract class User implements Prisoner, NpcObserver {
 
     private Location corner1;
     private Location corner2;
+
     private Perk activePerk = new Butterfly();
 
     @Override
@@ -48,13 +50,12 @@ public abstract class User implements Prisoner, NpcObserver {
 
     @Override
     public void summonPerk(Perk perk) {
-        if(activePerk.equals(perk)) {
-            getHandle().sendMessage("You already have this perk activated");
-            return;
-        }
 
-        perk.activate(getHandle());
+        removePerk();
+
         this.activePerk = perk;
+
+        this.activePerk.activate(getHandle());
     }
 
     @Override

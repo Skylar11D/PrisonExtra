@@ -2,6 +2,7 @@ package xyz.sk1.bukkit.prisonextra.executors.debug.subcommand;
 
 import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.Core;
+import xyz.sk1.bukkit.prisonextra.cosmetics.particles.EnderAura;
 import xyz.sk1.bukkit.prisonextra.executors.Subcommand;
 import xyz.sk1.bukkit.prisonextra.cosmetics.particles.HaloAura;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
@@ -20,7 +21,9 @@ public class DebugSubSpawn implements Subcommand {
         UserManager userManager = (UserManager) Core.getInstance().getManagerRegistry().getType(ManagerType.PRISON);
         User user = userManager.get(sender);
 
-        user.summonPerk(new HaloAura());
+        user.getHandle().sendMessage("command executed");
+
+        user.summonPerk(new EnderAura());
 
 
     }

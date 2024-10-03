@@ -1,11 +1,17 @@
 package xyz.sk1.bukkit.prisonextra.internal.perks;
 
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
-public interface Perk {
+public abstract class Perk {
 
-    void activate(Player player);
+    protected BukkitTask runnable;
 
-    void deactivate();
+    abstract public void activate(Player player);
+
+    public void deactivate(){
+        if(this.runnable != null)
+            this.runnable.cancel();
+    }
 
 }
