@@ -5,7 +5,7 @@ import xyz.sk1.bukkit.prisonextra.internal.storage.DatabaseConnector;
 
 import java.io.IOException;
 
-public class MongoConnector implements DatabaseConnector<MongoDBConnection> {
+public class MongoConnector implements DatabaseConnector<Object> {
 
     @Override
     public void connect() {
@@ -13,7 +13,7 @@ public class MongoConnector implements DatabaseConnector<MongoDBConnection> {
     }
 
     @Override
-    public MongoDBConnection getConnection() {
+    public Object getConnection() {
         return null;
     }
 
