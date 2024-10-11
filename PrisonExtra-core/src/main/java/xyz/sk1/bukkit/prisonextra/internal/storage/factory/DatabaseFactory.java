@@ -14,7 +14,7 @@ import xyz.sk1.bukkit.prisonextra.utilities.factory.AbstractDatabaseFactory;
 public class DatabaseFactory extends AbstractDatabaseFactory {
 
     @Override
-    public DatabaseConnector createDatabase(DatabaseType type, ConfigurationHandler configurationHandler) {
+    public DatabaseConnector<?> createDatabase(DatabaseType type, ConfigurationHandler configurationHandler) {
 
         switch (type) {
             case MYSQL: {

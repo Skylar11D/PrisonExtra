@@ -6,6 +6,6 @@ import xyz.sk1.bukkit.prisonextra.internal.storage.types.DatabaseType;
 
 public abstract class AbstractDatabaseFactory {
 
-    public abstract DatabaseConnector createDatabase(DatabaseType type, ConfigurationHandler configurationHandler);
+    public abstract DatabaseConnector<?> createDatabase(DatabaseType type, ConfigurationHandler configurationHandler);
 
 }
