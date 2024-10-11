@@ -6,15 +6,13 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import xyz.sk1.bukkit.prisonextra.Core;
-import xyz.sk1.bukkit.prisonextra.cosmetics.particles.Butterfly;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NPC;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.NpcObserver;
 import xyz.sk1.bukkit.prisonextra.entity.fakeplayer.manager.FakePlayerManager;
-import xyz.sk1.bukkit.prisonextra.internal.perks.Perk;
+import xyz.sk1.bukkit.prisonextra.perks.Perk;
 import xyz.sk1.bukkit.prisonextra.inventory.MenuType;
 import xyz.sk1.bukkit.prisonextra.manager.ManagerType;
 import xyz.sk1.bukkit.prisonextra.prisoner.Prisoner;
-import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 @Getter
 @Setter
@@ -23,7 +21,7 @@ public abstract class User implements Prisoner, NpcObserver {
     private Location corner1;
     private Location corner2;
 
-    private Perk activePerk = new Butterfly();
+    private Perk activePerk;
 
     @Override
     public void displayNPC(NPC npc) {

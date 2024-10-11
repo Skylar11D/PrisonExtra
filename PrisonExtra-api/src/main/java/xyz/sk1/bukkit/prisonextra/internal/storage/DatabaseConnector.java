@@ -3,10 +3,14 @@ package xyz.sk1.bukkit.prisonextra.internal.storage;
 import java.io.Closeable;
 import java.sql.Connection;
 
-public interface DatabaseConnector extends Closeable {
+/**
+ * Generic interface responsible for database connectivity
+ * @param <C> the type of connection
+ */
+public interface DatabaseConnector<C> extends Closeable {
 
     void connect();
 
-    Connection getConnection();
+    C getConnection();
 
 }

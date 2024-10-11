@@ -14,7 +14,7 @@ import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 import java.sql.*;
 
-public class SQLConnector implements DatabaseConnector {
+public class SQLConnector implements DatabaseConnector<Connection> {
 
     private final ConfigurationHandler<?> configurationHandler;
     private Connection connection;

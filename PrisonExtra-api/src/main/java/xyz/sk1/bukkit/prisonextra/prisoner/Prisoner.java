@@ -3,7 +3,7 @@ package xyz.sk1.bukkit.prisonextra.prisoner;
 import org.bukkit.entity.Player;
 import xyz.sk1.bukkit.prisonextra.entity.minion.Minion;
 import xyz.sk1.bukkit.prisonextra.inventory.MenuType;
-import xyz.sk1.bukkit.prisonextra.internal.perks.Perk;
+import xyz.sk1.bukkit.prisonextra.perks.Perk;
 
 public interface Prisoner {
 

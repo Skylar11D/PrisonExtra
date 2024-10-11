@@ -1,7 +1,7 @@
 package xyz.sk1.bukkit.prisonextra.cosmetics.particles;
 
 import org.bukkit.entity.Player;
-import xyz.sk1.bukkit.prisonextra.internal.perks.Perk;
+import xyz.sk1.bukkit.prisonextra.perks.Perk;
 
 public class BloodDrip extends Perk {
 

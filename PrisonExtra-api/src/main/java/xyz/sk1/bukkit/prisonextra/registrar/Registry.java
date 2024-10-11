@@ -11,7 +11,7 @@ public abstract class Registry<K, V> {
     private final Map<K, V> registry;
 
     protected Registry() {
-        this.registry = new HashMap<>();;
+        this.registry = new HashMap<>();
     }
 
     public abstract void register(K key, V value);

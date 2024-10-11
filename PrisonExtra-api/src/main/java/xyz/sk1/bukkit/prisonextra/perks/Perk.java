@@ -1,4 +1,4 @@
-package xyz.sk1.bukkit.prisonextra.internal.perks;
+package xyz.sk1.bukkit.prisonextra.perks;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;

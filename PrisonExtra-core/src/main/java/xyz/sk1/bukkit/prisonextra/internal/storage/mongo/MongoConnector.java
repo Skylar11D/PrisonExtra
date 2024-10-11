@@ -1,11 +1,11 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage.mongo;
 
+import org.apache.logging.log4j.core.appender.db.nosql.mongo.MongoDBConnection;
 import xyz.sk1.bukkit.prisonextra.internal.storage.DatabaseConnector;
 
 import java.io.IOException;
-import java.sql.Connection;
 
-public class MongoConnector implements DatabaseConnector {
+public class MongoConnector implements DatabaseConnector<MongoDBConnection> {
 
     @Override
     public void connect() {
@@ -13,7 +13,7 @@ public class MongoConnector implements DatabaseConnector {
     }
 
     @Override
-    public Connection getConnection() {
+    public MongoDBConnection getConnection() {
         return null;
     }
 

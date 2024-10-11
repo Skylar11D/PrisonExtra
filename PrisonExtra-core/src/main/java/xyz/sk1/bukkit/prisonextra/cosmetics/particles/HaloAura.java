@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import xyz.sk1.bukkit.prisonextra.Core;
-import xyz.sk1.bukkit.prisonextra.internal.perks.Perk;
+import xyz.sk1.bukkit.prisonextra.perks.Perk;
 import xyz.sk1.bukkit.prisonextra.utilities.Utils;
 
 public class HaloAura extends Perk {
