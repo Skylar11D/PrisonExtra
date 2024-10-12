@@ -1,7 +1,6 @@
 package xyz.sk1.bukkit.prisonextra.internal.storage;
 
 import java.io.Closeable;
-import java.sql.Connection;
 
 /**
  * Generic interface responsible for database connectivity

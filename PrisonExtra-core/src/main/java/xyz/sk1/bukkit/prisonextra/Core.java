@@ -58,7 +58,7 @@ public class Core extends Base {
     private Registry<RepositoryType, Repository<?>> repositoryRegistry;
     private LRUCacheRegistry<?, ?> lruCacheRegistry;
 
-    private DatabaseConnector databaseConnector;
+    private DatabaseConnector<?> databaseConnector;
 
     private AbstractDatabaseFactory abstractDatabaseFactory;
     @Getter(AccessLevel.PRIVATE)

@@ -28,7 +28,6 @@ public final class House extends Region implements Accessable {
     public House(Location position1, Location position2, String owner) {
         super(position1, position2, owner, RegionState.BOUGHT);
         this.accessStrategy = new WhitelistAccessStrategy();
-        //TODO you also need to make it compatible with more than one strategy, like wtf
     }
 
     @Override
